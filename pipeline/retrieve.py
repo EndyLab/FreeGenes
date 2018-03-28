@@ -9,23 +9,19 @@ import glob
 import datetime
 import shutil 
 import sys
-import fragment
 import optimize as optimize_sequence
 from zipfile import ZipFile
 from io import BytesIO
 import requests
 import zipfile
 import io
-
 import optimize
-#from config import *
+from config import *
 
 ## ==========
 ## Parameters
 ## ==========
 
-single_submission_id = '1j5Gc7KEfRlPCIaXMGjDhgQDfSOVx7tnbss9AksrHhzk'
-#bulk_submission_id = '1UtZkWkogPifDyD9sw46YM0PrSGXCh_2KJyfCdYqkIJs'
 ID_next = 0
 for file in glob.glob("template.json"): #(BASE_PATH + "/pipeline/testing/json/template.json"):
         with open(file,"r") as template_json:
@@ -150,7 +146,6 @@ class FreeGene:
         else:
             self.optimized = self.original_sequence
             #if self.find_enzyme in ("BbsI", "BtgZI", "BsaI")
-        self.fragments = fragment.fragment_gene(self.optimized,self.part_type)
         if len(self.optimized) < 300:
             self.cloning_enzyme = "BtgZI"
         else:
@@ -199,11 +194,6 @@ class FreeGene:
 #        # Write taxid, target_organism
 #        template["sequence"]["original_sequence"] = self.original_sequence
 #        template["sequence"]["optimized_sequence"] = self.optimized
-#        template["sequence"]["fragment_sequences"] = {}
-#        for index,frag in enumerate(self.fragments):
-#            fragment_name = self.gene_id + "_" + str(index + 1)
-#            template["sequence"]["fragment_sequences"][fragment_name] = frag
-#        # Figure out how to write fragments 
 #        with open("{}/{}.json".format(path,gene_id),"w+") as json_file:
 #            json.dump(template,json_file,indent=2)
 #        with open("{}/{}.gb".format(path,gene_id),"w+") as genbank_single:
@@ -214,45 +204,38 @@ class FreeGene:
 ## Script
 ## ======
 
-## Bulk data
-#current_data_bulk = fill_strip(extract_google_form(bulk_submission_id))
-#previous_bulk = fill_strip(pd.read_csv('previous_bulk.csv'))
-#bulk_data = uniq_data(current_data_bulk, previous_bulk)
-#
-#print (bulk_data)
-#for index, row in bulk_data.iterrows():
-#    csv_url = row['CSV file']
-#    csv_data = csvtext_to_pandas(get_google_textfile(csv_url))
-#    for index_csv, row_csv in csv_data.iterrows():
-#        # Setup import into object
-#        gene_id = NextID(ID_next) # New ID
-#        zip_file = zipfile.ZipFile(io.BytesIO(requests.get(url_fixer(row['Genbank files in zip file'])).content)) # Download zip file
-#        for name in zip_file.namelist():
-#            if row_csv['Genbank file'] in name:
-#                with zip_file.open(name) as myfile:
-#                    genbank_file="\n".join(str(myfile.read(), 'utf-8').splitlines()) # Format genbank file all nice 
-#        # Import into object 
-#        freegene = FreeGene(gene_id, NextCollection(), row['Timestamp'], row['Name (first and last)'], row['Email address'], row['Affiliation'], row['ORCID'], row_csv['Gene name'], row_csv['Who would be interested or who would they be useful to?'], row_csv['What exactly is this gene? What does it do?'], row_csv['Where does this gene come from? How was it discovered?'], row_csv['Why are you synthesizing this gene?'], row_csv['What are some future applications of this gene?'], row_csv['Database links'], row_csv['Part type'], row_csv['Target organism'], row_csv['Optimize?'], row_csv['Safety information'], genbank_file, template)
-#        freegene.write()
+# Bulk data
+current_data_bulk = fill_strip(extract_google_form(bulk_submission_id))
+previous_bulk = fill_strip(pd.read_csv('previous_bulk.csv'))
+bulk_data = uniq_data(current_data_bulk, previous_bulk)
+
+print (bulk_data)
+for index, row in bulk_data.iterrows():
+    csv_url = row['CSV file']
+    csv_data = csvtext_to_pandas(get_google_textfile(csv_url))
+    for index_csv, row_csv in csv_data.iterrows():
+        # Setup import into object
+        gene_id = "1" #NextID(ID_next) # New ID
+        zip_file = zipfile.ZipFile(io.BytesIO(requests.get(url_fixer(row['Genbank files in zip file'])).content)) # Download zip file
+        for name in zip_file.namelist():
+            if row_csv['Exact genbank name in zip file'] in name:
+                with zip_file.open(name) as myfile:
+                    genbank_file="\n".join(str(myfile.read(), 'utf-8').splitlines()) # Format genbank file all nice 
+        # Import into object 
+        freegene = FreeGene(gene_id, NextCollection(), row['Timestamp'], row['Name (first and last)'], row['Email address'], row['Affiliation'], row['ORCID'], row_csv['Gene name'], row_csv['Description'], row_csv['Links'], row_csv['Part type'], row_csv['Source organism'], row_csv['Target organism'], row_csv['Safety information'], genbank_file, template)
+        print(freegene.author_name)
 #current_data_bulk.to_csv('previous_bulk.csv', index=False)
 
 # Single submissions
-current_data_single = fill_strip(extract_google_form(single_submission_id))
-previous_single = fill_strip(pd.read_csv('previous_single.csv'))
+current_data_single = fill_strip(extract_google_form(SINGLE_SUBMISSION_ID))
+previous_single = fill_strip(pd.read_csv(PREVIOUS_CSV_SINGLE))
 single_data = uniq_data(current_data_single, previous_single)
 for index, row in single_data.iterrows():
-    gene_id = NextID(ID_next) # New ID
+    gene_id = "1"#NextID(ID_next) # New ID
     genbank_file = get_wufoo_textfile(row['genbank_file'])
         # Import into object 
-    freegene = FreeGene(gene_id, NextCollection(), row['Timestamp'], row['name'], row['email'], row['affiliation'], row['orcid'], row['gene_name'], row['description'], row['links'], row['part_type'], row['source_organism'],  row['target_organism'], genbank_file, template)
-    
-    #self, gene_id, collection_id, timestamp, author_name, author_email, author_affiliation, author_orcid, gene_name, description, database_links, part_type, source_organism, target_organism, genbank_file, template_json
-    
-    # Timestamp	name	email	affiliation	orcid	gene_name	part_type	source_organism	target_organism	description	links	genbank_file
-
-    print(freegene.description)
+    freegene = FreeGene(gene_id, "1", row['Timestamp'], row['name'], row['email'], row['affiliation'], row['orcid'], row['gene_name'], row['description'], row['links'], row['part_type'], row['source_organism'],  row['target_organism'], genbank_file, template)
 #current_data_single.to_csv('previous_single.csv', index=False)
-sys.exit()
 
 
 

@@ -15,7 +15,7 @@ After retrieval of sequences, CDSs are optimized to remove restriction enzyme si
 
 If all checks(IMPLEMENT) are completed, then the FreeGene object is written to a Bionet node. From there, genes can be loaded into the OpenFoundry for processing into physical molecules.
 
-## config.yaml
+## config.py
 
 ## template.json
 
