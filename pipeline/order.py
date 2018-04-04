@@ -21,11 +21,10 @@ import optimize
 #from config import *
 
 # Find the next submission number
-previous_submissions = (sorted(glob.glob("./submissions/*.csv")))
-string = (previous_submissions[-1])
-next_sub_num = int(string[-7:-4]) + 1
-print("Next submission number", (next_sub_num))
-
+#previous_submissions = (sorted(glob.glob("./submissions/*.csv")))
+#string = (previous_submissions[-1])
+#next_sub_num = int(string[-7:-4]) + 1
+next_sub_num = input("Next submission number : ")
 ## ====================================================
 ## Query the database for all of the small sequences
 ## and sequences to attach them to
@@ -34,11 +33,33 @@ small_seq_ids = []
 small_seqs = []
 large_seq_ids = []
 large_seqs = []
-for file in glob.glob("./data/*/*.json"):
+
+fragment_input = input("Fragment files? (ENTER to continue, 'FRAGMENT' to write) : ")
+write = input("Write files to system? (ENTER to continue, 'WRITE' to write) : ")
+
+for file in glob.glob("./../data/*/*.json"):
     with open(file,"r") as json_file:
         data = json.load(json_file)
-    if data["status"]["ordered"]:
-        continue
+        part_type = data["info"]["gene_metadata"]["cloning"]["part_type"]
+        part_type = part_type.lower()
+        part_type = part_type.replace(" ", "_")
+        fragments = fragment.fragment_gene(data["sequence"]["optimized_sequence"],part_type)
+        print(fragments)
+        print(data["gene_id"])
+        gene_id = data["gene_id"]
+        for index,frag in enumerate(fragments):
+            fragment_name = gene_id + "_" + str(index + 1)
+            data["sequence"]["fragment_sequences"][fragment_name] = frag
+        path = "{}/data/{}".format("./..",gene_id)
+        if fragment_input == "FRAGMENT":
+            with open("{}/{}.json".format(path,gene_id),"w+") as json_file:
+                json.dump(data,json_file,indent=2)
+
+for file in glob.glob("./../data/*/*.json"):
+    with open(file,"r") as json_file:
+        data = json.load(json_file)
+    # Fragment the genes
+    # Begin query
     if data["info"]["gene_metadata"]["cloning"]["cloning_enzyme"] == "BtgZI":
         small_seq_ids.append(data["gene_id"])
         small_seqs.append(data["sequence"]["fragment_sequences"]["{}_1".format(data["gene_id"])])
@@ -98,34 +119,35 @@ joined_df = pd.DataFrame({
 
 # Change the files in the database to reflect the joined sequences
 for index,row in joined_df.iterrows():
-    with open("{}/data/{}/{}.json".format(".",row["Gene ID"],row["Gene ID"]),"r") as json_file:
+    with open("{}/data/{}/{}.json".format("./..",row["Gene ID"],row["Gene ID"]),"r") as json_file:
         data = json.load(json_file)
     data["sequence"]["fragment_sequences"] = {}
     data["sequence"]["fragment_sequences"][row["Fragment Name"]] = row["Sequence"]
-    with open("{}/data/{}/{}.json".format(".",row["Gene ID"],row["Gene ID"]),"w+") as json_file:
-        json.dump(data,json_file,indent=2)
+    if write == "WRITE":
+        with open("{}/data/{}/{}.json".format("./..",row["Gene ID"],row["Gene ID"]),"w+") as json_file:
+            json.dump(data,json_file,indent=2)
 
 ## Find all of the sequences that have yet to be ordered
 will_order = []
 will_order_seqs = []
-for file in glob.glob("{}/data/*/*.json".format(".")):
+for file in glob.glob("{}/data/*/*.json".format("./..")):
     with open(file,"r") as json_file:
         data = json.load(json_file)
 
     # Excludes sequences that have already been ordered and small sequences
     # that haven't been paired yet
-    if data["status"]["ordered"] or data["info"]["gene_metadata"]["cloning"]["cloning_enzyme"] == "BtgZI":
+    if data["info"]["gene_metadata"]["cloning"]["cloning_enzyme"] == "BtgZI":
         continue
     # Only pulls the sequence to order from the large fragment
     if data["info"]["gene_metadata"]["cloning"]["cloning_enzyme"] == "BbsI":
         for fragment in data["sequence"]["fragment_sequences"]:
             print("fragment",fragment)
             will_order.append(fragment)
-            will_order_seqs.append(data["sequence"]["fragment_sequences"][fragment])
-    data["status"]["ordered"] = True
+            will_order_seqs.append(data["sequence"]["fragment_sequences"][fragment]) 
     data["info"]["order_number"] = next_sub_num
-    with open(file,"w+") as json_file:
-        json.dump(data,json_file,indent=2)
+    if write == "WRITE":
+        with open(file,"w+") as json_file:
+            json.dump(data,json_file,indent=2)
 
 # Output DNA in Twist order format
 twist_dna = pd.DataFrame({
@@ -134,8 +156,8 @@ twist_dna = pd.DataFrame({
         }, columns=['gene name','FASTA_seq'])
 
 
-previous_submissions = (sorted(glob.glob("." + "/submissions/*.csv")))
-twist_dna.to_csv('{}/submissions/submission{}.csv'.format(".",str(next_sub_num).zfill(3)),index=False)
+previous_submissions = (sorted(glob.glob("./.." + "/submissions/*.csv")))
+twist_dna.to_csv('{}/submissions/submission{}.csv'.format("./..",str(next_sub_num).zfill(3)),index=False)
 
 
 

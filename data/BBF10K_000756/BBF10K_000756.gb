@@ -1,0 +1,64 @@
+LOCUS       Exported                1469 bp ds-DNA     linear   UNA 07-MAR-2018
+DEFINITION  natural linear DNA
+ACCESSION   .
+VERSION     .
+KEYWORDS    .
+SOURCE      natural DNA sequence
+  ORGANISM  unspecified
+REFERENCE   1  (bases 1 to 1469)
+  AUTHORS   .
+  TITLE     Direct Submission
+  JOURNAL   Exported Mar 28, 2018 from SnapGene 4.1.6
+            http://www.snapgene.com
+FEATURES             Location/Qualifiers
+     source          1..1469
+                     /organism="unspecified"
+                     /mol_type="genomic DNA"
+     misc_feature    1..402
+                     /label=CuR
+     misc_feature    482..563
+                     /label=CopAP
+     misc_feature    571..612
+                     /label=5'- UTR
+     CDS             613..1326
+                     /codon_start=1
+                     /product="GFP variant that folds robustly even when fused 
+                     to poorly folded proteins (Pedelacq et al., 2006)"
+                     /label=superfolder GFP
+                     /translation="MRKGEELFTGVVPILVELDGDVNGHKFSVRGEGEGDATNGKLTLK
+                     FICTTGKLPVPWPTLVTTLTYGVQCFARYPDHMKQHDFFKSAMPEGYVQERTISFKDDG
+                     TYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNFNSHNVYITADKQKNGIKA
+                     NFKIRHNVEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSVLSKDPNEKRDHMVLLE
+                     FVTAAGITHGMDELYK"
+     misc_feature    1343..1420
+                     /label=T1
+     terminator      1430..1463
+                     /label=T7Te terminator
+                     /note="phage T7 early transcription terminator"
+ORIGIN
+        1 ttgacagcta gctcagtcct aggtattgtg ctagctacta gagaaagagg agaaatacta
+       61 gatgaacatc tccgatgtgg cgaagatcac aggtctgacc agcaaagcaa tccgctttta
+      121 tgaagaaaaa ggtttggtta ctccgccgat gcgctcagag aatggttatc gcacctatac
+      181 gcaacagcac ctcaatgagt tgacgttact gcgccaggcc cgtcaagtag ggttcaacct
+      241 tgaggagagc ggtgaactgg tcaatttgtt caacgatccg caacgtcact ctgctgatgt
+      301 gaaacgccgt acccttgaaa aagttgcgga aattgagcgc catatcgaag aattacagag
+      361 catgcgggac caactgctgg cgctggctaa cgcgtgtccg ggcgacgata gtgccgactg
+      421 tccgattatt gaaaacctgt cgggttgttg tcatcatcgc gcagggtaat actagagacc
+      481 cgcctggttt attaatttct tgaccttccc cttgctggaa ggtttaacct ttatcacagc
+      541 cagtcaaaac tgtcttaaag tactagaata attttgttta actttaaaaa aaaaaaagaa
+      601 ggagaataat ctatgcgtaa aggcgaagag ctgttcactg gtgtcgtccc tattctggtg
+      661 gaactggatg gtgatgtcaa cggtcataag ttttccgtgc gtggcgaggg tgaaggtgac
+      721 gcaactaatg gtaaactgac gctgaagttc atctgtacta ctggtaaact gccggtacct
+      781 tggccgactc tggtaacgac gctgacttat ggtgttcagt gctttgctcg ttatccggac
+      841 catatgaagc agcatgactt cttcaagtcc gccatgccgg aaggctatgt gcaggaacgc
+      901 acgatttcct ttaaggatga cggcacgtac aaaacgcgtg cggaagtgaa atttgaaggc
+      961 gataccctgg taaaccgcat tgagctgaaa ggcattgact ttaaagaaga cggcaatatc
+     1021 ctgggccata agctggaata caattttaac agccacaatg tttacatcac cgccgataaa
+     1081 caaaaaaatg gcattaaagc gaattttaaa attcgccaca acgtggagga tggcagcgtg
+     1141 cagctggctg atcactacca gcaaaacact ccaatcggtg atggtcctgt tctgctgcca
+     1201 gacaatcact atctgagcac gcaaagcgtt ctgtctaaag atccgaacga gaaacgcgat
+     1261 catatggttc tgctggagtt cgtaaccgca gcgggcatca cgcatggtat ggatgaactg
+     1321 tacaaatgat gatactagag ccaggcatca aataaaacga aaggctcagt cgaaagactg
+     1381 ggcctttcgt tttatctgtt gtttgtcggt gaacgctctc tactagagtc acactggctc
+     1441 accttcgggt gggcctttct gcgtttata
+//

@@ -1,0 +1,67 @@
+LOCUS       Exported                 951 bp ds-DNA     linear   UNA 03-APR-2018
+DEFINITION  Gemini
+ACCESSION   .
+VERSION     .
+KEYWORDS    .
+SOURCE      synthetic DNA sequence
+  ORGANISM  unspecified
+REFERENCE   1  (bases 1 to 951)
+  AUTHORS   Drew Endy
+  TITLE     Direct Submission
+  JOURNAL   Exported Apr 3, 2018 from SnapGene 4.0.4
+            http://www.snapgene.com
+FEATURES             Location/Qualifiers
+     source          1..951
+                     /organism="unspecified"
+                     /mol_type="genomic DNA"
+     CDS             1..951
+                     /codon_start=1
+                     /label=Gemini
+                     /translation="MTMITDSLAVVLQRRDWENPGVTQLNRLAAHPPFASWRNSEEART
+                     DRPSQQLRSLNGEWRAGGSEGGGSEHHHHHHGSERKGEELFTGVVPILVELDGDVNGHK
+                     FSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLTYGVQCFARYPDHMKQHDFFK
+                     SAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYN
+                     YNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLST
+                     QSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK"
+     CDS             1..174
+                     /codon_start=1
+                     /gene="lacZ fragment"
+                     /product="LacZ-alpha fragment of beta-galactosidase"
+                     /label=lacZ-alpha
+                     /translation="MTMITDSLAVVLQRRDWENPGVTQLNRLAAHPPFASWRNSEEART
+                     DRPSQQLRSLNGE"
+     primer_bind     complement(21..37)
+                     /label=M13 fwd
+                     /note="common sequencing primer, one of multiple similar 
+                     variants"
+     CDS             211..228
+                     /codon_start=1
+                     /product="6xHis affinity tag"
+                     /label=6xHis
+                     /translation="HHHHHH"
+     CDS             235..951
+                     /codon_start=1
+                     /label=GFP
+                     /translation="ERKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLK
+                     FICTTGKLPVPWPTLVTTLTYGVQCFARYPDHMKQHDFFKSAMPEGYVQERTIFFKDDG
+                     NYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKV
+                     NFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLE
+                     FVTAAGITHGMDELYK"
+ORIGIN
+        1 atgaccatga ttacggattc actggccgtc gttttacaac gtcgtgactg ggaaaaccct
+       61 ggcgttaccc aacttaatcg ccttgcagca catccccctt tcgccagctg gcgtaatagc
+      121 gaagaggccc gcaccgatcg cccttcccaa cagttgcgca gcctgaatgg cgaatggcgc
+      181 gcgggcggca gcgaaggcgg cggcagcgaa catcatcatc atcatcatgg cagcgaacgt
+      241 aaaggagaag aacttttcac tggagttgtc ccaattcttg ttgaattaga tggtgatgtt
+      301 aatgggcaca aattttctgt cagtggagag ggtgaaggtg atgcaacata cggaaaactt
+      361 acccttaaat ttatttgcac tactggaaaa ctacctgttc catggccaac acttgtcact
+      421 accctgacct atggtgttca atgctttgcg agatacccag atcatatgaa acagcatgac
+      481 tttttcaaga gtgccatgcc cgaaggttat gtacaggaaa gaactatatt tttcaaagat
+      541 gacgggaact acaagacacg tgctgaagtc aagtttgaag gtgataccct tgttaataga
+      601 atcgagttaa aaggtattga ttttaaagaa gatggaaaca ttcttggaca caaattggaa
+      661 tacaactata actcacacaa tgtatacatc atggcagaca aacaaaagaa tggaatcaaa
+      721 gttaacttca aaattagaca caacattgaa gatggaagcg ttcaactagc agaccattat
+      781 caacaaaata ctccaattgg cgatggccct gtccttttac cagacaacca ttacctgtcc
+      841 acacaatctg ccctttcgaa agatcccaac gaaaagagag accacatggt ccttcttgag
+      901 tttgtaacag ctgctgggat tacacatggc atggatgaac tatacaaata a
+//

@@ -1,2 +1,23 @@
-Timestamp,name,email,affiliation,orcid,gene_name,part_type,source_organism,target_organism,description,links,genbank_file
+Timestamp,name,email,affiliation,orcid,gene_name,part_type,source_organism,target_organism,description,links,genbank_file,safety_info
+26-Mar-2018 13:30:43,Keoni Gandall,koeng101@gmail.com,BioBricks Foundation,https://orcid.org/0000-0003-3995-6416,GFP,CDS,Aequorea victoria,Escherichia coli,"GFP stands for 'green fluorescent protein', and is a useful gene because its expression can be easily measured, which allows the measurement of complementing genetic elements. It has been one of the most widely used genes with no known toxicity.",http://www.uniprot.org/uniprot/P42212 https://doi.org/10.1016/0378-1119(92)90691-H http://parts.igem.org/Part:BBa_E0040 https://www.ncbi.nlm.nih.gov/nuccore/U73901,https://bbfreegenes.wufoo.com/cabinet/ejFybmlhanEwYWV5MXBj/maSIT03fNjs%3D/gfp.gb,
+27-Mar-2018 13:23:51,Drew Endy,endy@stanford.edu,Endy Lab @ Stanford,https://orcid.org/0000-0001-6952-8098,LuxI,CDS,V. fischeri,Escherichia coli,"autoinducer synthetase for AHL
 
+Synthesizes 3OC6HSL, which binds to LuxR.
+
+The lux cassette of V. fischeri contains a left and a right promoter. The right promoter gives weak constitutive expression of downstream genes.This expression is up-regulated by the action of the Lux repressor, LuxR. Two molecules of LuxR protein form a complex with two molecules the signalling compound HSL. This complex binds to a palindromic site on the promoter, increasing the rate of transcription.","http://parts.igem.org/Part:BBa_C0061
+https://www.ncbi.nlm.nih.gov/nuccore/AF170104",https://bbfreegenes.wufoo.com/cabinet/ejFybmlhanEwYWV5MXBj/DE4OA8wsq54%3D/luxl.gb,
+27-Mar-2018 21:12:24,Alec Lourenco,lourenco@stanford.edu,Stanford BIOME,,DMJHAMT-CTagged,operon,Drosophila melanogaster (codon optimized for E. coli),Escherichia coli,"Note - part type is actually a composite.
+
+This composite encodes for the expression of an enzyme that converts fatty acids into fatty acid methyl esters, a type of biofuel.",http://www.uniprot.org/uniprot/Q9VJK8,https://bbfreegenes.wufoo.com/cabinet/ejFybmlhanEwYWV5MXBj/w0FP3qA4KGY%3D/ngenetevhis6ccomposite.gb,
+27-Mar-2018 21:14:06,Alec Lourenco,lourenco@stanford.edu,Stanford BIOME,,DMJHAMT-N-tagged,operon,Drosophilia Melanogaster (codon optimized for E. coli),Escherichia coli,"Note - part type is actually a composite.
+
+This composite encodes for the expression of an enzyme that converts fatty acids into fatty acid methyl esters, a type of biofuel.",http://www.uniprot.org/uniprot/Q9VJK8,https://bbfreegenes.wufoo.com/cabinet/ejFybmlhanEwYWV5MXBj/JOruroE6mgU%3D/nhis6tevgeneccomposite.gb,
+28-Mar-2018 21:28:09,Eric Harness,eharness@gmail.com,BioCurious,,Copper BioSensor,prokaryotic promoter,Various,Escherichia coli,"Part:BBa_K1758324 : Copper activator under control constitutive promoter and strong RBS and Copper responsive promoter
+
+http://parts.igem.org/Part:BBa_K1758324",http://parts.igem.org/Part:BBa_K1758324,https://bbfreegenes.wufoo.com/cabinet/ejFybmlhanEwYWV5MXBj/ElP9RIgW6Sg%3D/cu_igem_plasmid.gb,
+28-Mar-2018 21:38:24,Eric Harness,eharness@gmail.com,BioCurious,,Mercury BioSensor,eukaryotic promoter,Various,Escherichia coli,"Part:BBa_K1758340
+Designed by: Team Bielefeld-CeBiTec 2015   Group: iGEM15_Bielefeld-CeBiTec   (2015-08-30)
+Mercury repressor under control of constitutive promoter and strong RBS",http://parts.igem.org/wiki/index.php?title=Part:BBa_K1758340,https://bbfreegenes.wufoo.com/cabinet/ejFybmlhanEwYWV5MXBj/wdl7CrVsGJs%3D/bba_k1758343_mercury.gb,
+29-Mar-2018 11:55:08,Drew Endy,endy@stanford.edu,Endy Lab @ Stanford,https://orcid.org/0000-0001-6952-8098,Cro,CDS,E. coli phage lambda,Escherichia coli,Cro is a DNA binding protein from phage lambda that recognizes operator sites naturally found within the right operator region from lambda.,http://parts.igem.org/Part:BBa_K177009,https://bbfreegenes.wufoo.com/cabinet/ejFybmlhanEwYWV5MXBj/WpJiPF3vVYs%3D/lambdaantirepressorcro.gb,
+3-Apr-2018 12:27:55,Drew Endy,endy@stanford.edu,Endy Lab at Stanford,https://orcid.org/0000-0001-6952-8098,Gemini,CDS,synthetic chimeric protein,Escherichia coli,"A Bifunctional Enzymatic and Fluorescent Reporter of Gene Expression (i.e., GFP fused to alpha fragment of beta gal).  Both fluorescent and enzymatic activities maintained.  See paper published and iGEM parts collection entries for full details.","http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0007569
+http://parts.igem.org/Part:BBa_E0051",https://bbfreegenes.wufoo.com/cabinet/ejFybmlhanEwYWV5MXBj/qYxXalmfCP8%3D/gemini.gb,

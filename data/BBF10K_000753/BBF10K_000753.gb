@@ -1,0 +1,48 @@
+LOCUS       Exported                 615 bp ds-DNA     linear   UNA 27-MAR-2018
+DEFINITION  natural linear DNA
+ACCESSION   .
+VERSION     .
+KEYWORDS    .
+SOURCE      natural DNA sequence
+  ORGANISM  unspecified
+REFERENCE   1  (bases 1 to 615)
+  AUTHORS   Keoni Gandall
+  TITLE     Direct Submission
+  JOURNAL   Exported Mar 27, 2018 from SnapGene 4.0.4
+            http://www.snapgene.com
+FEATURES             Location/Qualifiers
+     source          1..615
+                     /organism="unspecified"
+                     /mol_type="genomic DNA"
+     CDS             1..615
+                     /codon_start=1
+                     /product="Synthesizes 3OC6HSL, which binds to LuxR.
+                     
+                     The lux cassette of V. fischeri contains a left and a right
+                     promoter. The right promoter gives weak constitutive 
+                     expression of downstream genes.This expression is 
+                     up-regulated by the action of the Lux repressor, LuxR. Two 
+                     molecules of LuxR protein form a complex with two molecules
+                     the signalling compound HSL. This complex binds to a 
+                     palindromic site on the promoter, increasing the rate of 
+                     transcription.
+                     
+                     Derived from http://parts.igem.org/Part:BBa_C0061"
+                     /label=luxI
+                     /translation="MTIMIKKSDFLAIPSEEYKGILSLRYQVFKQRLEWDLVVENNLES
+                     DEYDNSNAEYIYACDDTENVSGCWRLLPTTGDYMLKSVFPELLGQQSAPKDPNIVELSR
+                     FAVGKNSSKINNSASEITMKLFEAIYKHAVSQGITEYVTVTSTAIERFLKRIKVPCHRI
+                     GDKEIHVLGDTKSVVLSMPINEQFKKAVLNAANDENYALVA"
+ORIGIN
+        1 atgactataa tgataaaaaa atcggatttt ttggcaattc catcggagga gtataaaggt
+       61 attctaagtc ttcgttatca agtgtttaag caaagacttg agtgggactt agttgtagaa
+      121 aataaccttg aatcagatga gtatgataac tcaaatgcag aatatattta tgcttgtgat
+      181 gatactgaaa atgtaagtgg atgctggcgt ttattaccta caacaggtga ttatatgctg
+      241 aaaagtgttt ttcctgaatt gcttggtcaa cagagtgctc ccaaagatcc taatatagtc
+      301 gaattaagtc gttttgctgt aggtaaaaat agctcaaaga taaataactc tgctagtgaa
+      361 attacaatga aactatttga agctatatat aaacacgctg ttagtcaagg tattacagaa
+      421 tatgtaacag taacatcaac agcaatagag cgatttttaa agcgtattaa agttccttgt
+      481 catcgtattg gagacaaaga aattcatgta ttaggtgata ctaaatcggt tgtattgtct
+      541 atgcctatta atgaacagtt taaaaaagca gtcttaaatg ctgcaaacga cgaaaactac
+      601 gctttagtag cttaa
+//
