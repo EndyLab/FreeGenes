@@ -9,13 +9,13 @@ import glob
 import datetime
 import shutil 
 import sys
-import optimize as optimize_sequence
+import freegene_fixer as optimize
+import freegene_fixer as optimize_sequence
 from zipfile import ZipFile
 from io import BytesIO
 import requests
 import zipfile
 import io
-import optimize
 from config import *
 
 ## ==========

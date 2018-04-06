@@ -1,3 +1,0 @@
-Gene name,Part type,Source organism,Target organism,Description,Links,Exact genbank name in zip file,Safety information
-rrnB T1 terminator,terminator,Escherichia coli,Escherichia coli,rrnB T1 terminator. A commonly used terminator in synthetic biology,https://doi.org/10.1111/j.1432-1033.1991.tb16326.x http://parts.igem.org/Part:BBa_B0010,rrnB T1 terminator.gb,
-AgeIM,cds,Agrobacterium gelatinovorum IAM 12617,Escherichia coli,The AgeI methylase gene. This gene methylates ACCGGT sites. It will be used in some advanced FreeGenes MoClo assemblies.,http://www.uniprot.org/uniprot/P94147 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5389614/ https://www.ncbi.nlm.nih.gov/pubmed/8901102 http://rebase.neb.com/rebase/enz/AgeI.html,AgeIM.gb,

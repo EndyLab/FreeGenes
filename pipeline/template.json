@@ -24,6 +24,14 @@
 				"target_organism" : {
 					"organism_name" : "",
 					"taxid" : ""
+				},
+				"conditions": {
+					"vector": "",
+					"strain": "",
+					"selection": [""],
+					"media": "",
+					"temperature": 37,
+					"mastermix_notes": ""
 				}
 			},
 			"collection_id" : "",
@@ -53,13 +61,6 @@
 			"reverse_read": ""
 		}]
 	},
-	"location": {
-		"fragments": {},
-		"cloned": [{
-			"vector": "",
-			"organism": "",
-			"location": []
-			}]},
 	"dates": {
 		"submitted": "",
 		"ordered": "",
