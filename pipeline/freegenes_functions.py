@@ -1,0 +1,666 @@
+from Bio import SeqIO
+from io import StringIO
+import requests
+import json
+import pandas as pd
+import re
+import os
+import glob
+import datetime
+import shutil 
+import sys
+from zipfile import ZipFile
+from io import BytesIO
+import requests
+import zipfile
+import io
+from config import *
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from Bio.Seq import Seq
+from Bio.Alphabet import generic_dna
+from difflib import ndiff
+import codon
+
+## =============
+## Configuration
+## =============
+
+ID_STARTING_POINT = 749
+PREVIOUS_CSV_SINGLE = './previous_plates/single.csv'
+PREVIOUS_CSV_BULK = './previous_plates/bulk.csv'
+SINGLE_SUBMISSION_ID = '1j5Gc7KEfRlPCIaXMGjDhgQDfSOVx7tnbss9AksrHhzk'
+BULK_SUBMISSION_ID = '1qgNt3h63--o7qlhTdkUqGpLqVOGizUaY5dMG7VdCwHA'
+
+## =========
+## Functions
+## =========
+
+def JsonTemplate():
+    for file in glob.glob("template.json"):
+        with open(file,"r") as template_json:
+            template = json.load(template_json)
+            return template
+
+def NextCollection():
+    data = glob.glob("./../data/*/*.json")
+    collection_list = [2]
+    for json_file in data:
+        with open(json_file,"r") as json_data:
+            collection_json = json.load(json_data)
+            collection_list.append(collection_json["info"]["gene_metadata"]["collection_id"])
+    return(int(max([e for e in collection_list if isinstance(e, int)])) + 1)
+
+def NextID(counter=0):
+    number = ID_STARTING_POINT + 1 + counter
+    string_number = str(number)
+    id_number = (string_number.zfill(6))
+    full_id = "BBF10K_" + id_number
+    return full_id
+
+def csvtext_to_pandas(csvtext, byte_string=False):
+    if byte_string == True:
+        csv_file= StringIO(str(csvtext, 'utf-8'))
+        data = pd.read_csv(csv_file)
+        return data
+    else: 
+        csv_file= StringIO(csvtext)
+        data = pd.read_csv(csv_file)
+        return data
+
+def extract_google_form(google_id):
+    response = requests.get('https://docs.google.com/spreadsheet/ccc?key=' + google_id + '&output=csv')
+    assert response.status_code == 200, 'Wrong status code'
+    byte_string=(response.content)
+    data = csvtext_to_pandas(byte_string, True)
+    #csv_file= StringIO(str(byte_string, 'utf-8'))
+    #data = pd.read_csv(csv_file)
+    return data
+
+def fill_strip(data):
+    data = data.fillna('')
+    data = strip_df(data)
+    return data
+
+#previous = pd.read_csv('previous_submissions.csv')
+def uniq_data(current_data, previous):
+    current_data = current_data.fillna('')
+    current_data = strip_df(current_data)
+    previous = previous.fillna('')
+    previous = strip_df(previous) 
+    united_data = pd.concat([current_data, previous])
+    united_data.fillna('')
+    united_data_grouped = united_data.groupby(list(united_data.columns))
+    uniq_data_idx = [x[0] for x in united_data_grouped.indices.values() if len(x) == 1]
+    uniq_data = united_data.iloc[uniq_data_idx]
+    return uniq_data
+
+def url_fixer(url):
+    link,file_id = re.match(r'(https:\/\/drive.google.com\/)open\?id=([A-Za-z0-9-_]+)',url).groups()
+    file_url = link + "uc?id=" + file_id
+    return file_url
+
+def get_google_textfile(url, zip_file=False):
+    file_url = url_fixer(url)
+    if zip_file == True:
+        data = requests.get(file_url)
+        return data
+    else: 
+        data = requests.get(file_url)
+        data.encoding = 'utf-8'
+        data = data.text
+        return data
+
+def get_wufoo_textfile(url, zip_file=False):
+    if zip_file == True:
+        data = requests.get(url)
+        return data
+    else:         
+        data = requests.get(url)
+        data.encoding = 'utf-8'
+        data = data.text
+        return data
+
+def strip_df(df):
+    for column in df:
+        new_col = []
+        for item in df[column]:
+            new_col.append(str(item).strip())
+        df[column] = new_col
+    return df
+
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
+
+def optimize_gene(gene_id,sequence,taxid):
+    gene = [{'Gene': gene_id, 'Sequence': sequence}]
+    design_genes = pd.DataFrame(gene)
+
+    # Read in genes
+    #design_genes = pd.read_csv(sys.stdin)
+
+    # Basic validation tests
+    def is_seq(seq):
+        return seq.replace(r'\s +', '').strip() != ""
+
+    def is_triplet(seq):
+        return len(seq) % 3 == 0
+
+    def translate(seq):
+        return str(Seq(seq, generic_dna).translate(table=11))
+
+    def dna_matches_aa(seq, aa):
+        prot = translate(seq)
+        if prot[-1] == "*":
+            prot = prot[:-1]
+
+        return prot == aa
+
+    def has_start(seq):
+        return seq[:3] == "ATG"
+
+    def has_stop(seq):
+        return translate(seq)[-1] == "*"
+
+    def has_no_internal_stops(seq):
+        return not "*" in translate(seq)[:-1]
+
+    basic_tests = [is_seq, is_triplet, has_start, has_stop, has_no_internal_stops]
+
+    for i, gene in design_genes.iterrows():
+        for test in basic_tests:
+            if not test(gene['Sequence']):
+                eprint("{} failed on {}".format(gene['Gene'], test.__name__))
+                eprint(gene['Sequence'])
+                eprint(translate(gene['Sequence']))
+                eprint()
+
+                # REVIEW: Changed from original script
+                # If no stop codon is present, add one
+                if test == has_stop:
+                    eprint("Added stop codon")
+                    gene['Sequence'] += "TGA"
+                eprint()
+
+
+    # Force stop codons to TGA
+    design_genes['Sequence'] = design_genes['Sequence'].str[:-3] + "TGA"
+
+    ### CLEAN UP THIS CODE:
+    codon_table = codon.load_codon_table(taxonomy_id=taxid)
+    codon_10plus = codon.codon_table_10plus(codon_table)
+    ec_codon_usage_10plus = codon_10plus
+    ec_codon_usage = codon_table
+
+    ec_codons = ec_codon_usage.reset_index(level=0).ix[:,'AA']
+
+    def pick_codon(aa):
+        return ec_codon_usage_10plus.ix[x].iloc[((ec_codon_usage_10plus.ix[x].Fraction).cumsum() < np.random.rand()).sum()].name
+
+    def reverse_complement(seq):
+        return seq.translate(str.maketrans("ATGC","TACG"))[::-1]
+
+    def recode_sequence(seq, rep):
+        pos = seq.find(rep)
+
+        if pos < 0:
+            return seq
+
+        pos -= pos % 3
+
+        for i in range(pos, pos + (len(rep) // 3 + 1) * 3, 3):
+            codon = seq[i:i+3]
+            choices = ec_codon_usage_10plus.ix[ec_codons.ix[codon]]
+            choices = choices[choices.index != codon]
+
+            if choices.shape[0] > 0:
+                newcodon = choices.iloc[(choices.Fraction.cumsum() / choices.Fraction.cumsum().max() < np.random.rand()).sum()].name # Stochastically allocate codon
+    #             newcodon = choices[choices.index != codon].Fraction.idxmax() # Deterministically allocate codons by using the most frequence one
+                break
+
+        eprint("{} -> {}".format(codon, newcodon))
+
+        return seq[:i] + newcodon + seq[i+3:]
+
+    def gc_content(seq):
+        return (seq.count("G") + seq.count("C")) / len(seq)
+
+    def gc_in_range(seq):
+        return (gc_content(seq) > 0.3) & (gc_content(seq) <= 0.65)
+
+    def size_in_range(seq):
+        return (len(seq) >= 300) & (len(seq) <= 1800)
+
+    def max_homopolymer(seq):
+        prev = ''
+        count = 0
+        max_count = 0
+        loc = None
+
+        for i, char in enumerate(seq):
+            if char == prev:
+                count += 1
+            else:
+                count = 0
+
+            if count > max_count:
+                max_count = count
+                loc = i - count
+
+            prev = char
+
+        return max_count, loc
+
+    def homopolymer_in_range(seq):
+        count, loc =  max_homopolymer(seq)
+        return max_homopolymer(seq) < 6
+
+    cut_sites = [
+        ("BfuAI", "ACCTGC"),
+        ("AarI", "CACCTGC"),
+        ("BtgZI", "GCGATG"),
+        ("BbsI", "GAAGAC"),
+        ("BsmBI", "CGTCTC"),
+        ("SapI", "GCTCTTC"),
+        ("BsaI", "GGTCTC")]
+
+    def remove_cutsites(name, seq):
+        changes = 0
+
+        for enzyme, cut in cut_sites + [(e, reverse_complement(c)) for e, c in cut_sites]:
+            while cut in seq:
+                eprint("{} cuts {} ({})".format(enzyme, name, cut))
+                changes += 1
+                seq = recode_sequence(seq, cut)
+
+        return seq, changes
+
+    for i, gene in design_genes.iterrows():
+        eprint("Fixing gene {}".format(gene['Gene']))
+
+        sequence = gene['Sequence']
+        for j in range(1000): # try 1000 times to get a working sequence
+            sequence, changed = remove_cutsites(gene['Gene'], sequence)
+
+            homopolymer_length, homopolymer_pos = max_homopolymer(sequence)
+            while homopolymer_length >= 6:
+                changed = True
+                sequence = recode_sequence(sequence, sequence[homopolymer_pos:homopolymer_pos+homopolymer_length])
+                homopolymer_length, homopolymer_pos = max_homopolymer(sequence)
+
+            if not gc_in_range(sequence):
+                eprint ("GC out of range")
+
+            if not changed:
+                break
+        else:
+            eprint("Warning: {} could not be optimized".format(gene['Gene']))
+
+        design_genes.ix[i, 'Sequence'] = sequence
+
+        eprint("")
+
+    # Force final codons to our standard set
+    force_codons = {
+        'M': 'ATG',
+        'W': 'TGG',
+        'F': 'TTT',
+        'L': 'CTG',
+        'I': 'ATT',
+        'V': 'GTG',
+        'S': 'TCC',
+        'P': 'CCA',
+        'T': 'ACC',
+        'A': 'GCC',
+        'Y': 'TAC',
+        'H': 'CAT',
+        'Q': 'CAG',
+        'N': 'AAC',
+        'K': 'AAG',
+        'D': 'GAT',
+        'E': 'GAG',
+        'C': 'TGC',
+        'R': 'CGC',
+        'G': 'GGC'
+    }
+
+    design_genes['Sequence'] = design_genes['Sequence'].str[:-6] + design_genes['Sequence'].str[-6:-3].apply(lambda x: force_codons[ec_codons.ix[x]]) + design_genes['Sequence'].str[-3:]
+
+    # Make sure we didn't introduce an RE site
+    # Make sure we didn't introduce any restriction sites
+    error = False
+    for enzyme, cut in cut_sites + [(e, reverse_complement(c)) for e, c in cut_sites]:
+        if design_genes['Sequence'].str.contains(cut).any():
+            error = True
+            eprint("Cannot normalize final codon without introducing restriction site {} ({})".format(enzyme, cut))
+
+            for i, (g, s) in design_genes.ix[design_genes['Sequence'].str.contains(cut), ['Gene','Sequence']].iterrows():
+                eprint(g, s[s.find(cut):])
+            eprint()
+
+    if error:
+        sys.exit(1)
+
+
+    #         seq = gene['Sequence']
+    #         while gc_content(seq) < 0.35:
+    #             # Too low, let's bump it up
+
+    #             # Pick a random codon
+    #             seq = gene['Sequence']
+    #             index = np.random.randint(len(seq))
+    #             index -= index % 3
+    #             codon = seq[index:index+3]
+
+    #             # Recode it for higher GC by replacing with the highest GC codon we can use
+    #             # Yup, this is a seriously inefficient way to do this
+    #             codons = ec_codon_usage.ix[ec_codons[codon]].index.values.tolist()
+    #             codons.sort(key=gc_content)
+    #             newcodon = codons[-1]
+    #             seq = seq[:index] + newcodon + seq[index+3:]
+
+    #            eprint('{} -> {}'.format(codon, newcodon))
+    #             break
+
+    #    eprint("")
+
+    return(design_genes.iloc[0]['Sequence'])
+    #design_genes.to_csv(sys.stdout)
+
+def fragment_gene(sequence,entry_type):
+        ## ==========================================================
+    ## Configurations
+    ## ==========================================================
+    synthesis_configuration = {
+        "max_length" : 1500,
+        "min_length" : 300
+    }
+    pcr_configuration = {
+        "max_length" : 5000
+    }
+    standard_flanks = {
+        "prefix" : "GGAG",
+        "suffix" : "CGCT"
+    }
+    enzyme_configuration = {
+        "AarI" : {
+            "prefix" : "CACCTGCCCTA",
+            "suffix" : "ACTCGCAGGTG"
+            },
+        "BbsI" : {
+             "prefix" : "GAAGACTA",
+             "suffix" : "ACGTCTTC"
+             },
+        "BfuAI" : {
+            "prefix" : "ACCTGCCCTA",
+            "suffix" : "ACTCGCAGGT"
+            },
+        "BsaI" : {
+            "prefix" : "GGTCTCA",
+            "suffix" : "CGAGACC"
+            },
+        "BsmBI" : {
+            "prefix" : "CGTCTCA",
+            "suffix" : "CGAGACG"
+            },
+        "BtgZI" : {
+            "prefix" : "GCGATGCATGCTTGCA",
+            "suffix" : "CCTCTGAATACATCGC"
+            },
+        "SapI" : {
+            "prefix" : "GCTCTTCA",
+            "suffix" : "GCTCTTCA"
+            },
+        "None" : {
+            "prefix" : "",
+            "suffix" : ""
+            },
+        "BsaI-methylated_prefix" : {
+            "prefix" : "CCGGTCTCA",
+            "suffix" : "CGAGACC"
+            },
+        "BsaI-methylated_suffix" : {
+            "prefix" : "GGTCTCA",
+            "suffix" : "CGAGACCGG"
+            },
+
+    }
+    # Establish part types
+    part_type = dict(
+        cds = {
+            # FreeGenes MoClo CDS definition
+            "cloning_enzyme": "BbsI",
+            "small_cloning_enzyme" : "BtgZI",
+            "retrieval_enzyme": "BsaI-methylated_suffix",
+            "prefix": "A",
+            "suffix": "AGAGCTT"
+        },
+        eukaryotic_promoter = {
+            # FreeGenes MoClo Eukaryotic Promoter definition
+            "cloning_enzyme" : "BbsI",
+            "small_cloning_enzyme" : "BtgZI",
+            "retrieval_enzyme" : "BsaI",
+            "prefix" : "GGAG",
+            "suffix" : "AATG"
+        },
+        prokaryotic_promoter = {
+            # FreeGenes MoClo Prokaryotic Promoter definition
+            "cloning_enzyme" : "BbsI",
+            "small_cloning_enzyme" : "BtgZI",
+            "retrieval_enzyme" : "BsaI",
+            "prefix" : "GGAG",
+            "suffix" : "TACT"
+        },
+        rbs = {
+            # FreeGenes MoClo RBS definition
+            "cloning_enzyme" : "BbsI",
+            "small_cloning_enzyme" : "BtgZI",
+            "retrieval_enzyme" : "BsaI",
+            "prefix" : "TACT",
+            "suffix" : "AATG"
+        },
+        terminator = {
+            # FreeGenes MoClo Prokaryotic Promoter definition
+            "cloning_enzyme" : "BbsI",
+            "small_cloning_enzyme" : "BtgZI",
+            "retrieval_enzyme" : "BsaI",
+            "prefix" : "GCTT",
+            "suffix" : "CGCT"
+        },
+        operon = {
+            # FreeGenes MoClo Operon definition
+            "cloning_enzyme" : "BbsI",
+            "small_cloning_enzyme" : "BtgZI",
+            "retrieval_enzyme" : "BsaI",
+            "prefix" : "GGAG",
+            "suffix" : "CGCT"
+        }
+    )
+    ## ================================
+    ## Defined find_enzyme for vectors
+    ## ================================
+    def find_enzyme(seq):
+        seq = str(seq)
+        def reverse_complement(seq):
+            return seq.translate(str.maketrans("ATGC","TACG"))[::-1]
+
+        cut_sites = [
+            ("BbsI", "GAAGAC"),
+            ("BtgZI", "GCGATG"),
+            ("BsaI", "GGTCTC"),
+            ("BsmBI", "CGTCTC"),
+            ("AarI", "CACCTGC"),
+            ("BfuAI", "ACCTGC")]
+        def single_finder(enzyme_cut,sequence):
+            if enzyme_cut in sequence:
+                return True
+            else:
+                return False
+        for enzyme in cut_sites:
+            if not single_finder(enzyme[1],seq) and not single_finder(reverse_complement(enzyme[1]),seq):
+                return enzyme[0]
+
+    ## ==========================================================
+    ## Add Retrieval prefix and suffix
+    ## ==========================================================
+    if entry_type not in part_type.keys() and "vector" not in entry_type:
+        print("not a valid type")
+        return
+    if "vector" not in entry_type:
+        part = part_type[entry_type]
+        retrieval_enzyme = part["retrieval_enzyme"]
+        full_sequence = enzyme_configuration[retrieval_enzyme]["prefix"] + part["prefix"] + sequence + part["suffix"] + enzyme_configuration[retrieval_enzyme]["suffix"] # Have a programmatic way to condense prefix / suffix rather than just defining them
+    else:
+        full_sequence = sequence.upper()
+    ## =======================================
+    ## Add Cloning prefix and suffix
+    ## =======================================
+    if "vector" in entry_type:
+        seq = full_sequence + full_sequence[:4]
+        cloning_enzyme = find_enzyme(seq)
+    else:
+        seq = standard_flanks["prefix"] + full_sequence + standard_flanks["suffix"]
+        cloning_enzyme = part["cloning_enzyme"]
+    num_frags = len(seq) // synthesis_configuration["max_length"] + 1
+    frag_len = len(seq) // num_frags
+
+    frags = []
+    if len(seq) < 300:
+        small_cloning_enzyme = part["small_cloning_enzyme"]
+        frag = enzyme_configuration[small_cloning_enzyme]["prefix"] + seq  + enzyme_configuration[small_cloning_enzyme]["suffix"]
+        frags.append(frag)
+    else:
+        for i in range(num_frags):
+            frag = seq[max(0, i * frag_len - 2):min((i+1) * frag_len + 2,len(seq))]
+            frag = enzyme_configuration[cloning_enzyme]["prefix"] + frag + enzyme_configuration[cloning_enzyme]["suffix"]
+            frags.append(frag)
+    return frags
+
+
+# Functions for the digester
+def dictionary_to_json_genbank(template, dictionary):
+     for key, value in dictionary.items():
+         template["genbank"][key] = data[key]
+     return template
+
+def suffix_genbank(sequence):
+    multiline = "ORIGIN\n"
+    start_site = 1
+    sequence_list = [sequence[i:i+10] for i in range(0, len(sequence), 10)]
+    sequence_split_list = [sequence_list[i:i+6] for i in range(0, len(sequence_list), 6)]
+    for index in sequence_split_list:
+        multiline += str(start_site).rjust(9)
+        for sequence in index:
+            multiline += " " + sequence
+        multiline += "\n"
+        start_site = start_site + 60
+    multiline += '//'
+    return multiline
+
+
+
+## =======
+## Classes
+## =======
+class FreeGene:
+    """FreeGene class"""
+    def __init__(self, gene_id, collection_id, timestamp, author_name, author_email, author_affiliation, author_orcid, gene_name, description, database_links, part_type, source_organism, target_organism, safety, genbank_file, template_json, optimize, genbank_dictionary):
+        self.gene_id = gene_id
+        self.collection_id = collection_id
+        self.submission_timestamp = timestamp
+        self.author_name = author_name
+        self.author_email = author_email
+        self.author_affiliation = author_affiliation
+        self.author_orcid = author_orcid
+        self.gene_name = gene_name
+        self.description = description
+        self.database_links = database_links
+        self.part_type = part_type.lower()
+        self.target_organism = target_organism
+        self.safety = safety
+        self.original_genbank = genbank_file
+        self.original_sequence = str(SeqIO.read(StringIO(genbank_file), "genbank").seq)
+        # Sequence modifications
+        if part_type == "CDS":
+            if optimize == False:
+                fix_sequence = self.original_sequence
+            else:
+                print("\n\nOptimizing " + self.gene_id)
+                fix_sequence = codon.optimize_protein(codon.load_codon_table(taxonomy_id=optimize, custom=True), genbank_dictionary["translation"]) + "TAA"
+            self.optimized = optimize_gene(self.gene_id, fix_sequence, "83333")#self.target_organism)
+        else:
+            self.optimized = self.original_sequence
+        # Apply to make new genbank file
+        self.optimized_genbank = self.original_genbank.replace(''.join(re.findall(r'(ORIGIN[A-Za-z0-9:_./-_\s-]+//)', self.original_genbank)), suffix_genbank(self.optimized))
+        # Check sequences
+        if self.buildable():
+            print(self.gene_id + " is clear of enzymes")
+        else:
+            print(self.find_enzyme() + " found in " + self.gene_id)
+        if len(self.optimized) < 300:
+            self.cloning_enzyme = "BtgZI"
+        else:
+            self.cloning_enzyme = "BbsI"
+        self.retrieval_enzyme = "BsaI"
+
+    
+
+    # Functions
+    def buildable(self):
+        enzyme = str(self.find_enzyme())
+        if enzyme == "Clear":
+            return True
+        else:
+            return False
+    def find_enzyme(self):
+        seq = self.optimized
+        def reverse_complement(seq):
+            return seq.translate(str.maketrans("ATGC","TACG"))[::-1]
+        cut_sites = [
+            ("BbsI", "GAAGAC"),
+            ("BtgZI", "GCGATG"),
+            ("BsaI", "GGTCTC")]
+        def single_finder(enzyme_cut,sequence):
+            if enzyme_cut in sequence:
+                return True
+            else:
+                return False
+        for enzyme in cut_sites:
+            if single_finder(enzyme[1],seq) and single_finder(reverse_complement(enzyme[1]),seq):
+                return enzyme[0]
+            else:
+                return "Clear"
+    def dictionary_to_json_genbank(template, dictionary):
+        for key, value in dictionary.items():
+            template["genbank"][key] = data[key]
+        return template
+    def json_write(self): 
+        if self.buildable():
+            path = "./../data/{}".format(gene_id)
+            os.makedirs(path)
+            template["gene_id"] = self.gene_id
+            template["author"]["name"] = self.author_name
+            template["author"]["email"] = self.author_email
+            template["author"]["affiliation"] = self.author_affiliation
+            template["author"]["orcid"] = self.author_orcid
+            template["info"]["documentation"]["gene_name"] = self.gene_name
+            template["info"]["documentation"]["description"] = self.description
+            template["info"]["documentation"]["database_links"] = self.database_links
+            template["info"]["gene_metadata"]["cloning"]["part_type"] = self.part_type
+            template["info"]["gene_metadata"]["cloning"]["cloning_enzyme"] = self.cloning_enzyme
+            template["info"]["gene_metadata"]["cloning"]["retrieval_enzyme"] = self.retrieval_enzyme
+            #template["info"]["gene_metadata"]["cloning"]["target_organism"]["organism_name"] = self.target_organism
+            template["info"]["gene_metadata"]["safety"] = self.safety
+            template["info"]["gene_metadata"]["collection_id"] = self.collection_id
+            template["dates"]["submitted"] = self.submission_timestamp
+            # Write taxid, target_organism
+            template["sequence"]["original_sequence"] = self.original_sequence
+            template["sequence"]["optimized_sequence"] = self.optimized
+            with open("{}/{}.json".format(path,gene_id),"w+") as json_file:
+                json.dump(template,json_file,indent=2)
+            with open("{}/{}.gb".format(path,gene_id),"w+") as genbank_single:
+                genbank_single.write(self.genbank_file)
+        else: 
+            print(self.gene_id + " NOT BUILDABLE")
+

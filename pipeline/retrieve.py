@@ -9,8 +9,8 @@ import glob
 import datetime
 import shutil 
 import sys
-import freegene_fixer as optimize
-import freegene_fixer as optimize_sequence
+import freegenes_fixer as optimize
+import freegenes_fixer as optimize_sequence
 from zipfile import ZipFile
 from io import BytesIO
 import requests
@@ -24,15 +24,19 @@ from config import *
 
 counter = 0
 base_pairs = 0
-for file in glob.glob("template.json"): 
-        with open(file,"r") as template_json:
-            template = json.load(template_json)
 write = input("Write files to system? (ENTER to continue, 'WRITE' to write) : ")
 
 
 ## =========
 ## Functions
 ## =========
+
+def JsonTemplate():
+    for file in glob.glob("template.json"):
+        with open(file,"r") as template_json:
+            template = json.load(template_json)
+            return template
+template = JsonTemplate()
 
 def NextCollection():
     data = glob.glob("./../data/*/*.json")
@@ -128,7 +132,7 @@ def strip_df(df):
 ## =======
 class FreeGene:
     """FreeGene class"""
-    def __init__(self, gene_id, collection_id, timestamp, author_name, author_email, author_affiliation, author_orcid, gene_name, description, database_links, part_type, source_organism, target_organism, safety, genbank_file, template_json):
+    def __init__(self, gene_id, collection_id, timestamp, author_name, author_email, author_affiliation, author_orcid, gene_name, description, database_links, part_type, source_organism, target_organism, safety, genbank_file, template_json, genomic, optimize, genbank_dictionary):
         self.gene_id = gene_id
         self.collection_id = collection_id
         self.submission_timestamp = timestamp
@@ -173,6 +177,10 @@ class FreeGene:
             if not single_finder(enzyme[1],seq) and not single_finder(reverse_complement(enzyme[1]),seq):
                 return enzyme[0]
                 break
+    def dictionary_to_json_genbank(template, dictionary):
+        for key, value in dictionary.items():
+            template["genbank"][key] = data[key]
+        return template
     def write(self): 
         path = "./../data/{}".format(gene_id)
         os.makedirs(path)
@@ -219,8 +227,17 @@ for index, row in bulk_data.iterrows():
             if row_csv['Exact genbank name in zip file'] in name:
                 with zip_file.open(name) as myfile:
                     genbank_file="\n".join(str(myfile.read(), 'utf-8').splitlines()) # Format genbank file all nice 
-        # Import into object 
-        freegene = FreeGene(gene_id, NextCollection(), row['Timestamp'], row['Name'], row['Email'], row['Affiliation'], row['ORCID'], row_csv['Gene name'], row_csv['Description'], row_csv['Links'], row_csv['Part type'], row_csv['Source organism'], row_csv['Target organism'], row_csv['Safety information'], genbank_file, template)
+        # Genomic preparation (to use 'genbank' file section when parsing)
+        if row_csv["genomic"]:
+            genomic = True
+        else:
+            genomic = False
+        if row_csv["optimize"]:
+            optimize = row_csv["optimize_table"]
+        else: 
+            optimize = False
+        # Import into object
+        freegene = FreeGene(gene_id, NextCollection(), row['Timestamp'], row['Name'], row['Email'], row['Affiliation'], row['ORCID'], row_csv['Gene name'], row_csv['Description'], row_csv['Links'], row_csv['Part type'], row_csv['Source organism'], row_csv['Target organism'], row_csv['Safety information'], genbank_file, template, genomic, optimize, False)
         if write == "WRITE":
             freegene.write()
         counter = counter + 1
@@ -235,8 +252,10 @@ single_data = uniq_data(current_data_single, previous_single)
 for index, row in single_data.iterrows():
     gene_id = NextID(counter) # New ID
     genbank_file = get_wufoo_textfile(row['genbank_file'])
+    genomic = False
+    optimize = False
         # Import into object 
-    freegene = FreeGene(gene_id, NextCollection(), row['Timestamp'], row['name'], row['email'], row['affiliation'], row['orcid'], row['gene_name'], row['description'], row['links'], row['part_type'], row['source_organism'],  row['target_organism'], row['safety_info'], genbank_file, template)
+    freegene = FreeGene(gene_id, NextCollection(), row['Timestamp'], row['name'], row['email'], row['affiliation'], row['orcid'], row['gene_name'], row['description'], row['links'], row['part_type'], row['source_organism'],  row['target_organism'], row['safety_info'], genbank_file, template, genomic, optimize, False)
     if write == "WRITE":
         freegene.write()
     counter = counter + 1

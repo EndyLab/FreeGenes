@@ -66,5 +66,19 @@
 		"ordered": "",
 		"received": "",
 		"complete": ""
-	}
+	},
+	"genbank": {
+		"locus_tag": "",
+		"gene": "",
+	       	"gene_synonyms": "",
+	       	"product": "",
+	       	"note": "",
+	       	"Source": "",
+	       	"GenBank_acc": "",
+	       	"protein_id": "",
+	       	"EC_number": "",
+		"translation": "",
+		"references": ""
+	},
+	"tags": []
 }
