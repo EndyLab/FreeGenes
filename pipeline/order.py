@@ -9,16 +9,12 @@ import glob
 import datetime
 import shutil 
 import sys
-import fragment
-import optimize as optimize_sequence
 from zipfile import ZipFile
 from io import BytesIO
 import requests
 import zipfile
 import io
-
-import optimize
-#from config import *
+import freegenes_functions as ff
 
 # Find the next submission number
 #previous_submissions = (sorted(glob.glob("./submissions/*.csv")))

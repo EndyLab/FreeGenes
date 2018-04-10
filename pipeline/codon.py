@@ -136,13 +136,14 @@ def optimize_protein(table, protein_seq):
     seq = list(protein_seq.upper())
     DNA_sequence = []
     for aa in seq:
-        codons = []
-        fractions = []
-        for index, row in table.iterrows():
-            if index[0] == aa:
-                codons.append(index[1])
-                fractions.append(row["Fraction"])
-        DNA_sequence.append(''.join(choice(codons, 1, p=fractions)) )
+        #codons = []
+        #fractions = []
+        #for index, row in table.iterrows():
+        #    if index[0] == aa:
+        #        codons.append(index[1])
+        #        fractions.append(row["Fraction"])
+        #DNA_sequence.append(''.join(choice(codons, 1, p=fractions)) )
+        DNA_sequence.append(''.join(choice(list(table.loc[aa].index), 1, p=list(table.loc[aa]['Fraction']))) )
     return ''.join(DNA_sequence)
 
 
