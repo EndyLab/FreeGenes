@@ -15,8 +15,8 @@ import requests
 import zipfile
 import io
 import freegenes_functions as ff
-
-
+from Bio.Seq import Seq
+from Bio.Alphabet import IUPAC
 
 random_sequence = "CGTAACTCGATCACTCACTC"
 
@@ -125,6 +125,7 @@ def write_link():
             json.dump(data,json_file,indent=2)
 
 def twist_order():
+    next_sub_num = input("Next submission number : ")
     ## Find all of the sequences that have yet to be ordered
     will_order = []
     will_order_seqs = []
@@ -155,7 +156,34 @@ def twist_order():
     previous_submissions = (sorted(glob.glob("./.." + "/submissions/*.csv")))
     twist_dna.to_csv('{}/submissions/submission{}.csv'.format("./..",str(next_sub_num).zfill(3)),index=False)
 
-def redo_optimization():
+def replace_bad_sequence(gene_id):
+    json_data = ff.Json_load("./../data/{}/{}.json".format(gene_id,gene_id))
+    seq_to_replace = input("Sequence to replace? ")
+    new_seq = input("New sequence? ")
+    old_sequence = json_data["sequence"]["optimized_sequence"]
+    new_sequence = old_sequence.replace(seq_to_replace, new_seq)
+    if not Seq(old_sequence, IUPAC.unambiguous_dna).translate() == Seq(new_sequence, IUPAC.unambiguous_dna).translate():
+        print("Bad translation, try again")
+        replace_bad_sequence(gene_id)
+    else:
+        with open("./../data/{}/{}.gb".format(gene_id,gene_id),"r") as genbank_single:
+            genbank_current = genbank_single.read()
+        genbank_fixed = ff.replace_genbank_sequence(genbank_current, new_sequence)
+        with open("./../data/{}/{}.gb".format(gene_id,gene_id),"w+") as genbank_single:
+            genbank_single.write(genbank_fixed)
+        json_data["sequence"]["optimized_sequence"] = new_sequence
+        with open("./../data/{}/{}.json".format(gene_id,gene_id),"w+") as json_file:
+            json.dump(json_data,json_file,indent=2)
+        print("Wrote new sequence for " + gene_id)
+        print("Remember to refragment, order, and make Twist submission")
+        if input("Replace another sequence? Y or N : ").upper() == "Y":
+            new_gene_id = input("Gene ID? :")
+            replace_bad_sequence(new_gene_id)
+        else: 
+            print("Recreating datbase")
+            fragment_genes()
+            write_link()
+            twist_order()
 
 
 ## ============
@@ -170,7 +198,6 @@ if choice == "Fragment genes in stage":
 elif choice == "Write linkers to stage":
     write_link()
 elif choice == "Create Twist submission spreadsheet":
-    next_sub_num = input("Next submission number : ")
     twist_order()
 elif choice == "Redo optimization":
-
+    replace_bad_sequence(input("gene_id : "))

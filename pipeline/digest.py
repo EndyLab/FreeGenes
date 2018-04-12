@@ -19,7 +19,7 @@ date = datetime.date.today().strftime("%d") + "-" + datetime.date.today().strfti
 author = "FreeGenes Team"
 counter = 0
 email = "koeng101@gmail.com"
-description = "A collection of all Mycoplasma genitalium G37 genes. Requested by JCVI."
+description = "A collection of all Mycoplasma pneumoniae M129 genes. Requested by JCVI."
 target_organism = "E.coli"
 safety = ""
 optimization_table = "custom_1"
@@ -151,7 +151,7 @@ for index, row in df.iterrows():
     genbank_file += ff.suffix_genbank(sequence) 
     # Create object
     if write:
-        freegene = ff.FreeGene(gene_id, NextCollection, date, author, email, "BioBricks Foundation", "NA", definition, description, links, "CDS", data["Source"], target_organism, safety, genbank_file, ff.JsonTemplate(), optimization_table, data)
+        freegene = ff.FreeGene(gene_id, NextCollection, date, author, email, "BioBricks Foundation", "NA", definition, description, links, "CDS", data["Source"], target_organism, safety, genbank_file, ff.Json_load("template.json"), optimization_table, data)
         freegene.json_write()
         counter = counter + 1
     else:

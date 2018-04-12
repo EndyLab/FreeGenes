@@ -27,7 +27,7 @@ from Bio.Alphabet import IUPAC
 ## Configuration
 ## =============
 
-ID_STARTING_POINT = 1439
+ID_STARTING_POINT = 1263
 PREVIOUS_CSV_SINGLE = './previous_plates/single.csv'
 PREVIOUS_CSV_BULK = './previous_plates/bulk.csv'
 SINGLE_SUBMISSION_ID = '1j5Gc7KEfRlPCIaXMGjDhgQDfSOVx7tnbss9AksrHhzk'
@@ -657,12 +657,12 @@ class FreeGene:
         self.retrieval_enzyme = "BsaI" 
 
     # Functions
-def buildable(self):
-    enzyme = str(self.find_enzyme())
-    if enzyme == "Clear":
-        return True
-    else:
-        return False
+    def buildable(self):
+        enzyme = str(self.find_enzyme())
+        if enzyme == "Clear":
+            return True
+        else:
+            return False
     def find_enzyme(self):
         seq = self.optimized
         def reverse_complement(seq):
