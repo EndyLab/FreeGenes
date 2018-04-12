@@ -19,13 +19,15 @@ date = datetime.date.today().strftime("%d") + "-" + datetime.date.today().strfti
 author = "FreeGenes Team"
 counter = 0
 email = "koeng101@gmail.com"
-description = "Test"
+description = "A collection of all Mycoplasma genitalium G37 genes. Requested by JCVI."
 target_organism = "E.coli"
 safety = ""
 optimization_table = "custom_1"
 transl_table = "11"
 transl_table = '                     /transl_table='+transl_table
 NextCollection = ff.NextCollection()
+unused = set()
+
 
 prefix_genbank = """LOCUS       {}    {} bp ds-DNA     linear   BCT {}
 DEFINITION  {}
@@ -75,6 +77,11 @@ def fasta_refseq_dictionary(file_name):
         dictionary[record.id[:14]] = str(record.seq)
     return dictionary
 
+def genelist_to_list(file_name):
+    with open(file_name,"r") as data_file:
+        data = data_file.read()
+    essential = list(filter(None, data.split("\n")))
+    return essential 
 
 ## ==================
 ## Ask for user input
@@ -85,6 +92,10 @@ protein_file = input("Does this have a protein file? (T or F) ").upper()
 if protein_file == "T":
     protein_fasta = ff.file_list("./../genome/genome_sequences/*.fasta")
     protein_dictionary = fasta_refseq_dictionary(protein_fasta)
+gene_list = input("does this have a gene list? (T or F) ").upper()
+if gene_list == "T":
+    essential_list = ff.file_list("./../genome/genome_sequences/*.txt")
+    essential_list = genelist_to_list(essential_list)
 
 ## ========================
 ## Process Genbank into CSV
@@ -92,7 +103,6 @@ if protein_file == "T":
 csv = subprocess.check_output("python2 ./../genome/gb2tab.py -f CDS " + genome, shell=True)
 df = pd.read_csv(StringIO(str(csv, "utf-8")), sep='\t')
 df.columns = ['locus_tag', 'sequence', 'exons', 'description']
-
 
 ## ================
 ## Digest the table 
@@ -112,8 +122,17 @@ for index, row in df.iterrows():
 
     # Get gene_id and collection id
     gene_id = ff.NextID(counter)
+    
+    write = True
+    # Essential checker
+    if gene_list == "T":
+        if definition in essential_list:
+            write = True
+        else:
+            write = False
+            unused.add(definition)
 
-    # Protein file checker
+        # Protein file checker
     if protein_file == "T":
         ref = data["protein_id"]
         if ref:
@@ -122,22 +141,20 @@ for index, row in df.iterrows():
             print("Changed translation on " + gene_id)
         else:
             write = False
-    else:
-        write = True
+
 
     # Setup database links
     links = []
 
     # Setup Genbank file prefix
     genbank_file = prefix_genbank.format(gene_id, str(len(sequence)).rjust(11), date, definition, len(sequence), data["Source"], author, "1.." + str(len(sequence))) + "\n" + multiline
-    genbank_file += ff.suffix_genbank(sequence)
-    #print(genbank_file)
+    genbank_file += ff.suffix_genbank(sequence) 
     # Create object
     if write:
         freegene = ff.FreeGene(gene_id, NextCollection, date, author, email, "BioBricks Foundation", "NA", definition, description, links, "CDS", data["Source"], target_organism, safety, genbank_file, ff.JsonTemplate(), optimization_table, data)
         freegene.json_write()
         counter = counter + 1
     else:
-        print('skipping' + gene_id)
+        print('skipping ' + definition)
 
 

@@ -120,33 +120,18 @@ def recode_sequence(table, seq, rep):
 
     return seq[:i] + newcodon + seq[i+3:]
 
-def remove_cutsites(cut_sites, seq):
+def remove_cutsites(table, cut_sites, seq):
     """Remove cutsites from a sequence."""
     changes = 0
-
     for enzyme, cut in cut_sites + [(e, reverse_complement(c)) for e, c in cut_sites]:
         while cut in seq:
             logger.warn("{} cuts ({})".format(enzyme, cut))
             changes += 1
-            seq = recode_sequence(seq, cut)
-
+            seq = recode_sequence(table, seq, cut)
     return seq, changes
 
 def optimize_protein(table, protein_seq):
-    seq = list(protein_seq.upper())
-    DNA_sequence = []
-    for aa in seq:
-        #codons = []
-        #fractions = []
-        #for index, row in table.iterrows():
-        #    if index[0] == aa:
-        #        codons.append(index[1])
-        #        fractions.append(row["Fraction"])
-        #DNA_sequence.append(''.join(choice(codons, 1, p=fractions)) )
-        DNA_sequence.append(''.join(choice(list(table.loc[aa].index), 1, p=list(table.loc[aa]['Fraction']))) )
-    return ''.join(DNA_sequence)
-
-
+    return''.join(list(map(lambda aa: ''.join(choice(list(table.loc[aa].index), 1, p=list(table.loc[aa]['Fraction']))), list(protein_seq.upper()))))
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)

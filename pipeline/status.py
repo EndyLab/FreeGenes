@@ -3,15 +3,13 @@ import os
 import glob
 import re
 
-part_set=set()
 
 for file in glob.glob("./../data/*/*.json"):
     with open(file,"r") as json_file:
         data = json.load(json_file)
-    part = data["info"]["gene_metadata"]["cloning"]["part_type"]
-    part = part.replace(" ", "_")
-    part_set.add(part)
-    print(part)
-    print(data["gene_id"])
+    part = data["info"]["documentation"]["gene_name"]
+    print(part + "," + data["gene_id"])
+    text_file = open("JCVI.csv","a")
+    text_file.write(part + "," + data["gene_id"] + "\n")
+    text_file.close()
 
-print(part_set)
