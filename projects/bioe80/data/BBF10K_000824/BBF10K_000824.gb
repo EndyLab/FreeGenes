@@ -1,0 +1,45 @@
+LOCUS       BBF10K_000824            612 bp ds-DNA     linear   BCT 10-APR-2018
+DEFINITION  lolA
+ACCESSION   .
+VERSION     .
+KEYWORDS    .
+REFERENCE   1  (bases 1 to 612)
+SOURCE      synthetic DNA sequence
+  ORGANISM  Escherichia coli str. K-12 substr. MG1655
+  AUTHORS   FreeGenes Team
+  TITLE     Direct Submission
+FEATURES             Location/Qualifiers
+     CDS             1..612
+                     /locus_tag="b0891"
+                     /gene="lolA"
+                     /gene_synonyms=""
+                     /product="lipoprotein chaperone"
+                     /note="periplasmic protein effects translocation
+                     oflipoproteins from inner membrane to outer"
+                     /Source="Escherichia coli str. K-12 substr. MG1655"
+                     /GenBank_acc="NC_000913"
+                     /protein_id="NP_415411.2"
+                     /EC_number=""
+                     /translation="MKKIAITCALLSSLVASSVWADAASDLKSRLDKVSSFHASFTQK
+                     VTDGSGAAVQEGQGDLWVKRPNLFNWHMTQPDESILVSDGKTLWFYNPFVEQATATWL
+                     KDATGNTPFMLIARNQSSDWQQYNIKQNGDDFVLTPKASNGNLKQFTINVGRDGTIHQ
+                     FSAVEQDDQRSSYQLKSQQNGAVDAAKFTFTPPQGVTVDDQRK"
+                     /transl_table=11
+                     /codon_start=1
+                     db_xref="ASAP:ABE-0003031"
+                     db_xref="UniProtKB/Swiss-Prot:P61316"
+                     db_xref="EcoGene:EG12684"
+                     db_xref="GeneID:948989"
+ORIGIN
+        1 ATGAAGAAAA TTGCAATTAC GTGCGCGCTG CTGTCCTCGC TGGTTGCGTC GAGCGTATGG
+       61 GCGGATGCTG CGAGCGATCT TAAGAGCCGT CTGGATAAAG TCAGCAGCTT CCATGCGTCC
+      121 TTCACGCAAA AAGTCACCGA CGGTAGCGGT GCGGCAGTGC AGGAAGGTCA GGGCGACCTG
+      181 TGGGTGAAGC GCCCTAACCT GTTCAACTGG CACATGACCC AGCCTGATGA ATCCATCCTG
+      241 GTTTCAGATG GTAAAACCCT GTGGTTCTAC AACCCGTTCG TCGAACAAGC GACCGCAACT
+      301 TGGCTGAAGG ACGCGACGGG CAACACCCCG TTTATGCTGA TTGCCCGTAA CCAAAGCAGC
+      361 GACTGGCAAC AATACAACAT CAAGCAGAAC GGCGACGATT TTGTCCTGAC GCCGAAGGCC
+      421 TCCAACGGTA ATCTGAAACA GTTCACCATC AATGTTGGTC GTGATGGCAC GATCCACCAG
+      481 TTCAGCGCCG TGGAGCAGGA TGATCAACGT TCCAGCTATC AGCTGAAGTC CCAGCAGAAT
+      541 GGCGCCGTTG ACGCGGCAAA ATTTACGTTC ACCCCGCCGC AGGGTGTTAC TGTTGACGAC
+      601 CAACGCAAGT GA
+//

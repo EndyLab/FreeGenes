@@ -17,17 +17,12 @@ import io
 import freegenes_functions as ff
 from Bio.Seq import Seq
 from Bio.Alphabet import IUPAC
+import yaml
+
+config = ff.FreeGenes_configuration()
+stage = config["STAGE_PATH"]
 
 random_sequence = "CGTAACTCGATCACTCACTC"
-
-# Find the next submission number
-#previous_submissions = (sorted(glob.glob("./submissions/*.csv")))
-#string = (previous_submissions[-1])
-#next_sub_num = int(string[-7:-4]) + 1
-## ====================================================
-## Query the database for all of the small sequences
-## and sequences to attach them to
-## ====================================================
 small_seq_ids = []
 small_seqs = []
 large_seq_ids = []
@@ -35,7 +30,7 @@ large_seqs = []
 
 
 def fragment_genes():
-    for file in glob.glob("./../data/*/*.json"):
+    for file in glob.glob(stage + "*/*.json"):
         with open(file,"r") as json_file:
             data = json.load(json_file)
             part_type = data["info"]["gene_metadata"]["cloning"]["part_type"]
@@ -48,12 +43,12 @@ def fragment_genes():
             for index,frag in enumerate(fragments):
                 fragment_name = gene_id + "_" + str(index + 1)
                 data["sequence"]["fragment_sequences"][fragment_name] = frag
-            path = "{}/data/{}".format("./..",gene_id)
+            path = "{}{}".format(stage,gene_id)
             with open("{}/{}.json".format(path,gene_id),"w+") as json_file:
                 json.dump(data,json_file,indent=2)
 
 def write_link():
-    for file in glob.glob("./../data/*/*.json"):
+    for file in glob.glob(stage + "*/*.json"):
         with open(file,"r") as json_file:
             data = json.load(json_file)
         # Fragment the genes
@@ -117,11 +112,11 @@ def write_link():
     
     # Change the files in the database to reflect the joined sequences
     for index,row in joined_df.iterrows():
-        with open("{}/data/{}/{}.json".format("./..",row["Gene ID"],row["Gene ID"]),"r") as json_file:
+        with open("{}{}/{}.json".format(stage,row["Gene ID"],row["Gene ID"]),"r") as json_file:
             data = json.load(json_file)
         data["sequence"]["fragment_sequences"] = {}
         data["sequence"]["fragment_sequences"][row["Fragment Name"]] = row["Sequence"]
-        with open("{}/data/{}/{}.json".format("./..",row["Gene ID"],row["Gene ID"]),"w+") as json_file:
+        with open("{}{}/{}.json".format(stage,row["Gene ID"],row["Gene ID"]),"w+") as json_file:
             json.dump(data,json_file,indent=2)
 
 def twist_order():
@@ -129,7 +124,7 @@ def twist_order():
     ## Find all of the sequences that have yet to be ordered
     will_order = []
     will_order_seqs = []
-    for file in glob.glob("{}/data/*/*.json".format("./..")):
+    for file in glob.glob("{}*/*.json".format(stage)):
         with open(file,"r") as json_file:
             data = json.load(json_file)
     
@@ -155,9 +150,10 @@ def twist_order():
     
     previous_submissions = (sorted(glob.glob("./.." + "/submissions/*.csv")))
     twist_dna.to_csv('{}/submissions/submission{}.csv'.format("./..",str(next_sub_num).zfill(3)),index=False)
+    print("Completed submission form.")
 
 def replace_bad_sequence(gene_id):
-    json_data = ff.Json_load("./../data/{}/{}.json".format(gene_id,gene_id))
+    json_data = ff.Json_load(stage + "{}/{}.json".format(gene_id,gene_id))
     seq_to_replace = input("Sequence to replace? ")
     new_seq = input("New sequence? ")
     old_sequence = json_data["sequence"]["optimized_sequence"]
@@ -166,38 +162,81 @@ def replace_bad_sequence(gene_id):
         print("Bad translation, try again")
         replace_bad_sequence(gene_id)
     else:
-        with open("./../data/{}/{}.gb".format(gene_id,gene_id),"r") as genbank_single:
+        with open(stage + "{}/{}.gb".format(gene_id,gene_id),"r") as genbank_single:
             genbank_current = genbank_single.read()
         genbank_fixed = ff.replace_genbank_sequence(genbank_current, new_sequence)
-        with open("./../data/{}/{}.gb".format(gene_id,gene_id),"w+") as genbank_single:
+        with open(stage + "{}/{}.gb".format(gene_id,gene_id),"w+") as genbank_single:
             genbank_single.write(genbank_fixed)
         json_data["sequence"]["optimized_sequence"] = new_sequence
-        with open("./../data/{}/{}.json".format(gene_id,gene_id),"w+") as json_file:
+        with open(stage + "{}/{}.json".format(gene_id,gene_id),"w+") as json_file:
             json.dump(json_data,json_file,indent=2)
         print("Wrote new sequence for " + gene_id)
-        print("Remember to refragment, order, and make Twist submission")
+
         if input("Replace another sequence? Y or N : ").upper() == "Y":
-            new_gene_id = input("Gene ID? :")
+            new_gene_id = input("gene id : ")
             replace_bad_sequence(new_gene_id)
         else: 
-            print("Recreating datbase")
-            fragment_genes()
-            write_link()
-            twist_order()
+            fragment_to_order()
+            
+def reset_fragment_stage():
+    for file in glob.glob(stage + "*/*.json"):
+        with open(file,"r") as json_file:
+            data = json.load(json_file)
+            data["sequence"]["fragment_sequences"] = {}
+            gene_id = data["gene_id"]
+            path = "{}{}".format(stage,gene_id)
+            with open("{}/{}.json".format(path,gene_id),"w+") as json_file:
+                json.dump(data,json_file,indent=2)
+    print("Fragments on stage cleared.")
 
+def id_reset():
+    number_of_files = len(glob.glob(stage + "*")) 
+    input("Are you sure you'd like to continue? (ENTER TO CONTINUE)")
+    original_number = config["ID_START"]
+    new_number = config["ID_START"] + number_of_files
+    config["ID_START"] = new_number
+    with open("./configuration/FreeGene_config.yaml","w+") as yaml_file:
+        yaml.dump(config,yaml_file,default_flow_style=False)
+    print("Replaced {} with {}".format(original_number,new_number))
+
+
+def fragment_to_order():
+    print("Recreating database")
+    reset_fragment_stage()
+    fragment_genes()
+    write_link()
+    twist_order()
+
+
+def order_manager():
+    print("\n")
+    print("=== FreeGenes Order manager ===")
+    options = ("Frag -> Order", "Set ID starting point", "Fragment genes in stage", "Write linkers to stage", "Create Twist submission spreadsheet", "Redo optimization", "Reset fragment stage", "Exit")
+    choice = ff.option_list(options)
+    
+    if choice == "Frag -> Order":
+        fragment_to_order()
+    elif choice == "Set ID starting point":
+        id_reset()
+    elif choice == "Fragment genes in stage":
+        fragment_genes()
+    elif choice == "Write linkers to stage":
+        write_link()
+    elif choice == "Create Twist submission spreadsheet":
+        twist_order()
+    elif choice == "Redo optimization":
+        replace_bad_sequence(input("gene_id : "))
+    elif choice == "Reset fragment stage":
+        reset_fragment_stage()
+    elif choice == "Exit":
+        sys.exit()
+    print("Returning to Order manager")
+    return order_manager()
 
 ## ============
 ## Run the code
 ## ============
 print("Welcome to the FreeGenes Order manager")
-options = ("Fragment genes in stage", "Write linkers to stage", "Create Twist submission spreadsheet", "Redo optimization")
-choice = ff.option_list(options)
 
-if choice == "Fragment genes in stage":
-    fragment_genes()
-elif choice == "Write linkers to stage":
-    write_link()
-elif choice == "Create Twist submission spreadsheet":
-    twist_order()
-elif choice == "Redo optimization":
-    replace_bad_sequence(input("gene_id : "))
+order_manager()
+

@@ -22,16 +22,20 @@ from Bio.Alphabet import generic_dna
 from difflib import ndiff
 import codon
 from Bio.Alphabet import IUPAC
+import yaml
 
 ## =============
 ## Configuration
 ## =============
+def load_configuration(config):
+    with open(config) as configuration:
+        config = yaml.load(configuration)
+        return config
 
-ID_STARTING_POINT = 1263
-PREVIOUS_CSV_SINGLE = './previous_plates/single.csv'
-PREVIOUS_CSV_BULK = './previous_plates/bulk.csv'
-SINGLE_SUBMISSION_ID = '1j5Gc7KEfRlPCIaXMGjDhgQDfSOVx7tnbss9AksrHhzk'
-BULK_SUBMISSION_ID = '1qgNt3h63--o7qlhTdkUqGpLqVOGizUaY5dMG7VdCwHA'
+def FreeGenes_configuration():
+    return load_configuration("./configuration/FreeGene_config.yaml")
+
+config = FreeGenes_configuration()
 
 ## =============
 ## DNA sequences
@@ -88,7 +92,7 @@ def Json_load(path):
         return template
 
 def NextCollection():
-    data = glob.glob("./../data/*/*.json")
+    data = glob.glob("./../stage/*/*.json")
     collection_list = [2]
     if data:
         for json_file in data:
@@ -98,7 +102,7 @@ def NextCollection():
     return(int(max([e for e in collection_list if isinstance(e, int)])) + 1)
 
 def NextID(counter=0):
-    number = ID_STARTING_POINT + 1 + counter
+    number = config["ID_START"] + 1 + counter
     string_number = str(number)
     id_number = (string_number.zfill(6))
     full_id = "BBF10K_" + id_number
@@ -397,7 +401,7 @@ def optimize_gene(gene_id,sequence,taxid):
 
     if error:
         input("Try Again? ENTER TO CONTINUE")
-        return optimize_gene(gene_id,codon.optimize_gene(codon.load_codon_table(taxonomy_id="custom_1", custom=True), Seq(sequence, IUPAC.unambiguous_dna).translate()),taxid)
+        return optimize_gene(gene_id,codon.optimize_protein(codon.load_codon_table(taxonomy_id="custom_1", custom=True), Seq(sequence, IUPAC.unambiguous_dna).translate()),taxid)
         
         #again = input("Try again? ( y or n )").upper()
 
@@ -609,7 +613,7 @@ def final_fixer(translation):
 ## =======
 class FreeGene:
     """FreeGene class"""
-    def __init__(self, gene_id, collection_id, timestamp, author_name, author_email, author_affiliation, author_orcid, gene_name, description, database_links, part_type, source_organism, target_organism, safety, genbank_file, template_json, optimize, genbank_dictionary):
+    def __init__(self, gene_id, collection_id, timestamp, author_name, author_email, author_affiliation, author_orcid, gene_name, description, database_links, part_type, source_organism, target_organism, safety, genbank_file, template_json, optimize, genbank_dictionary, tags):
         self.gene_id = gene_id
         self.collection_id = collection_id
         self.submission_timestamp = timestamp
@@ -625,6 +629,7 @@ class FreeGene:
         self.safety = safety
         self.template_json = template_json
         self.genbank_dictionary = genbank_dictionary
+        self.tags = tags
         self.original_genbank = genbank_file
         self.original_sequence = str(SeqIO.read(StringIO(genbank_file), "genbank").seq)
         # Sequence modifications
@@ -655,6 +660,7 @@ class FreeGene:
         else:
             self.cloning_enzyme = "BbsI"
         self.retrieval_enzyme = "BsaI" 
+
 
     # Functions
     def buildable(self):
@@ -687,7 +693,7 @@ class FreeGene:
         return template
     def json_write(self): 
         if self.buildable():
-            path = "./../data/{}".format(self.gene_id)
+            path = "./../stage/{}".format(self.gene_id)
             os.makedirs(path)
             self.template_json["gene_id"] = self.gene_id
             self.template_json["author"]["name"] = self.author_name
@@ -700,13 +706,14 @@ class FreeGene:
             self.template_json["info"]["gene_metadata"]["cloning"]["part_type"] = self.part_type
             self.template_json["info"]["gene_metadata"]["cloning"]["cloning_enzyme"] = self.cloning_enzyme
             self.template_json["info"]["gene_metadata"]["cloning"]["retrieval_enzyme"] = self.retrieval_enzyme
-            #template["info"]["gene_metadata"]["cloning"]["target_organism"]["organism_name"] = self.target_organism
+            self.template_json["info"]["gene_metadata"]["cloning"]["target_organism"]["organism_name"] = self.target_organism
             self.template_json["info"]["gene_metadata"]["safety"] = self.safety
             self.template_json["info"]["gene_metadata"]["collection_id"] = self.collection_id
             self.template_json["dates"]["submitted"] = self.submission_timestamp
             # Write taxid, target_organism
             self.template_json["sequence"]["original_sequence"] = self.original_sequence
             self.template_json["sequence"]["optimized_sequence"] = self.optimized
+            self.template_json["tags"] = self.tags
             if self.genbank_dictionary:
                 self.dictionary_to_json_genbank(self.template_json, self.genbank_dictionary)
             with open("{}/{}.json".format(path,self.gene_id),"w+") as json_file:

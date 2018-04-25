@@ -1,0 +1,16 @@
+# Escherichia coli configuration
+# 24-APR-2018
+
+author: FreeGenes Team
+email: koeng101@gmail.com
+description: All essential genes from Escherichia coli as defined by http://www.ecogene.org/old/topic.php?topic_id=5
+target_organism: Escherichia coli
+optimization_table: custom_1
+safety: NA
+transl_table: 11
+tags:
+        - Escherichia coli
+        - Essential
+
+protein_file: False
+gene_list: True

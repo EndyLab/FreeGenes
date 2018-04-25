@@ -1,0 +1,16 @@
+# Template yaml configuration for producing a genomic digestion.
+# 24-APR-2018 
+
+author: Keoni Gandall
+email: koeng101@gmail.com
+description: A clever description
+target_organism: E.coli
+optimization_table: custom_1
+safety: NA
+transl_table: 11
+tags:
+        - Bacillus subtilis
+        - Essential
+
+protein_file: False
+gene_list: False

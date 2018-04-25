@@ -15,19 +15,12 @@ from Bio import SeqIO
 ## ===============
 ## SETUP VARIABLES
 ## ===============
+
 date = datetime.date.today().strftime("%d") + "-" + datetime.date.today().strftime("%B")[:3].upper() + "-" + datetime.date.today().strftime("%Y")
-author = "FreeGenes Team"
-counter = 0
-email = "koeng101@gmail.com"
-description = "A collection of all Mycoplasma pneumoniae M129 genes. Requested by JCVI."
-target_organism = "E.coli"
-safety = ""
-optimization_table = "custom_1"
-transl_table = "11"
-transl_table = '                     /transl_table='+transl_table
+counter = len(glob.glob(stage + "*"))
+
 NextCollection = ff.NextCollection()
 unused = set()
-
 
 prefix_genbank = """LOCUS       {}    {} bp ds-DNA     linear   BCT {}
 DEFINITION  {}
@@ -86,21 +79,32 @@ def genelist_to_list(file_name):
 ## ==================
 ## Ask for user input
 ## ==================
+path = ff.FreeGenes_configuration()["PROJECT_PATH"]
+
 print("Please choose a genome file")
-genome = ff.file_list("./../genome/genome_sequences/*.gb")
-protein_file = input("Does this have a protein file? (T or F) ").upper()
-if protein_file == "T":
-    protein_fasta = ff.file_list("./../genome/genome_sequences/*.fasta")
+genome = ff.file_list(path + "genome/genome_sequences/*.gb")
+print("Please choose configuration file")
+digest_configuration = ff.file_list(path + "genome/digestion_configuration/*.yaml")
+config = ff.load_configuration(digest_configuration)
+transl_table = '                     /transl_table='+str(config["transl_table"])
+
+
+## =====================================
+## Check for protein files or gene lists
+## =====================================
+if config["protein_file"]:
+    protein_fasta = ff.file_list(path + "genome/protein_lists/*.fasta")
     protein_dictionary = fasta_refseq_dictionary(protein_fasta)
-gene_list = input("does this have a gene list? (T or F) ").upper()
-if gene_list == "T":
-    essential_list = ff.file_list("./../genome/genome_sequences/*.txt")
+
+if config["gene_list"]:
+    essential_list = ff.file_list(path + "genome/gene_lists/*.txt")
     essential_list = genelist_to_list(essential_list)
 
 ## ========================
 ## Process Genbank into CSV
 ## ========================
-csv = subprocess.check_output("python2 ./../genome/gb2tab.py -f CDS " + genome, shell=True)
+csv_python_command = "python2 " + path+ "genome/gb2tab.py -f CDS "
+csv = subprocess.check_output(csv_python_command + genome, shell=True)
 df = pd.read_csv(StringIO(str(csv, "utf-8")), sep='\t')
 df.columns = ['locus_tag', 'sequence', 'exons', 'description']
 
@@ -125,15 +129,15 @@ for index, row in df.iterrows():
     
     write = True
     # Essential checker
-    if gene_list == "T":
-        if definition in essential_list:
+    if config["gene_list"]:
+        if data["gene"] in essential_list or data["locus_tag"] in essential_list:
             write = True
         else:
             write = False
             unused.add(definition)
 
         # Protein file checker
-    if protein_file == "T":
+    if config["protein_file"]:
         ref = data["protein_id"]
         if ref:
             write = True
@@ -147,11 +151,11 @@ for index, row in df.iterrows():
     links = []
 
     # Setup Genbank file prefix
-    genbank_file = prefix_genbank.format(gene_id, str(len(sequence)).rjust(11), date, definition, len(sequence), data["Source"], author, "1.." + str(len(sequence))) + "\n" + multiline
+    genbank_file = prefix_genbank.format(gene_id, str(len(sequence)).rjust(11), date, definition, len(sequence), data["Source"], config["author"], "1.." + str(len(sequence))) + "\n" + multiline
     genbank_file += ff.suffix_genbank(sequence) 
     # Create object
     if write:
-        freegene = ff.FreeGene(gene_id, NextCollection, date, author, email, "BioBricks Foundation", "NA", definition, description, links, "CDS", data["Source"], target_organism, safety, genbank_file, ff.Json_load("template.json"), optimization_table, data)
+        freegene = ff.FreeGene(gene_id, NextCollection, date, config["author"], config["email"], "BioBricks Foundation", "NA", definition, config["description"], links, "CDS", data["Source"], config["target_organism"], config["safety"], genbank_file, ff.Json_load("./configuration/template.json"), config["optimization_table"], data, config["tags"])
         freegene.json_write()
         counter = counter + 1
     else:

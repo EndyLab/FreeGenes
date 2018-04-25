@@ -1,0 +1,42 @@
+LOCUS       BBF10K_000834            519 bp ds-DNA     linear   BCT 10-APR-2018
+DEFINITION  fabA
+ACCESSION   .
+VERSION     .
+KEYWORDS    .
+REFERENCE   1  (bases 1 to 519)
+SOURCE      synthetic DNA sequence
+  ORGANISM  Escherichia coli str. K-12 substr. MG1655
+  AUTHORS   FreeGenes Team
+  TITLE     Direct Submission
+FEATURES             Location/Qualifiers
+     CDS             1..519
+                     /locus_tag="b0954"
+                     /gene="fabA"
+                     /gene_synonyms=""
+                     /product="beta-hydroxydecanoyl thioester dehydrase"
+                     /note=""
+                     /Source="Escherichia coli str. K-12 substr. MG1655"
+                     /GenBank_acc="NC_000913"
+                     /protein_id="NP_415474.1"
+                     /EC_number="4.2.1.595.3.3.14"
+                     /translation="MVDKRESYTKEDLLASGRGELFGAKGPQLPAPNMLMMDRVVKMT
+                     ETGGNFDKGYVEAELDINPDLWFFGCHFIGDPVMPGCLGLDAMWQLVGFYLGWLGGEG
+                     KGRALGVGEVKFTGQVLPTAKKVTYRIHFKRIVNRRLIMGLADGEVLVDGRLIYTASD
+                     LKVGLFQDTSAF"
+                     /transl_table=11
+                     /codon_start=1
+                     db_xref="ASAP:ABE-0003229"
+                     db_xref="UniProtKB/Swiss-Prot:P0A6Q3"
+                     db_xref="EcoGene:EG10273"
+                     db_xref="GeneID:945568"
+ORIGIN
+        1 ATGGTTGACA AGCGTGAGAG CTATACCAAA GAAGATCTGC TGGCAAGCGG CCGTGGCGAA
+       61 CTGTTCGGTG CGAAAGGTCC GCAGCTGCCG GCGCCGAACA TGCTGATGAT GGACAGAGTG
+      121 GTTAAGATGA CGGAAACCGG TGGTAATTTC GATAAAGGTT ATGTTGAAGC GGAACTGGAC
+      181 ATTAACCCGG ATCTGTGGTT CTTTGGTTGT CATTTCATCG GTGACCCGGT GATGCCGGGC
+      241 TGCCTGGGTC TGGACGCCAT GTGGCAGCTG GTGGGTTTCT ACCTGGGCTG GCTGGGTGGC
+      301 GAAGGTAAGG GCCGTGCATT GGGTGTTGGC GAAGTCAAAT TTACCGGTCA AGTCTTGCCA
+      361 ACCGCGAAGA AAGTCACCTA TCGTATCCAC TTTAAGCGTA TTGTCAATCG CCGTCTGATC
+      421 ATGGGTTTGG CAGATGGTGA GGTTCTGGTG GATGGTCGTT TAATCTACAC GGCAAGCGAC
+      481 CTGAAAGTCG GCCTGTTCCA AGATACGTCC GCGTTTTGA
+//

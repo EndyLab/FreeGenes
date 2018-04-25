@@ -1,0 +1,38 @@
+LOCUS       BBF10K_000775            345 bp ds-DNA     linear   BCT 10-APR-2018
+DEFINITION  erpA
+ACCESSION   .
+VERSION     .
+KEYWORDS    .
+REFERENCE   1  (bases 1 to 345)
+SOURCE      synthetic DNA sequence
+  ORGANISM  Escherichia coli str. K-12 substr. MG1655
+  AUTHORS   FreeGenes Team
+  TITLE     Direct Submission
+FEATURES             Location/Qualifiers
+     CDS             1..345
+                     /locus_tag="b0156"
+                     /gene="erpA"
+                     /gene_synonyms=""
+                     /product="iron-sulfur cluster insertion protein"
+                     /note=""
+                     /Source="Escherichia coli str. K-12 substr. MG1655"
+                     /GenBank_acc="NC_000913"
+                     /protein_id="NP_414698.1"
+                     /EC_number=""
+                     /translation="MSDDVALPLEFTDAAANKVKSLIADEDNPNLKLRVYITGGGCSG
+                     FQYGFTFDDQVNEGDMTIEKQGVGLVVDPMSLQYLVGGSVDYTEGLEGSRFIVTNPNA
+                     KSTCGCGSSFSI"
+                     /transl_table=11
+                     /codon_start=1
+                     db_xref="ASAP:ABE-0000538"
+                     db_xref="UniProtKB/Swiss-Prot:P0ACC3"
+                     db_xref="EcoGene:EG12332"
+                     db_xref="GeneID:944857"
+ORIGIN
+        1 ATGAGCGACG ACGTTGCGTT GCCGCTGGAG TTTACGGACG CAGCCGCGAA TAAGGTGAAG
+       61 TCTTTGATCG CTGATGAGGA TAACCCGAAC CTGAAGCTGC GTGTTTATAT CACGGGTGGC
+      121 GGTTGTAGCG GCTTCCAATA CGGCTTTACG TTTGACGACC AAGTTAACGA AGGTGACATG
+      181 ACCATTGAGA AACAGGGTGT GGGTCTGGTG GTTGACCCGA TGAGCCTGCA ATACCTGGTT
+      241 GGTGGTAGCG TCGACTATAC CGAAGGCCTG GAGGGTAGCC GTTTTATCGT TACTAACCCG
+      301 AATGCCAAAA GCACGTGCGG CTGCGGTAGC TCCTTTAGCA TTTGA
+//

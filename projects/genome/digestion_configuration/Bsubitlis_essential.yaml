@@ -1,0 +1,16 @@
+# Bacillus subtilis 168 configuration
+# 24-APR-2018
+
+author: FreeGenes Team
+email: koeng101@gmail.com
+description: All essential genes from Bacillus subtilis as defined by https://doi.org/10.1016/j.cell.2016.05.003 
+target_organism: Escherichia coli
+optimization_table: custom_1
+safety: NA
+transl_table: 11
+tags:
+        - Bacillus subtilis
+        - Essential
+
+protein_file: False
+gene_list: True

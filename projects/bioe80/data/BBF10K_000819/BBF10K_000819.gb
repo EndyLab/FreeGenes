@@ -1,0 +1,42 @@
+LOCUS       BBF10K_000819            531 bp ds-DNA     linear   BCT 10-APR-2018
+DEFINITION  fldA
+ACCESSION   .
+VERSION     .
+KEYWORDS    .
+REFERENCE   1  (bases 1 to 531)
+SOURCE      synthetic DNA sequence
+  ORGANISM  Escherichia coli str. K-12 substr. MG1655
+  AUTHORS   FreeGenes Team
+  TITLE     Direct Submission
+FEATURES             Location/Qualifiers
+     CDS             1..531
+                     /locus_tag="b0684"
+                     /gene="fldA"
+                     /gene_synonyms=""
+                     /product="flavodoxin 1"
+                     /note=""
+                     /Source="Escherichia coli str. K-12 substr. MG1655"
+                     /GenBank_acc="NC_000913"
+                     /protein_id="NP_415210.1"
+                     /EC_number=""
+                     /translation="MAITGIFFGSDTGNTENIAKMIQKQLGKDVADVHDIAKSSKEDL
+                     EAYDILLLGIPTWYYGEAQCDWDDFFPTLEEIDFNGKLVALFGCGDQEDYAEYFCDAL
+                     GTIRDIIEPRGATIVGHWPTAGYHFEASKGLADDDHFVGLAIDEDRQPELTAERVEKW
+                     VKQISEELHLDEILNA"
+                     /transl_table=11
+                     /codon_start=1
+                     db_xref="ASAP:ABE-0002332"
+                     db_xref="UniProtKB/Swiss-Prot:P61949"
+                     db_xref="EcoGene:EG10318"
+                     db_xref="GeneID:945293"
+ORIGIN
+        1 ATGGCAATCA CGGGTATCTT TTTTGGCTCA GATACCGGTA ATACGGAGAA TATCGCAAAA
+       61 ATGATCCAGA AACAATTGGG TAAAGATGTG GCGGATGTTC ATGATATTGC TAAGAGCAGC
+      121 AAAGAGGACC TGGAGGCGTA CGACATCCTT CTGCTTGGTA TTCCGACGTG GTACTACGGC
+      181 GAGGCACAGT GCGATTGGGA TGACTTCTTC CCAACGCTGG AGGAAATCGA CTTCAATGGT
+      241 AAACTGGTTG CGCTGTTTGG CTGCGGTGAC CAAGAGGACT ATGCTGAATA TTTTTGCGAC
+      301 GCCCTGGGCA CCATCCGCGA CATCATTGAG CCGCGCGGTG CTACCATTGT GGGCCATTGG
+      361 CCGACCGCGG GTTACCATTT CGAAGCGAGC AAAGGTCTGG CGGATGACGA CCATTTTGTG
+      421 GGTCTGGCAA TCGATGAGGA TCGTCAACCA GAACTGACCG CCGAACGTGT TGAAAAGTGG
+      481 GTTAAGCAAA TCAGCGAGGA GCTGCACCTG GACGAGATTC TGAACGCCTG A
+//

@@ -1,0 +1,42 @@
+LOCUS       BBF10K_000752            495 bp ds-DNA     linear   BCT 10-APR-2018
+DEFINITION  lspA
+ACCESSION   .
+VERSION     .
+KEYWORDS    .
+REFERENCE   1  (bases 1 to 495)
+SOURCE      synthetic DNA sequence
+  ORGANISM  Escherichia coli str. K-12 substr. MG1655
+  AUTHORS   FreeGenes Team
+  TITLE     Direct Submission
+FEATURES             Location/Qualifiers
+     CDS             1..495
+                     /locus_tag="b0027"
+                     /gene="lspA"
+                     /gene_synonyms=""
+                     /product=""
+                     /note=""
+                     /Source="Escherichia coli str. K-12 substr. MG1655"
+                     /GenBank_acc="NC_000913"
+                     /protein_id="NP_414568.1"
+                     /EC_number="3.4.23.36"
+                     /translation="MSQSICSTGLRWLWLVVVVLIIDLGSKYLILQNFALGDTVPLFP
+                     SLNLHYARNYGAAFSFLADSGGWQRWFFAGIAIGISVILAVMMYRSKATQKLNNIAYA
+                     LIIGGALGNLFDRLWHGFVVDMIDFYVGDWHFATFNLADTAICVGAALIVLEGFLPSR
+                     AKKQ"
+                     /transl_table=11
+                     /codon_start=1
+                     db_xref="ASAP:ABE-0000096"
+                     db_xref="UniProtKB/Swiss-Prot:P00804"
+                     db_xref="EcoGene:EG10548"
+                     db_xref="GeneID:944800"
+ORIGIN
+        1 ATGAGCCAGT CTATTTGCTC AACCGGTCTG CGTTGGCTGT GGCTGGTTGT GGTTGTGCTG
+       61 ATCATTGATC TGGGCAGCAA GTATTTGATT CTGCAGAATT TCGCCCTGGG TGATACCGTC
+      121 CCGCTGTTTC CTTCTCTGAA TCTGCACTAC GCGCGCAACT ACGGTGCTGC ATTTAGCTTC
+      181 CTGGCGGATA GCGGTGGCTG GCAAAGATGG TTTTTTGCCG GCATTGCGAT CGGTATTAGC
+      241 GTGATCCTGG CAGTGATGAT GTATCGCTCC AAAGCGACCC AAAAACTGAA CAACATTGCC
+      301 TATGCCCTGA TCATTGGTGG CGCTCTGGGT AACCTGTTCG ACCGCCTGTG GCACGGCTTC
+      361 GTGGTTGATA TGATTGACTT TTATGTCGGC GATTGGCATT TCGCGACGTT TAATCTGGCT
+      421 GACACCGCTA TTTGTGTTGG TGCAGCGCTC ATTGTGCTGG AGGGTTTCCT GCCGAGCCGC
+      481 GCGAAAAAGC AGTGA
+//

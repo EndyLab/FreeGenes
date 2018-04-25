@@ -1,0 +1,42 @@
+LOCUS       BBF10K_000769            513 bp ds-DNA     linear   BCT 10-APR-2018
+DEFINITION  secM
+ACCESSION   .
+VERSION     .
+KEYWORDS    .
+REFERENCE   1  (bases 1 to 513)
+SOURCE      synthetic DNA sequence
+  ORGANISM  Escherichia coli str. K-12 substr. MG1655
+  AUTHORS   FreeGenes Team
+  TITLE     Direct Submission
+FEATURES             Location/Qualifiers
+     CDS             1..513
+                     /locus_tag="b0097"
+                     /gene="secM"
+                     /gene_synonyms=""
+                     /product="regulator of secA translation"
+                     /note=""
+                     /Source="Escherichia coli str. K-12 substr. MG1655"
+                     /GenBank_acc="NC_000913"
+                     /protein_id="NP_414639.2"
+                     /EC_number=""
+                     /translation="MSGILTRWRQFGKRYFWPHLLLGMVAASLGLPALSNAAEPNAPA
+                     KATTRNHEPSAKVNFGQLALLEANTRRPNSNYSVDYWHQHAIRTVIRHLSFAMAPQTL
+                     PVAEESLPLQAQHLALLDTLSALLTQEGTPSEKGYRIDYAHFTPQAKFSTPVWISQAQ
+                     GIRAGPQRLT"
+                     /transl_table=11
+                     /codon_start=1
+                     db_xref="ASAP:ABE-0000340"
+                     db_xref="UniProtKB/Swiss-Prot:P62395"
+                     db_xref="EcoGene:EG11087"
+                     db_xref="GeneID:944831"
+ORIGIN
+        1 ATGAGCGGTA TCCTCACGCG TTGGCGTCAA TTCGGCAAGC GCTACTTCTG GCCACATCTG
+       61 TTGCTGGGTA TGGTTGCGGC TTCCCTGGGC CTGCCGGCAC TGAGCAACGC GGCGGAACCT
+      121 AATGCTCCGG CCAAAGCTAC CACCCGCAAT CATGAACCGA GCGCGAAGGT TAACTTCGGT
+      181 CAGTTGGCGC TGCTGGAGGC GAACACGCGT CGTCCGAACA GCAACTACTC AGTTGACTAT
+      241 TGGCACCAAC ACGCTATTCG TACCGTTATT CGTCACCTGT CCTTTGCCAT GGCGCCGCAA
+      301 ACCCTGCCGG TTGCAGAGGA AAGCCTGCCG CTGCAAGCCC AACACTTGGC GCTGTTGGAC
+      361 ACGTTGTCGG CACTGCTGAC CCAGGAGGGC ACCCCGTCCG AGAAAGGTTA TCGTATCGAT
+      421 TACGCACACT TCACGCCGCA GGCCAAGTTC TCTACCCCGG TTTGGATTAG CCAGGCCCAA
+      481 GGCATTCGTG CGGGCCCGCA ACGTCTGACC TGA
+//

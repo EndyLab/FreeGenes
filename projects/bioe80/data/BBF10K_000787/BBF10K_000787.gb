@@ -1,0 +1,40 @@
+LOCUS       BBF10K_000787            456 bp ds-DNA     linear   BCT 10-APR-2018
+DEFINITION  fabZ
+ACCESSION   .
+VERSION     .
+KEYWORDS    .
+REFERENCE   1  (bases 1 to 456)
+SOURCE      synthetic DNA sequence
+  ORGANISM  Escherichia coli str. K-12 substr. MG1655
+  AUTHORS   FreeGenes Team
+  TITLE     Direct Submission
+FEATURES             Location/Qualifiers
+     CDS             1..456
+                     /locus_tag="b0180"
+                     /gene="fabZ"
+                     /gene_synonyms=""
+                     /product=""
+                     /note=""
+                     /Source="Escherichia coli str. K-12 substr. MG1655"
+                     /GenBank_acc="NC_000913"
+                     /protein_id="NP_414722.1"
+                     /EC_number="4.2.1.-"
+                     /translation="MTTNTHTLQIEEILELLPHRFPFLLVDRVLDFEEGRFLRAVKNV
+                     SVNEPFFQGHFPGKPIFPGVLILEAMAQATGILAFKSVGKLEPGELYYFAGIDEARFK
+                     RPVVPGDQMIMEVTFEKTRRGLTRFKGVALVDGKVVCEATMMCARSREA"
+                     /transl_table=11
+                     /codon_start=1
+                     db_xref="ASAP:ABE-0000613"
+                     db_xref="UniProtKB/Swiss-Prot:P0A6Q6"
+                     db_xref="EcoGene:EG11284"
+                     db_xref="GeneID:944888"
+ORIGIN
+        1 ATGACCACCA ATACCCACAC GCTGCAGATC GAAGAAATCC TGGAACTGCT GCCTCACCGT
+       61 TTCCCGTTTC TGCTGGTCGA CCGCGTTTTA GATTTCGAGG AAGGCCGTTT CCTGCGTGCC
+      121 GTCAAGAATG TTAGCGTGAA TGAACCGTTT TTTCAGGGCC ACTTTCCGGG TAAACCTATT
+      181 TTTCCGGGCG TGCTGATTCT CGAGGCCATG GCCCAAGCGA CTGGCATCCT GGCCTTTAAA
+      241 AGCGTCGGTA AGCTGGAACC GGGTGAGTTG TACTATTTTG CGGGCATTGA CGAGGCAAGA
+      301 TTCAAACGCC CGGTGGTTCC GGGCGACCAG ATGATCATGG AGGTTACGTT TGAAAAAACC
+      361 CGCCGCGGTC TGACCCGTTT CAAAGGTGTT GCGCTGGTGG ACGGCAAGGT GGTCTGCGAG
+      421 GCGACCATGA TGTGCGCTCG TTCCCGCGAA GCCTGA
+//

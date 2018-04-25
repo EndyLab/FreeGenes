@@ -1,0 +1,45 @@
+LOCUS       BBF10K_000810            621 bp ds-DNA     linear   BCT 10-APR-2018
+DEFINITION  entD
+ACCESSION   .
+VERSION     .
+KEYWORDS    .
+REFERENCE   1  (bases 1 to 621)
+SOURCE      synthetic DNA sequence
+  ORGANISM  Escherichia coli str. K-12 substr. MG1655
+  AUTHORS   FreeGenes Team
+  TITLE     Direct Submission
+FEATURES             Location/Qualifiers
+     CDS             1..621
+                     /locus_tag="b0583"
+                     /gene="entD"
+                     /gene_synonyms=""
+                     /product="phosphopantetheinyltransferase component
+                     ofenterobactin synthase multienzyme complex"
+                     /note=""
+                     /Source="Escherichia coli str. K-12 substr. MG1655"
+                     /GenBank_acc="NC_000913"
+                     /protein_id="NP_415115.2"
+                     /EC_number="2.7.8.-"
+                     /translation="MKTTHTSLPFAGHTLHFVEFDPANFCEQDLLWLPHYAQLQHAGR
+                     KRKTEHLAGRIAAVYALREYGYKCVPAIGELRQPVWPAEVYGSISHCGTTALAVVSRQ
+                     PIGIDIEEIFSVQTARELTDNIITPAEHERLADCGLAFSLALTLAFSAKESAFKASEI
+                     QTDAGFLDYQIISWNKQQVIIHRENEMFAVHWQIKEKIVITLCQHD"
+                     /transl_table=11
+                     /codon_start=1
+                     db_xref="ASAP:ABE-0002009"
+                     db_xref="UniProtKB/Swiss-Prot:P19925"
+                     db_xref="EcoGene:EG10262"
+                     db_xref="GeneID:945194"
+ORIGIN
+        1 ATGAAAACCA CCCACACCAG CCTGCCTTTC GCAGGCCACA CCCTGCACTT TGTGGAATTT
+       61 GACCCGGCAA ACTTTTGCGA ACAAGATTTG TTGTGGCTGC CGCACTACGC GCAGCTGCAA
+      121 CACGCTGGTC GTAAACGCAA GACTGAACAC TTGGCGGGCC GTATCGCGGC CGTCTACGCG
+      181 CTGCGTGAAT ATGGCTACAA ATGTGTCCCG GCTATTGGTG AGCTGCGTCA ACCGGTGTGG
+      241 CCTGCAGAAG TTTACGGTAG CATTAGCCAC TGCGGTACCA CCGCGCTGGC GGTTGTCTCC
+      301 CGTCAACCGA TTGGTATCGA TATCGAGGAG ATTTTCAGCG TTCAGACCGC CCGCGAACTG
+      361 ACCGATAACA TTATCACTCC AGCGGAACAC GAACGTCTGG CGGACTGCGG CCTGGCGTTT
+      421 TCCTTGGCGT TGACCCTGGC GTTCAGCGCC AAGGAATCCG CTTTCAAAGC TAGCGAAATT
+      481 CAGACCGACG CGGGTTTCCT GGATTATCAA ATTATTAGCT GGAATAAACA ACAGGTGATT
+      541 ATTCACCGTG AAAACGAGAT GTTTGCAGTG CATTGGCAAA TTAAGGAAAA GATCGTCATC
+      601 ACGCTGTGCC AGCACGATTG A
+//

@@ -1,0 +1,45 @@
+LOCUS       BBF10K_000805            645 bp ds-DNA     linear   BCT 10-APR-2018
+DEFINITION  adk
+ACCESSION   .
+VERSION     .
+KEYWORDS    .
+REFERENCE   1  (bases 1 to 645)
+SOURCE      synthetic DNA sequence
+  ORGANISM  Escherichia coli str. K-12 substr. MG1655
+  AUTHORS   FreeGenes Team
+  TITLE     Direct Submission
+FEATURES             Location/Qualifiers
+     CDS             1..645
+                     /locus_tag="b0474"
+                     /gene="adk"
+                     /gene_synonyms=""
+                     /product="adenylate kinase"
+                     /note="adenylate kinase activity; pleiotropic effects
+                     onglycerol-3-phosphate acyltransferase activity"
+                     /Source="Escherichia coli str. K-12 substr. MG1655"
+                     /GenBank_acc="NC_000913"
+                     /protein_id="NP_415007.1"
+                     /EC_number="2.7.4.3"
+                     /translation="MRIILLGAPGAGKGTQAQFIMEKYGIPQISTGDMLRAAVKSGSE
+                     LGKQAKDIMDAGKLVTDELVIALVKERIAQEDCRNGFLLDGFPRTIPQADAMKEAGIN
+                     VDYVLEFDVPDELIVDRIVGRRVHAPSGRVYHVKFNPPKVEGKDDVTGEELTTRKDDQ
+                     EETVRKRLVEYHQMTAPLIGYYSKEAEAGNTKYAKVDGTKPVAEVRADLEKILG"
+                     /transl_table=11
+                     /codon_start=1
+                     db_xref="ASAP:ABE-0001645"
+                     db_xref="UniProtKB/Swiss-Prot:P69441"
+                     db_xref="EcoGene:EG10032"
+                     db_xref="GeneID:945097"
+ORIGIN
+        1 ATGCGTATCA TTTTATTGGG CGCGCCGGGT GCGGGTAAAG GCACGCAAGC ACAATTCATC
+       61 ATGGAGAAGT ACGGTATTCC GCAGATCAGC ACCGGTGATA TGCTGCGTGC CGCAGTTAAA
+      121 TCGGGTAGCG AGCTGGGTAA GCAGGCGAAG GATATTATGG ATGCTGGTAA GTTGGTGACC
+      181 GACGAATTAG TGATCGCACT GGTGAAAGAA CGTATTGCCC AAGAGGACTG CCGCAACGGT
+      241 TTTTTACTGG ACGGTTTCCC GCGTACCATC CCACAAGCAG ATGCCATGAA GGAGGCGGGT
+      301 ATCAACGTCG ACTATGTCCT GGAGTTCGAT GTTCCGGACG AGCTGATCGT CGACCGCATC
+      361 GTGGGCCGTC GCGTGCACGC CCCAAGCGGT CGTGTTTACC ACGTGAAATT TAATCCGCCG
+      421 AAAGTCGAGG GCAAGGATGA CGTCACCGGC GAGGAGCTGA CCACCCGTAA AGACGACCAG
+      481 GAAGAAACCG TGCGTAAACG TCTGGTTGAA TACCACCAGA TGACCGCGCC GCTGATTGGC
+      541 TATTACAGCA AGGAAGCAGA GGCGGGCAAT ACGAAGTATG CGAAAGTCGA CGGCACCAAA
+      601 CCTGTGGCAG AAGTCCGTGC CGATCTGGAA AAGATTCTGG GCTGA
+//

@@ -1,0 +1,36 @@
+LOCUS       BBF10K_000848            267 bp ds-DNA     linear   BCT 10-APR-2018
+DEFINITION  minE
+ACCESSION   .
+VERSION     .
+KEYWORDS    .
+REFERENCE   1  (bases 1 to 267)
+SOURCE      synthetic DNA sequence
+  ORGANISM  Escherichia coli str. K-12 substr. MG1655
+  AUTHORS   FreeGenes Team
+  TITLE     Direct Submission
+FEATURES             Location/Qualifiers
+     CDS             1..267
+                     /locus_tag="b1174"
+                     /gene="minE"
+                     /gene_synonyms=""
+                     /product="cell division topological specificity factor"
+                     /note=""
+                     /Source="Escherichia coli str. K-12 substr. MG1655"
+                     /GenBank_acc="NC_000913"
+                     /protein_id="NP_415692.1"
+                     /EC_number=""
+                     /translation="MALLDFFLSRKKNTANIAKERLQIIVAERRRSDAEPHYLPQLRK
+                     DILEVICKYVQIDPEMVTVQLEQKDGDISILELNVTLPEAEELK"
+                     /transl_table=11
+                     /codon_start=1
+                     db_xref="ASAP:ABE-0003935"
+                     db_xref="UniProtKB/Swiss-Prot:P0A734"
+                     db_xref="EcoGene:EG10598"
+                     db_xref="GeneID:945740"
+ORIGIN
+        1 ATGGCGCTGC TGGATTTTTT CCTGTCCCGT AAGAAAAACA CCGCGAATAT TGCCAAAGAG
+       61 CGTCTGCAGA TTATTGTGGC AGAGCGCAGA CGTTCTGATG CCGAGCCTCA TTATCTGCCG
+      121 CAACTGCGTA AAGACATTCT GGAAGTTATT TGCAAATACG TGCAAATCGA TCCGGAAATG
+      181 GTCACCGTTC AACTGGAACA AAAGGACGGT GATATCAGCA TTCTGGAACT GAACGTTACG
+      241 CTGCCGGAGG CGGAGGAGCT GAAGTGA
+//

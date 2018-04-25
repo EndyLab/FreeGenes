@@ -1,0 +1,41 @@
+LOCUS       BBF10K_000773            480 bp ds-DNA     linear   BCT 10-APR-2018
+DEFINITION  folK
+ACCESSION   .
+VERSION     .
+KEYWORDS    .
+REFERENCE   1  (bases 1 to 480)
+SOURCE      synthetic DNA sequence
+  ORGANISM  Escherichia coli str. K-12 substr. MG1655
+  AUTHORS   FreeGenes Team
+  TITLE     Direct Submission
+FEATURES             Location/Qualifiers
+     CDS             1..480
+                     /locus_tag="b0142"
+                     /gene="folK"
+                     /gene_synonyms=""
+                     /product="2-amino-4-hydroxy-6-hydroxymethyldihyropteridine
+                     pyrophosphokinase"
+                     /note=""
+                     /Source="Escherichia coli str. K-12 substr. MG1655"
+                     /GenBank_acc="NC_000913"
+                     /protein_id="NP_414684.1"
+                     /EC_number="2.7.6.3"
+                     /translation="MTVAYIAIGSNLASPLEQVNAALKALGDIPESHILTVSSFYRTP
+                     PLGPQDQPDYLNAAVALETSLAPEELLNHTQRIELQQGRVRKAERWGPRTLDLDIMLF
+                     GNEVINTERLTVPHYDMKNRGFMLWPLFEIAPELVFPDGEMLRQILHTRAFDKLNKW"
+                     /transl_table=11
+                     /codon_start=1
+                     db_xref="ASAP:ABE-0000491"
+                     db_xref="UniProtKB/Swiss-Prot:P26281"
+                     db_xref="EcoGene:EG11374"
+                     db_xref="GeneID:948792"
+ORIGIN
+        1 ATGACCGTCG CATACATTGC GATCGGTTCG AATCTGGCAA GCCCGCTGGA ACAAGTCAAC
+       61 GCGGCGCTGA AAGCCCTGGG CGACATTCCG GAAAGCCACA TTTTGACCGT TTCGTCGTTC
+      121 TATCGTACGC CGCCGCTGGG CCCGCAGGAT CAGCCGGACT ACCTGAATGC CGCAGTCGCA
+      181 CTGGAAACCA GCCTGGCCCC GGAGGAACTG CTCAATCACA CTCAACGTAT TGAGCTGCAG
+      241 CAAGGTCGTG TCCGTAAAGC CGAGCGTTGG GGTCCGCGCA CCCTCGATCT GGACATCATG
+      301 CTGTTCGGTA ACGAAGTGAT TAATACTGAG CGTTTAACGG TACCGCACTA TGATATGAAA
+      361 AATCGCGGTT TTATGCTGTG GCCGTTGTTC GAAATTGCTC CGGAACTGGT GTTCCCGGAC
+      421 GGTGAAATGC TGCGCCAAAT CTTGCACACC CGTGCCTTTG ATAAGTTGAA TAAATGGTGA
+//
