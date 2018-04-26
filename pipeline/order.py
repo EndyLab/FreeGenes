@@ -195,9 +195,11 @@ def id_reset():
     original_number = config["ID_START"]
     new_number = config["ID_START"] + number_of_files
     config["ID_START"] = new_number
+    # Collection reset
+    config["LAST_COLLECTION"] = config["LAST_COLLECTION"] + 1
     with open("./configuration/FreeGene_config.yaml","w+") as yaml_file:
         yaml.dump(config,yaml_file,default_flow_style=False)
-    print("Replaced {} with {}".format(original_number,new_number))
+    print("Replaced {} with {}. New collection number start is {}".format(original_number,new_number,config["LAST_COLLECTION"]))
 
 
 def fragment_to_order():

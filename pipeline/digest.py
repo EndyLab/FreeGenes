@@ -17,7 +17,8 @@ from Bio import SeqIO
 ## ===============
 
 date = datetime.date.today().strftime("%d") + "-" + datetime.date.today().strftime("%B")[:3].upper() + "-" + datetime.date.today().strftime("%Y")
-counter = len(glob.glob(stage + "*"))
+stage = ff.FreeGenes_configuration()["STAGE_PATH"]
+counter = 0 
 
 NextCollection = ff.NextCollection()
 unused = set()

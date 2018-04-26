@@ -1,3 +1,4 @@
+import collections
 from Bio import SeqIO
 from io import StringIO
 import requests
@@ -23,6 +24,8 @@ from difflib import ndiff
 import codon
 from Bio.Alphabet import IUPAC
 import yaml
+from numpy.random import choice
+
 
 ## =============
 ## Configuration
@@ -64,6 +67,15 @@ end_codons = {
     '*': 'TGA'
 }
 
+cut_sites= [
+        ("BbsI", "GAAGAC"),
+        ("BtgZI", "GCGATG"),
+        ("BsaI", "GGTCTC"),
+        ("BsmBI", "CGTCTC"),
+        ("AarI", "CACCTGC"),
+        ("BfuAI", "ACCTGC")]
+
+
 
 
 ## ==============
@@ -93,7 +105,8 @@ def Json_load(path):
 
 def NextCollection():
     data = glob.glob("./../stage/*/*.json")
-    collection_list = [2]
+    collection_number = config["LAST_COLLECTION"]
+    collection_list = [collection_number]
     if data:
         for json_file in data:
             with open(json_file,"r") as json_data:
@@ -183,9 +196,9 @@ def strip_df(df):
         df[column] = new_col
     return df
 
-## ==============
-## Gene functions
-## ==============
+## =============
+## DNA functions
+## =============
 
 def reverse_complement(seq):
     return seq.translate(str.maketrans("ATGC","TACG"))[::-1]
@@ -198,239 +211,194 @@ def transl_checker(DNA, protein):
         return False
 
 def FG_MoClo_ends(seq):
-    return seq[:-6].join(list(map(lambda x: end_codons[str(Seq(x, IUPAC.unambiguous_dna).translate())], [seq[-6:-3],seq[-3:]])))
+    return seq[:-6] + ''.join(list(map(lambda x: end_codons[str(Seq(x, IUPAC.unambiguous_dna).translate())], [seq[-6:-3],seq[-3:]])))
 
 def random_dna_sequence(length):
     return ''.join(np.random.choice(('A', 'C', 'T', 'G')) for _ in range(length))
 
-#def check_sequence(seq, recode=True):
+def translate(seq):
+    return str(Seq(seq, generic_dna).translate(table=11))
 
-def eprint(*args, **kwargs):
-    print(*args, file=sys.stderr, **kwargs)
+def sequence_search(search,sequence):
+    if search in sequence or reverse_complement(search) in sequence:
+        return True
+    else:
+        return False
 
-def optimize_gene(gene_id,sequence,taxid):
-    gene = [{'Gene': gene_id, 'Sequence': sequence}]
-    design_genes = pd.DataFrame(gene)
+def which_vector_enzyme(seq, cut_sites=cut_sites):
+    seq = str(seq)
+    for enzyme in cut_sites:
+        if not sequence_search(enzyme[1],seq):
+            return enzyme[0]
+
+def find_enzyme(seq, cut_sites=cut_sites):
+    seq = str(seq)
+    for enzyme in cut_sites:
+        if sequence_search(enzyme[1],seq):
+            return enzyme[0]
+
+def max_homopolymer(seq):
+    prev = ''
+    count = 0
+    max_count = 0
+    loc = None
+    for i, char in enumerate(seq):
+        if char == prev:
+            count += 1
+        else:
+            count = 0
+        if count > max_count:
+            max_count = count
+            loc = i - count
+        prev = char
+    return max_count + 1, loc
+
+## ===============
+## Recode_sequence
+## ===============
+
+def recode_sequence(table, seq, rep, halfway=False):
+    if seq.find(rep) < 0:
+        rep = reverse_complement(rep)
+        if seq.find(rep) < 0:
+            return seq
+
+    # This block contains code that picks a new codon.
+    def list_del(del_list, position):
+        del del_list[position]
+        return del_list
+    def fraction_list(number_list):
+        return list(map(lambda x: x / sum(number_list), number_list))
+    def new_codon_chooser(old_codon):
+        # Add exception handling for when there are 0 cases of said codon. 
+        recode_aa = str(Seq(old_codon, IUPAC.unambiguous_dna).translate())
+        old_codon_location = list(table.loc[recode_aa].index).index(old_codon.upper())
+        return ''.join(choice(list_del(list(table.loc[recode_aa].index),old_codon_location), 1, p=fraction_list(list_del(list(table.loc[recode_aa]['Number']),old_codon_location))))
+
+    # This block contains code that produces the desired position information
+    def choose_position(list_of_positions, halfway):
+        if halfway:
+            position = list_of_positions[int(len(list_of_positions)/2)]
+        else:
+            position = list_of_positions[0]
+        return position
+    def position_list(seq, rep):
+        position = seq.find(rep)
+        position -= position % 3
+        list_of_positions = list(range(position, position + (len(rep) // 3 + 1) * 3, 3))
+        return list_of_positions
+
+    position_choice = choose_position(position_list(seq, rep), halfway)
+    old_codon = seq[position_choice:position_choice+3]
+    new_codon = new_codon_chooser(old_codon)
+    print("{} -> {} at position {}-{}.".format(old_codon,new_codon,position_choice+1,position_choice+3))
+    return seq[:position_choice] + new_codon + seq[position_choice+3:]
+
+## ======
+## Checks
+## ======
+
+def repeat_finder(string):
+    # Shamelessly stolen from https://codereview.stackexchange.com/questions/63329/finding-the-largest-repeating-substring . Credit to Arvind Padmanabhan.
+    l = list(string)
+    d = collections.deque(string[1:])
+    match = []
+    longest_match = []
+    while d:
+        for i, item in enumerate(d):
+            if l[i]==item:
+                match.append(item)
+            else:
+                if len(longest_match) < len(match):
+                    longest_match = match
+                match = []
+        d.popleft()
+    return ''.join(longest_match)
+
+def repeat_check(seq):
+    return len(repeat_finder(seq)) < 20
+
+def cutsite_check(seq, cut_sites=cut_sites):
+    seq = str(seq)
+    for enzyme in cut_sites:
+        if sequence_search(enzyme[1],seq):
+            return False
+    return True
+
+def homopolymer_checker(seq):
+    homopolymer_max, homopolymer_site = max_homopolymer(seq)
+    if homopolymer_max > 6:
+        return False
+    else:
+        return True
+
+def gc_content(seq):
+    return (seq.count("G") + seq.count("C")) / len(seq)
+def gc_in_range(seq):
+    return (gc_content(seq) > 0.3) & (gc_content(seq) <= 0.65)
+
+## =====
+## Fixer
+## ===== 
+
+def fix_sequence(table,gene_id,seq,fix_attempts=0):
+    fix_attempts = fix_attempts + 1
+    max_attempts = 1000
+    seq = FG_MoClo_ends(seq)
+    if fix_attempts > max_attempts:
+        print("{} could not be fixed. Please manually check this sequence.".format(gene_id))
+        print("Terminating program")
+        sys.exit()
+    if not gc_in_range(seq):
+        print("Fixing GC content in {}".format(gene_id))
+        return fix_sequence(table, gene_id, codon.optimize_protein(table, translate(seq)))
+    elif not homopolymer_checker(seq):
+        print("Fixing homopolymer stretches in {}".format(gene_id))
+        homopolymer_max, homopolymer_site = max_homopolymer(seq)
+        homopolymer = seq[homopolymer_site:homopolymer_site+homopolymer_max]
+        return fix_sequence(table, gene_id, recode_sequence(table, seq, homopolymer, halfway=True), fix_attempts)
+    elif not repeat_check(seq):
+        print("Fixing repeat regions in {}".format(gene_id))
+        return fix_sequence(table, gene_id, recode_sequence(table, seq, repeat_finder(seq), halfway=True), fix_attempts)
+    elif not cutsite_check(seq):
+        print("Fixing {} cutsites in {}".format(find_enzyme(seq),gene_id))
+        new_seq = recode_sequence(table, seq, dict((x, y) for x, y in cut_sites)[find_enzyme(seq)], halfway=True)
+        return fix_sequence(table, gene_id, new_seq, fix_attempts)
+    else:
+        return check_sequence(table,gene_id,seq)
+
+
+## =======
+## Checker
+## =======
+
+def check_sequence(table,gene_id,seq):
     def is_seq(seq):
         return seq.replace(r'\s +', '').strip() != ""
     def is_triplet(seq):
         return len(seq) % 3 == 0
-    def translate(seq):
-        return str(Seq(seq, generic_dna).translate(table=11))
-    def dna_matches_aa(seq, aa):
-        prot = translate(seq)
-        if prot[-1] == "*":
-            prot = prot[:-1]
-        return prot == aa
     def has_start(seq):
         return seq[:3] == "ATG" or "GTG" or "TTG"
     def has_stop(seq):
         return translate(seq)[-1] == "*"
     def has_no_internal_stops(seq):
         return not "*" in translate(seq)[:-1]
-
-    basic_tests = [is_seq, is_triplet, has_start, has_stop, has_no_internal_stops]
-
-    for i, gene in design_genes.iterrows():
-        for test in basic_tests:
-            if not test(gene['Sequence']):
-                eprint("{} failed on {}".format(gene['Gene'], test.__name__))
-                eprint(gene['Sequence'])
-                eprint(translate(gene['Sequence']))
-                eprint()
-
-                # REVIEW: Changed from original script
-                # If no stop codon is present, add one
-                if test == has_stop:
-                    eprint("Added stop codon")
-                    gene['Sequence'] += "TGA"
-                eprint()
-
-
-    # Force stop codons to TGA
-    design_genes['Sequence'] = design_genes['Sequence'].str[:-3] + "TGA"
-
-    ### CLEAN UP THIS CODE:
-    codon_table = codon.load_codon_table(taxonomy_id=taxid)
-    codon_10plus = codon.codon_table_10plus(codon_table)
-    ec_codon_usage_10plus = codon_10plus
-    ec_codon_usage = codon_table
-
-    ec_codons = ec_codon_usage.reset_index(level=0).ix[:,'AA']
-
-    def pick_codon(aa):
-        return ec_codon_usage_10plus.ix[x].iloc[((ec_codon_usage_10plus.ix[x].Fraction).cumsum() < np.random.rand()).sum()].name
-
-    def reverse_complement(seq):
-        return seq.translate(str.maketrans("ATGC","TACG"))[::-1]
-
-    def recode_sequence(seq, rep):
-        pos = seq.find(rep)
-
-        if pos < 0:
-            return seq
-
-        pos -= pos % 3
-
-        for i in range(pos, pos + (len(rep) // 3 + 1) * 3, 3):
-            codon = seq[i:i+3]
-            choices = ec_codon_usage_10plus.ix[ec_codons.ix[codon]]
-            choices = choices[choices.index != codon]
-
-            if choices.shape[0] > 0:
-                newcodon = choices.iloc[(choices.Fraction.cumsum() / choices.Fraction.cumsum().max() < np.random.rand()).sum()].name # Stochastically allocate codon
-    #             newcodon = choices[choices.index != codon].Fraction.idxmax() # Deterministically allocate codons by using the most frequence one
-                break
-
-        eprint("{} -> {}".format(codon, newcodon))
-
-        return seq[:i] + newcodon + seq[i+3:]
-
-    def gc_content(seq):
-        return (seq.count("G") + seq.count("C")) / len(seq)
-
-    def gc_in_range(seq):
-        return (gc_content(seq) > 0.3) & (gc_content(seq) <= 0.65)
-
+    def MoClo_ends(seq):
+        return end_codons[translate(seq[-6:-3])] == seq[-6:-3] and seq[-3:] == "TGA"
     def size_in_range(seq):
         return (len(seq) >= 300) & (len(seq) <= 1800)
-
-    def max_homopolymer(seq):
-        prev = ''
-        count = 0
-        max_count = 0
-        loc = None
-
-        for i, char in enumerate(seq):
-            if char == prev:
-                count += 1
-            else:
-                count = 0
-
-            if count > max_count:
-                max_count = count
-                loc = i - count
-
-            prev = char
-
-        return max_count, loc
-
-    def homopolymer_in_range(seq):
-        count, loc =  max_homopolymer(seq)
-        return max_homopolymer(seq) < 6
-
-    cut_sites = [
-        ("BfuAI", "ACCTGC"),
-        ("AarI", "CACCTGC"),
-        ("BtgZI", "GCGATG"),
-        ("BbsI", "GAAGAC"),
-        ("BsmBI", "CGTCTC"),
-        ("SapI", "GCTCTTC"),
-        ("BsaI", "GGTCTC")]
-
-    def remove_cutsites(name, seq):
-        changes = 0
-
-        for enzyme, cut in cut_sites + [(e, reverse_complement(c)) for e, c in cut_sites]:
-            while cut in seq:
-                eprint("{} cuts {} ({})".format(enzyme, name, cut))
-                changes += 1
-                seq = recode_sequence(seq, cut)
-
-        return seq, changes
-
-    for i, gene in design_genes.iterrows():
-        eprint("Fixing gene {}".format(gene['Gene']))
-
-        sequence = gene['Sequence']
-        for j in range(1000): # try 1000 times to get a working sequence
-            sequence, changed = remove_cutsites(gene['Gene'], sequence)
-
-            homopolymer_length, homopolymer_pos = max_homopolymer(sequence)
-            while homopolymer_length >= 6:
-                changed = True
-                sequence = recode_sequence(sequence, sequence[homopolymer_pos:homopolymer_pos+homopolymer_length])
-                homopolymer_length, homopolymer_pos = max_homopolymer(sequence)
-
-            if not gc_in_range(sequence):
-                eprint ("GC out of range")
-
-            if not changed:
-                break
-        else:
-            eprint("Warning: {} could not be optimized".format(gene['Gene']))
-        design_genes.ix[i, 'Sequence'] = sequence
-
-    # Force final codons to our standard set
-    force_codons = {
-        'M': 'ATG',
-        'W': 'TGG',
-        'F': 'TTT',
-        'L': 'CTG',
-        'I': 'ATT',
-        'V': 'GTG',
-        'S': 'TCC',
-        'P': 'CCA',
-        'T': 'ACC',
-        'A': 'GCC',
-        'Y': 'TAC',
-        'H': 'CAT',
-        'Q': 'CAG',
-        'N': 'AAC',
-        'K': 'AAG',
-        'D': 'GAT',
-        'E': 'GAG',
-        'C': 'TGC',
-        'R': 'CGC',
-        'G': 'GGC'
-    }
-
-    design_genes['Sequence'] = design_genes['Sequence'].str[:-6] + design_genes['Sequence'].str[-6:-3].apply(lambda x: force_codons[ec_codons.ix[x]]) + design_genes['Sequence'].str[-3:]
-
-    # Make sure we didn't introduce an RE site
-    # Make sure we didn't introduce any restriction sites
-    error = False
-    for enzyme, cut in cut_sites + [(e, reverse_complement(c)) for e, c in cut_sites]:
-        if design_genes['Sequence'].str.contains(cut).any():
-            error = True
-            eprint("Cannot normalize final codon without introducing restriction site {} ({})".format(enzyme, cut))
-
-            for i, (g, s) in design_genes.ix[design_genes['Sequence'].str.contains(cut), ['Gene','Sequence']].iterrows():
-                eprint(g, s[s.find(cut):])
-            eprint()
-
-    if error:
-        input("Try Again? ENTER TO CONTINUE")
-        return optimize_gene(gene_id,codon.optimize_protein(codon.load_codon_table(taxonomy_id="custom_1", custom=True), Seq(sequence, IUPAC.unambiguous_dna).translate()),taxid)
-        
-        #again = input("Try again? ( y or n )").upper()
-
-
-
-    #         seq = gene['Sequence']
-    #         while gc_content(seq) < 0.35:
-    #             # Too low, let's bump it up
-
-    #             # Pick a random codon
-    #             seq = gene['Sequence']
-    #             index = np.random.randint(len(seq))
-    #             index -= index % 3
-    #             codon = seq[index:index+3]
-
-    #             # Recode it for higher GC by replacing with the highest GC codon we can use
-    #             # Yup, this is a seriously inefficient way to do this
-    #             codons = ec_codon_usage.ix[ec_codons[codon]].index.values.tolist()
-    #             codons.sort(key=gc_content)
-    #             newcodon = codons[-1]
-    #             seq = seq[:index] + newcodon + seq[index+3:]
-
-    #            eprint('{} -> {}'.format(codon, newcodon))
-    #             break
-
-    #    eprint("")
-
-    return(design_genes.iloc[0]['Sequence'])
-    #design_genes.to_csv(sys.stdout)
+    def gc_content(seq):
+        return (seq.count("G") + seq.count("C")) / len(seq)
+    def gc_in_range(seq):
+        return (gc_content(seq) > 0.3) & (gc_content(seq) <= 0.65)
+    sequence_checks = [is_seq, is_triplet, has_start, has_no_internal_stops, MoClo_ends, homopolymer_checker, gc_in_range, cutsite_check, repeat_check]
+    for test in sequence_checks:
+        if not test(seq):
+            print("{} failed on {}".format(gene_id, test.__name__))
+            input("PRESS ENTER TO FIX THIS GENE!")
+            return fix_sequence(table,gene_id,seq)
+    print("{} successfully checked.".format(gene_id))
+    return seq
 
 ## ===================
 ## Refactored fragment
@@ -444,19 +412,6 @@ def sequence_search(search,sequence):
         return True
     else:
         return False
-
-def find_enzyme(seq):
-    seq = str(seq)
-    cut_sites = [
-        ("BbsI", "GAAGAC"),
-        ("BtgZI", "GCGATG"),
-        ("BsaI", "GGTCTC"),
-        ("BsmBI", "CGTCTC"),
-        ("AarI", "CACCTGC"),
-        ("BfuAI", "ACCTGC")]
-    for enzyme in cut_sites:
-        if not sequence_search(enzyme[1],seq):
-            return enzyme[0]
 
 enzymes = {
         "AarI" : {
@@ -635,11 +590,13 @@ class FreeGene:
         # Sequence modifications
         if part_type == "CDS":
             if optimize == False:
-                fix_sequence = self.original_sequence
+                optimized_sequence = self.original_sequence
             else:
                 print("\n\nOptimizing {}. ( {} )".format(self.gene_id, self.gene_name))
-                fix_sequence = codon.optimize_protein(codon.load_codon_table(taxonomy_id=optimize, custom=True), genbank_dictionary["translation"]) + "TAA"
-            self.optimized = optimize_gene(self.gene_id, fix_sequence, "83333")#self.target_organism)
+                optimization_table = codon.load_codon_table(taxonomy_id=optimize, custom=True)
+                optimized_sequence = codon.optimize_protein(optimization_table, genbank_dictionary["translation"]) + "TAA"
+            print(optimized_sequence)
+            self.optimized = fix_sequence(optimization_table,self.gene_id,optimized_sequence)
         else:
             self.optimized = self.original_sequence
         # Apply to make new genbank file

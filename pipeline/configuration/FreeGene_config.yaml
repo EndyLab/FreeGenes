@@ -1,6 +1,6 @@
 BULK_SUBMISSION_ID: 1qgNt3h63--o7qlhTdkUqGpLqVOGizUaY5dMG7VdCwHA
-ID_START: 749
-NEXT_COLLECTION: 5
+ID_START: 2427
+LAST_COLLECTION: 6
 PREVIOUS_CSV_BULK: ./configuration/previous_plates/bulk.csv
 PREVIOUS_CSV_SINGLE: ./configuration/previous_plates/single.csv
 PROJECT_PATH: ./../projects/

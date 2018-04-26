@@ -22,6 +22,7 @@ codons = ['CGA', 'CGC', 'CGG', 'CGT', 'AGA', 'AGG', 'CTA', 'CTC', 'CTG', 'CTT', 
 standard_genetic_code = ['R', 'R', 'R', 'R', 'R', 'R', 'L', 'L', 'L', 'L', 'L', 'L', 'S', 'S', 'S', 'S', 'S', 'S', 'T', 'T', 'T', 'T', 'P', 'P', 'P', 'P', 'A', 'A', 'A', 'A', 'G', 'G', 'G', 'G', 'V', 'V', 'V', 'V', 'K', 'K', 'N', 'N', 'Q', 'Q', 'H', 'H', 'E', 'E', 'D', 'D', 'Y', 'Y', 'C', 'C', 'F', 'F', 'I', 'I', 'I', 'M', 'W', '*', '*', '*']
 tables = dict()
 
+#table = codon.load_codon_table(taxonomy_id="custom_1", custom=True)
 def load_codon_table(species=None, taxonomy_id=None, custom=False):
     """Load a codon table based on the organism's species ID."""
 
