@@ -18,6 +18,7 @@ import freegenes_functions as ff
 from Bio.Seq import Seq
 from Bio.Alphabet import IUPAC
 import yaml
+import codon
 
 config = ff.FreeGenes_configuration()
 stage = config["STAGE_PATH"]
@@ -36,7 +37,8 @@ def fragment_genes():
             part_type = data["info"]["gene_metadata"]["cloning"]["part_type"]
             part_type = part_type.lower()
             part_type = part_type.replace(" ", "_")
-            fragments = ff.FG_standard_fragment(data["sequence"]["optimized_sequence"],part_type,data["info"]["gene_metadata"]["cloning"]["cloning_enzyme"])
+            ortho_pair = ff.get_pair(data["gene_id"])
+            fragments = ff.FG_standard_fragment(data["sequence"]["optimized_sequence"],part_type,data["info"]["gene_metadata"]["cloning"]["cloning_enzyme"], ortho_pair)
             print(fragments)
             print(data["gene_id"])
             gene_id = data["gene_id"]
@@ -46,6 +48,7 @@ def fragment_genes():
             path = "{}{}".format(stage,gene_id)
             with open("{}/{}.json".format(path,gene_id),"w+") as json_file:
                 json.dump(data,json_file,indent=2)
+
 
 def write_link():
     for file in glob.glob(stage + "*/*.json"):
@@ -96,14 +99,15 @@ def write_link():
             print("ran out of small")
             break
         small_row = small_df.iloc[small_counter]
-        joined_seq = row["Sequence"] + small_row["Sequence"]
-        joined_ids.append(row["Gene ID"])
-        joined_seqs.append(joined_seq)
-        fragment_names.append(row["Gene ID"] + "_link_" + small_row["Gene ID"])
-        joined_ids.append(small_row["Gene ID"])
-        joined_seqs.append(joined_seq)
-        fragment_names.append(row["Gene ID"] + "_link_" + small_row["Gene ID"])
-        small_counter += 1
+        if ff.repeat_check(row["Sequence"] + small_row["Sequence"]):
+            joined_seq = row["Sequence"] + small_row["Sequence"]
+            joined_ids.append(row["Gene ID"])
+            joined_seqs.append(joined_seq)
+            fragment_names.append(row["Gene ID"] + "_link_" + small_row["Gene ID"])
+            joined_ids.append(small_row["Gene ID"])
+            joined_seqs.append(joined_seq)
+            fragment_names.append(row["Gene ID"] + "_link_" + small_row["Gene ID"])
+            small_counter += 1
     joined_df = pd.DataFrame({
         "Gene ID" : joined_ids,
         "Sequence" : joined_seqs,
@@ -130,15 +134,15 @@ def twist_order():
     
         # Excludes sequences that have already been ordered and small sequences
         # that haven't been paired yet
-        if data["info"]["gene_metadata"]["cloning"]["cloning_enzyme"] == "BtgZI":
-            continue
+        #if data["info"]["gene_metadata"]["cloning"]["cloning_enzyme"] == "BtgZI":
+            #continue
         # Only pulls the sequence to order from the large fragment
         if data["info"]["gene_metadata"]["cloning"]["cloning_enzyme"] == "BbsI":
             for fragment in data["sequence"]["fragment_sequences"]:
                 print("fragment",fragment)
                 will_order.append(fragment)
                 will_order_seqs.append(data["sequence"]["fragment_sequences"][fragment]) 
-        data["info"]["order_number"] = next_sub_num
+        data["info"]["order_number"] = int(next_sub_num)
         with open(file,"w+") as json_file:
             json.dump(data,json_file,indent=2)
     
@@ -153,11 +157,12 @@ def twist_order():
     print("Completed submission form.")
 
 def replace_bad_sequence(gene_id):
+    table = codon.load_codon_table(taxonomy_id="custom_1", custom=True)
     json_data = ff.Json_load(stage + "{}/{}.json".format(gene_id,gene_id))
     seq_to_replace = input("Sequence to replace? ")
     new_seq = input("New sequence? ")
     old_sequence = json_data["sequence"]["optimized_sequence"]
-    new_sequence = old_sequence.replace(seq_to_replace, new_seq)
+    new_sequence = ff.fix_sequence(table,gene_id,old_sequence.replace(seq_to_replace, new_seq),0,[])
     if not Seq(old_sequence, IUPAC.unambiguous_dna).translate() == Seq(new_sequence, IUPAC.unambiguous_dna).translate():
         print("Bad translation, try again")
         replace_bad_sequence(gene_id)
@@ -174,10 +179,30 @@ def replace_bad_sequence(gene_id):
 
         if input("Replace another sequence? Y or N : ").upper() == "Y":
             new_gene_id = input("gene id : ")
-            replace_bad_sequence(new_gene_id)
+            return replace_bad_sequence(new_gene_id)
         else: 
             fragment_to_order()
-            
+
+def reoptimize_fragment(gene_id):
+    json_data = ff.Json_load(stage + "{}/{}.json".format(gene_id,gene_id))
+    table = codon.load_codon_table(taxonomy_id="custom_1", custom=True)
+    translation = json_data["genbank"]["translation"]
+    new_sequence = ff.fix_sequence(table,gene_id,codon.optimize_protein(table, translation) + "TGA")
+    if not Seq(json_data["sequence"]["optimized_sequence"], IUPAC.unambiguous_dna).translate() == Seq(new_sequence, IUPAC.unambiguous_dna).translate():
+        print("Bad translation, try again")
+        reoptimize_fragment(gene_id)
+    else:
+        with open(stage + "{}/{}.gb".format(gene_id,gene_id),"r") as genbank_single:
+            genbank_current = genbank_single.read()
+        genbank_fixed = ff.replace_genbank_sequence(genbank_current, new_sequence)
+        with open(stage + "{}/{}.gb".format(gene_id,gene_id),"w+") as genbank_single:
+            genbank_single.write(genbank_fixed)
+        json_data["sequence"]["optimized_sequence"] = new_sequence
+        with open(stage + "{}/{}.json".format(gene_id,gene_id),"w+") as json_file:
+            json.dump(json_data,json_file,indent=2)
+        print("Wrote new sequence for " + gene_id)
+
+
 def reset_fragment_stage():
     for file in glob.glob(stage + "*/*.json"):
         with open(file,"r") as json_file:
@@ -204,6 +229,7 @@ def id_reset():
 
 def fragment_to_order():
     print("Recreating database")
+    ff.clear_pairs()
     reset_fragment_stage()
     fragment_genes()
     write_link()
@@ -213,7 +239,7 @@ def fragment_to_order():
 def order_manager():
     print("\n")
     print("=== FreeGenes Order manager ===")
-    options = ("Frag -> Order", "Set ID starting point", "Fragment genes in stage", "Write linkers to stage", "Create Twist submission spreadsheet", "Redo optimization", "Reset fragment stage", "Exit")
+    options = ("Frag -> Order", "Set ID starting point", "Fragment genes in stage", "Write linkers to stage", "Create Twist submission spreadsheet", "Change part of sequence", "Reoptimize single fragment", "Reset fragment stage", "Clear ortho pairs", "Exit")
     choice = ff.option_list(options)
     
     if choice == "Frag -> Order":
@@ -226,12 +252,17 @@ def order_manager():
         write_link()
     elif choice == "Create Twist submission spreadsheet":
         twist_order()
-    elif choice == "Redo optimization":
+    elif choice == "Change part of sequence":
         replace_bad_sequence(input("gene_id : "))
+    elif choice == "Reoptimize single fragment":
+        reoptimize_fragment(input("gene_id : "))
     elif choice == "Reset fragment stage":
         reset_fragment_stage()
     elif choice == "Exit":
         sys.exit()
+    elif choice == "Clear ortho pairs":
+        ff.clear_pairs()
+
     print("Returning to Order manager")
     return order_manager()
 

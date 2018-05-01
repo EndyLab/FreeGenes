@@ -1,16 +1,15 @@
 # Template yaml configuration for producing a genomic digestion.
 # 24-APR-2018 
 
-author: Keoni Gandall
+author: FreeGenes Team
 email: koeng101@gmail.com
-description: A clever description
+description: All genes from Mycoplasma genitalium G37, codon optimized for Escherichia coli. Requested by the JCVI. 
 target_organism: Escherichia coli
 optimization_table: custom_1
 safety: NA
 transl_table: 11
 tags:
-        - Bacillus subtilis
-        - Essential
-
-protein_file: False
+        - Mycoplasma
+        - Mycoplasma genitalium
+protein_file: True
 gene_list: False

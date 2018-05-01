@@ -3,14 +3,12 @@
 
 author: Keoni Gandall
 email: koeng101@gmail.com
-description: A clever description
+description: A collection of all genes from Mesoplasma florum L1, codon optimized for Escherichia coli expression.
 target_organism: Escherichia coli
 optimization_table: custom_1
-safety: NA
+safety: BSL1
 transl_table: 11
 tags:
-        - Bacillus subtilis
-        - Essential
-
+        - Mesoplasma florum
 protein_file: False
 gene_list: False

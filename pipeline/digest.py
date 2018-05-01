@@ -18,7 +18,7 @@ from Bio import SeqIO
 
 date = datetime.date.today().strftime("%d") + "-" + datetime.date.today().strftime("%B")[:3].upper() + "-" + datetime.date.today().strftime("%Y")
 stage = ff.FreeGenes_configuration()["STAGE_PATH"]
-counter = 0 
+
 
 NextCollection = ff.NextCollection()
 unused = set()
@@ -126,7 +126,7 @@ for index, row in df.iterrows():
         definition = data["locus_tag"]
 
     # Get gene_id and collection id
-    gene_id = ff.NextID(counter)
+    gene_id = ff.NextID()
     
     write = True
     # Essential checker
@@ -147,7 +147,6 @@ for index, row in df.iterrows():
         else:
             write = False
 
-
     # Setup database links
     links = []
 
@@ -158,7 +157,6 @@ for index, row in df.iterrows():
     if write:
         freegene = ff.FreeGene(gene_id, NextCollection, date, config["author"], config["email"], "BioBricks Foundation", "NA", definition, config["description"], links, "CDS", data["Source"], config["target_organism"], config["safety"], genbank_file, ff.Json_load("./configuration/template.json"), config["optimization_table"], data, config["tags"])
         freegene.json_write()
-        counter = counter + 1
     else:
         print('skipping ' + definition)
 

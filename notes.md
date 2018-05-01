@@ -8,3 +8,13 @@ BBF10K_000894_1
 
 BBF10K_000918
 - High TM repeat
+
+
+Some unique ones:
+MQKDSPVKDSNKDSEKLSETTASSMSGMATSPRKALKVEVKKQSGSSDTLTKNDFAKKPLQHKNSSGTEVKLDASGEFGDNKAWKPLLTTEQIAREKRMGMPTPPPLLLLLLLLLLLLLLLLLLLLLLLLLLLPQPPSPLFLTSMLGLNQWSLNI
+
+
+- make manual MTAs for shipment
+- make one shipment to UK with HS
+- fix database for linked fragments in the database model 
+- fix fix_sequence of repeat 

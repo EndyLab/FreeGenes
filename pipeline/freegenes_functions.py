@@ -1,4 +1,5 @@
 import collections
+from Bio.SeqUtils import MeltingTemp as mt
 from Bio import SeqIO
 from io import StringIO
 import requests
@@ -37,8 +38,10 @@ def load_configuration(config):
 
 def FreeGenes_configuration():
     return load_configuration("./configuration/FreeGene_config.yaml")
-
 config = FreeGenes_configuration()
+
+pairs_file = ""
+primer_pairs = pd.DataFrame()
 
 ## =============
 ## DNA sequences
@@ -73,11 +76,10 @@ cut_sites= [
         ("BsaI", "GGTCTC"),
         ("BsmBI", "CGTCTC"),
         ("AarI", "CACCTGC"),
-        ("BfuAI", "ACCTGC")]
+        ("BfuAI", "ACCTGC"),
+        ("SapI", "GAAGAGC")]
 
-
-
-
+universal_set = pd.read_csv(config["UNIVERSAL_PRIMER"])["Sequence"].tolist()
 ## ==============
 ## File Functions
 ## ==============
@@ -114,7 +116,8 @@ def NextCollection():
                 collection_list.append(collection_json["info"]["gene_metadata"]["collection_id"])
     return(int(max([e for e in collection_list if isinstance(e, int)])) + 1)
 
-def NextID(counter=0):
+def NextID():
+    counter = len(glob.glob("./../stage/" + "*")) 
     number = config["ID_START"] + 1 + counter
     string_number = str(number)
     id_number = (string_number.zfill(6))
@@ -196,6 +199,39 @@ def strip_df(df):
         df[column] = new_col
     return df
 
+
+## ==================
+## Orthogonal primers
+## ==================
+
+def load_pairs(file = config["ORTHOGONAL_PRIMER"]):
+    global primer_pairs
+    global pairs_file
+    pairs_file = file
+    primer_pairs = pd.read_csv(pairs_file, index_col=0)
+
+def save_pairs():
+    primer_pairs.to_csv(pairs_file)
+
+def clear_pairs():
+    primer_pairs['GeneID'] = np.nan
+    save_pairs()
+
+def get_pair(gene_id, counter=0):
+    index = primer_pairs['GeneID'].isnull().idxmax() + counter
+    primer_pairs.loc[index, 'GeneID'] = gene_id
+    save_pairs()
+    return (
+        primer_pairs.loc[index, 'Forward'],
+        primer_pairs.loc[index, 'Reverse']
+    )
+
+
+### Run pairs
+load_pairs()
+
+
+
 ## =============
 ## DNA functions
 ## =============
@@ -257,42 +293,83 @@ def max_homopolymer(seq):
 ## Recode_sequence
 ## ===============
 
-def recode_sequence(table, seq, rep, halfway=False):
+def recode_sequence(table, seq, rep, change_list=[], halfway=True):
     if seq.find(rep) < 0:
         rep = reverse_complement(rep)
         if seq.find(rep) < 0:
             return seq
 
     # This block contains code that picks a new codon.
-    def list_del(del_list, position):
-        del del_list[position]
-        return del_list
     def fraction_list(number_list):
         return list(map(lambda x: x / sum(number_list), number_list))
-    def new_codon_chooser(old_codon):
-        # Add exception handling for when there are 0 cases of said codon. 
-        recode_aa = str(Seq(old_codon, IUPAC.unambiguous_dna).translate())
-        old_codon_location = list(table.loc[recode_aa].index).index(old_codon.upper())
-        return ''.join(choice(list_del(list(table.loc[recode_aa].index),old_codon_location), 1, p=fraction_list(list_del(list(table.loc[recode_aa]['Number']),old_codon_location))))
+    def new_codon_chooser(table,old_codons):
+        del_table = table
+        for codons in old_codons:
+            recode_aa = codon_to_aa(table,codons)
+            del_table = deletion_table(del_table,recode_aa,codons)
+        return ''.join(choice(list(del_table.loc[recode_aa].index), 1, p=fraction_list(list(del_table.loc[recode_aa]['Fraction']))))
+    def codon_to_aa(table,old_codon):
+        return table.loc[(slice(None),old_codon),:].index[0][0]
+    def deletion_table(table,recode_aa,old_codon):
+        return table.drop((recode_aa.upper(),old_codon.upper()))
 
     # This block contains code that produces the desired position information
     def choose_position(list_of_positions, halfway):
         if halfway:
-            position = list_of_positions[int(len(list_of_positions)/2)]
+            position = list_of_positions[int(len(list_of_positions)/2)  - 1] 
         else:
             position = list_of_positions[0]
         return position
-    def position_list(seq, rep):
+    def make_position_list(seq, rep):
         position = seq.find(rep)
         position -= position % 3
-        list_of_positions = list(range(position, position + (len(rep) // 3 + 1) * 3, 3))
+        position +=1
+        list_of_positions = list(range(position, position + (len(rep) // 3) * 3, 3))
         return list_of_positions
+    def verify_position(table,old_codon_list):
+        new_table = table
+        for old_codon in old_codon_list:
+            codon_aa = codon_to_aa(table,old_codon)
+            new_table = deletion_table(new_table,codon_aa,old_codon)
+        to_return = new_table.loc[codon_aa].shape[0]
+        return to_return
+    def remove_from_list(pos_list,change_list):
+        for change in change_list:
+            if change in pos_list:
+                pos_list.remove(change)
+        return pos_list
+    def remove_single_aa(table, position_list, change_list):
+        # Grab grab spot to modify and its current codon
+        position_choice = choose_position(position_list, halfway)
+        current_codon = seq[position_choice-1:position_choice+2]
+        # Grab all other codons used in that spot
+        old_codons = list(map(lambda x: x[0], list(filter(lambda x: x[1] == position_choice, change_list))))
+        if not current_codon in old_codons:
+            old_codons.append(current_codon)
+        if verify_position(table,old_codons) == 0:
+            position_list.remove(position_choice)
+            return remove_single_aa(table, position_list, change_list)
+        else:
+            return [position_choice, new_codon_chooser(table,old_codons), current_codon]
 
-    position_choice = choose_position(position_list(seq, rep), halfway)
-    old_codon = seq[position_choice:position_choice+3]
-    new_codon = new_codon_chooser(old_codon)
-    print("{} -> {} at position {}-{}.".format(old_codon,new_codon,position_choice+1,position_choice+3))
-    return seq[:position_choice] + new_codon + seq[position_choice+3:]
+    new_recoding = remove_single_aa(table,make_position_list(seq, rep),change_list)
+    position_choice = new_recoding[0]
+    new_codon = new_recoding[1]
+    old_codon = new_recoding[2]
+    print("{} -> {} at position {}-{}.".format(old_codon,new_codon,position_choice,position_choice+2))
+    return [seq[:position_choice-1] + new_codon + seq[position_choice+2:], position_choice, new_codon]
+
+
+def recode_region(table,gene_id,seq,rep):
+    position = seq.find(rep)
+    position -= position % 3
+    length_position = len(rep) - (len(rep) % 3)
+    recode_sequence = seq[position:position+length_position]
+    recode_sequence = codon.optimize_protein(table,translate(recode_sequence))
+    final_seq = seq[:position] + recode_sequence + seq[position+length_position:]
+    return final_seq
+
+
 
 ## ======
 ## Checks
@@ -316,7 +393,13 @@ def repeat_finder(string):
     return ''.join(longest_match)
 
 def repeat_check(seq):
-    return len(repeat_finder(seq)) < 20
+    repeat_sequence = repeat_finder(seq)
+    # Twist's melting temperature algorithm is different than ours
+    if len(repeat_sequence) < 20 and int(mt.Tm_Wallace(Seq(repeat_sequence))) < 60:
+        return True
+    else:
+        return False
+
 
 def cutsite_check(seq, cut_sites=cut_sites):
     seq = str(seq)
@@ -337,33 +420,88 @@ def gc_content(seq):
 def gc_in_range(seq):
     return (gc_content(seq) > 0.3) & (gc_content(seq) <= 0.65)
 
+
+def gc_range(seq):
+    highest_gc = (0, False)
+    lowest_gc = (1, False)
+    for start_base in range(len(seq)-50):
+        gc_seq = seq[start_base:start_base+50]
+        gc_percent = gc_content(gc_seq)
+        if gc_percent > highest_gc[0]:
+            highest_gc = (gc_percent, gc_seq)
+        if gc_percent < lowest_gc[0]:
+            lowest_gc = (gc_percent, gc_seq)
+    return [highest_gc, lowest_gc]
+
+def gc_50bp_acceptable_range(seq):
+    high_low = gc_range(seq)
+    average = gc_content(seq)
+    return not high_low[0][0] - high_low[1][0] > .51
+
+def gc_range_sequence(seq):
+    high_low = gc_range(seq)
+    average = gc_content(seq)
+    if abs(high_low[0][0] - average) > abs(high_low[1][0] - average):
+        return high_low[0][1]
+    else:
+        return high_low[1][1]
+
+
+def univerisal_primer_checker(seq):
+    for primer in universal_set:
+        if primer in seq:
+            return False
+    return True
+
+def universal_primer_finder(seq):
+    for primer in universal_set:
+        if primer in seq:
+            return primer
+
+
 ## =====
 ## Fixer
 ## ===== 
 
-def fix_sequence(table,gene_id,seq,fix_attempts=0):
+def fix_sequence(table,gene_id,seq,fix_attempts=0,change_list=[]):
     fix_attempts = fix_attempts + 1
-    max_attempts = 1000
+    max_attempts = 500
     seq = FG_MoClo_ends(seq)
     if fix_attempts > max_attempts:
         print("{} could not be fixed. Please manually check this sequence.".format(gene_id))
         print("Terminating program")
         sys.exit()
-    if not gc_in_range(seq):
-        print("Fixing GC content in {}".format(gene_id))
-        return fix_sequence(table, gene_id, codon.optimize_protein(table, translate(seq)))
+    elif not cutsite_check(seq):
+        print("Fixing {} cutsites in {}".format(find_enzyme(seq),gene_id))
+        recode = recode_sequence(table, seq, dict((x, y) for x, y in cut_sites)[find_enzyme(seq)], change_list, halfway=True)
+        new_seq = recode[0]
+        change_list.append([recode[2],recode[1]])
+        return fix_sequence(table, gene_id, new_seq, fix_attempts,change_list)
     elif not homopolymer_checker(seq):
         print("Fixing homopolymer stretches in {}".format(gene_id))
         homopolymer_max, homopolymer_site = max_homopolymer(seq)
         homopolymer = seq[homopolymer_site:homopolymer_site+homopolymer_max]
-        return fix_sequence(table, gene_id, recode_sequence(table, seq, homopolymer, halfway=True), fix_attempts)
+        recode = recode_sequence(table, seq, homopolymer, change_list, halfway=True)
+        new_seq = recode[0]
+        change_list.append([recode[2],recode[1]])
+        return fix_sequence(table, gene_id, new_seq, fix_attempts, change_list)
     elif not repeat_check(seq):
         print("Fixing repeat regions in {}".format(gene_id))
-        return fix_sequence(table, gene_id, recode_sequence(table, seq, repeat_finder(seq), halfway=True), fix_attempts)
-    elif not cutsite_check(seq):
-        print("Fixing {} cutsites in {}".format(find_enzyme(seq),gene_id))
-        new_seq = recode_sequence(table, seq, dict((x, y) for x, y in cut_sites)[find_enzyme(seq)], halfway=True)
-        return fix_sequence(table, gene_id, new_seq, fix_attempts)
+        recode = recode_sequence(table, seq, str(repeat_finder(seq)), change_list, halfway=True)
+        new_seq = recode[0]
+        change_list.append([recode[2],recode[1]])
+        return fix_sequence(table, gene_id, new_seq, fix_attempts, change_list)
+    elif not gc_50bp_acceptable_range(seq):
+        print("Fixing 50bp of outlier GC in {}".format(gene_id))
+        gc_outlier = gc_range_sequence(seq)
+        new_seq = recode_region(table,gene_id,seq,gc_outlier)
+        return fix_sequence(table, gene_id, new_seq , fix_attempts, change_list)
+    elif not gc_in_range(seq):
+        print("Fixing GC content in {}".format(gene_id))
+        return fix_sequence(table, gene_id, codon.optimize_protein(table, translate(seq)))
+    elif not univerisal_primer_checker(seq):
+        print("Fixing internal FG primer regions in {}".format(gene_id))
+        return fix_sequence(table, gene_id, universal_primer_finder(seq), fix_attempts, change_list)
     else:
         return check_sequence(table,gene_id,seq)
 
@@ -397,7 +535,7 @@ def check_sequence(table,gene_id,seq):
             print("{} failed on {}".format(gene_id, test.__name__))
             input("PRESS ENTER TO FIX THIS GENE!")
             return fix_sequence(table,gene_id,seq)
-    print("{} successfully checked.".format(gene_id))
+    print("{} CHECKED.".format(gene_id))
     return seq
 
 ## ===================
@@ -453,28 +591,28 @@ enzymes = {
 
 FG_part_types = {
         "cds" : {
-            "prefix" : "GGAGGTCTCNA",
-            "suffix" : "AGAGCTTNGAGACCGCT"
+            "prefix" : "GGTCTCNA",
+            "suffix" : "AGAGCTTNGAGACC"
             },
         "eukaryotic_promoter" : {
-            "prefix" : "GGAGGTCTCNGGAG",
-            "suffix" : "AATGNGAGACCGCT"
+            "prefix" : "GGTCTCNGGAG",
+            "suffix" : "AATGNGAGACC"
             },
         "prokaryotic_promoter" : {
-            "prefix" : "GGAGGTCTCNGGAG",
-            "suffix" : "TACTNGAGACCGCT"
+            "prefix" : "GGTCTCNGGAG",
+            "suffix" : "TACTNGAGACC"
             },
         "rbs" : { 
-            "prefix" : "GGAGGTCTCNTACT",
-            "suffix" : "AATGNGAGACCGCT"
+            "prefix" : "GGTCTCNTACT",
+            "suffix" : "AATGNGAGACC"
             },
         "terminator" : {
-            "prefix" : "GGAGGTCTCNGCTT",
-            "suffix" : "CGCTNGAGACCGCT"
+            "prefix" : "GGTCTCNGCTT",
+            "suffix" : "CGCTNGAGACC"
             },
         "operon" : { 
-            "prefix" : "GGAGGTCTCNGGAG",
-            "suffix" : "CGCTNGAGACCGCT"
+            "prefix" : "GGTCTCNGGAG",
+            "suffix" : "CGCTNGAGACC"
             }
         }
 
@@ -506,13 +644,13 @@ def fragmenter(seq, cloning_enzyme_prefix, cloning_enzyme_suffix, synthesis_max=
         frags.append(frag)
     return frags
 
-def FG_standard_fragment(seq, part_type, cloning_enzyme):
+def FG_standard_fragment(seq, part_type, cloning_enzyme, ortho_pair):
     random_forward = "CATGCTTGCA"
     random_reverse = "GCTCTGAATA"
     cloning_sites = enzymes[cloning_enzyme]["seq"] + ("N" * enzymes[cloning_enzyme]["jump"])
-    cloning_prefix = cloning_sites.replace("N" * cloning_sites.count("N"), random_forward[:cloning_sites.count("N")]) 
+    cloning_prefix = cloning_sites.replace("N" * cloning_sites.count("N"), random_forward[:cloning_sites.count("N")])
     cloning_suffix = reverse_complement(cloning_sites).replace("N" * cloning_sites.count("N"), random_reverse[:cloning_sites.count("N")])
-    return fragmenter(part_type_preparer(part_type, seq), cloning_prefix, cloning_suffix)
+    return fragmenter("GGAG" + ortho_pair[0] + part_type_preparer(part_type, seq) + reverse_complement(ortho_pair[1]) + "CGCT", cloning_prefix, cloning_suffix)
 
 
 
@@ -559,16 +697,18 @@ def reoptimize(gene_id):
 
 def final_fixer(translation):
     optimize = "custom_1"
-    fix_sequence = codon.optimize_protein(codon.load_codon_table(taxonomy_id=optimize, custom=True), translation) + "TAA"
+    #fix_sequence = codon.optimize_protein(codon.load_codon_table(taxonomy_id=optimize, custom=True), translation) + "TAA"
     optimized = optimize_gene("gene", fix_sequence, "83333")#self.target_organism)
     return optimized
+
+
 
 ## =======
 ## Classes
 ## =======
 class FreeGene:
     """FreeGene class"""
-    def __init__(self, gene_id, collection_id, timestamp, author_name, author_email, author_affiliation, author_orcid, gene_name, description, database_links, part_type, source_organism, target_organism, safety, genbank_file, template_json, optimize, genbank_dictionary, tags):
+    def __init__(self, gene_id, collection_id, timestamp, author_name, author_email, author_affiliation, author_orcid, gene_name, description, database_links, part_type, source_organism, target_organism, safety, genbank_file, template_json, optimize, genbank_dictionary={}, tags=[]):
         self.gene_id = gene_id
         self.collection_id = collection_id
         self.submission_timestamp = timestamp
@@ -588,15 +728,18 @@ class FreeGene:
         self.original_genbank = genbank_file
         self.original_sequence = str(SeqIO.read(StringIO(genbank_file), "genbank").seq)
         # Sequence modifications
-        if part_type == "CDS":
+        print("Running {}".format(self.gene_name))
+        if self.part_type == "cds":
+            ####### FIX: ONLY DOES CODON CHANGING ACCORDING TO THE E COLI TABLE!!
             if optimize == False:
                 optimized_sequence = self.original_sequence
+                optimization_table = codon.load_codon_table(taxonomy_id="custom_1", custom=True)
             else:
                 print("\n\nOptimizing {}. ( {} )".format(self.gene_id, self.gene_name))
                 optimization_table = codon.load_codon_table(taxonomy_id=optimize, custom=True)
                 optimized_sequence = codon.optimize_protein(optimization_table, genbank_dictionary["translation"]) + "TAA"
             print(optimized_sequence)
-            self.optimized = fix_sequence(optimization_table,self.gene_id,optimized_sequence)
+            self.optimized = fix_sequence(optimization_table,self.gene_id,optimized_sequence,0,[])
         else:
             self.optimized = self.original_sequence
         # Apply to make new genbank file
@@ -606,17 +749,18 @@ class FreeGene:
             print(self.gene_id + " is clear of enzymes")
         else:
             print(self.find_enzyme() + " found in " + self.gene_id)
-        if transl_checker(self.optimized[:-3], self.genbank_dictionary["translation"]):
-            print(self.gene_id + " translation is correct")
-        else: 
-            print(self.gene_id + " INCORRECT TRANSLATION")
-            sys.exit()
+        if self.part_type == "cds" and not genbank_dictionary == {}:
+            if transl_checker(self.optimized[:-3], self.genbank_dictionary["translation"]):
+                print(self.gene_id + " translation is correct")
+            else: 
+                print(self.gene_id + " INCORRECT TRANSLATION")
+                sys.exit()
         # Add cloning enzymes
         if len(self.optimized) < 300:
             self.cloning_enzyme = "BtgZI"
         else:
             self.cloning_enzyme = "BbsI"
-        self.retrieval_enzyme = "BsaI" 
+        self.retrieval_enzyme = "BsaI"
 
 
     # Functions
