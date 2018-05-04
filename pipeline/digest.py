@@ -36,15 +36,15 @@ SOURCE      synthetic DNA sequence
 FEATURES             Location/Qualifiers
      CDS             {}"""
 
-important_tags = ['locus_tag', 'gene', 'gene_synonyms', 'product', 'note', 'Source', 'GenBank_acc', 'protein_id', 'EC_number', 'translation']
+important_tags = ff.important_tags
 
 for file in glob.glob("./../pipeline/template.json"):
         with open(file,"r") as template_json:
             template = json.load(template_json)
 
-## =========
-## Functions
-## =========
+## ================
+## Digest functions
+## ================
 # Process a string of important values into a dictionary
 def dictionary_builder(tag_list, string):
     return {key: value for (key, value) in map(lambda tag: [tag, ''.join(re.findall(r'/{}=\"([A-Za-z0-9:_./-_\s-]+)\"'.format(tag),string))], tag_list)}
@@ -54,7 +54,7 @@ def dictionary_to_genbank(dictionary):
     value_list = []
     for key, value in dictionary.items():
         if type(value) == type(""):
-            value_list.append(str("/" + key + "=" + '"' + value + '"'))
+            value_list.append(str(key + "=" + '"' + value + '"'))
     return value_list
 
 def genbank_multiline(genbank_list):
@@ -62,7 +62,7 @@ def genbank_multiline(genbank_list):
     for item in genbank_list:
         split_list = textwrap.wrap(item, width=58)
         for item in split_list:
-            multiline = multiline + "                     " + item + "\n"
+            multiline = multiline + "                     " + "/" + item + "\n"
     return multiline#.rstrip()
 
 def fasta_refseq_dictionary(file_name):
@@ -104,10 +104,8 @@ if config["gene_list"]:
 ## ========================
 ## Process Genbank into CSV
 ## ========================
-csv_python_command = "python2 " + path+ "genome/gb2tab.py -f CDS "
-csv = subprocess.check_output(csv_python_command + genome, shell=True)
-df = pd.read_csv(StringIO(str(csv, "utf-8")), sep='\t')
-df.columns = ['locus_tag', 'sequence', 'exons', 'description']
+df = ff.genbank_to_csv(genome)
+
 
 ## ================
 ## Digest the table 
@@ -115,11 +113,11 @@ df.columns = ['locus_tag', 'sequence', 'exons', 'description']
 for index, row in df.iterrows():
     string = row["description"]
     sequence = row["sequence"]
-    data = (dictionary_builder(important_tags, string))
+    data = (ff.dictionary_builder(important_tags, string))
     references = (re.findall(r'(db_xref=\"[A-Za-z0-9:_/-_\s-]+\")',string))
     data["references"] = references
     # Genbank stuff
-    multiline = (genbank_multiline((dictionary_to_genbank(data))) + transl_table + "\n" + "                     /codon_start=1" + "\n" + genbank_multiline(references))
+    multiline = (genbank_multiline(dictionary_to_genbank(data)) + transl_table + "\n" + "                     /codon_start=1" + "\n" + genbank_multiline(references))
     if not data["gene"] == "":
         definition = data["gene"]
     else:

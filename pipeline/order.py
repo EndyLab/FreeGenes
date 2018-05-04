@@ -37,7 +37,10 @@ def fragment_genes():
             part_type = data["info"]["gene_metadata"]["cloning"]["part_type"]
             part_type = part_type.lower()
             part_type = part_type.replace(" ", "_")
-            ortho_pair = ff.get_pair(data["gene_id"])
+            if not part_type == "vector":
+                ortho_pair = ff.get_pair(data["gene_id"])
+            else:
+                ortho_pair = ("","")
             fragments = ff.FG_standard_fragment(data["sequence"]["optimized_sequence"],part_type,data["info"]["gene_metadata"]["cloning"]["cloning_enzyme"], ortho_pair)
             print(fragments)
             print(data["gene_id"])
@@ -186,7 +189,8 @@ def replace_bad_sequence(gene_id):
 def reoptimize_fragment(gene_id):
     json_data = ff.Json_load(stage + "{}/{}.json".format(gene_id,gene_id))
     table = codon.load_codon_table(taxonomy_id="custom_1", custom=True)
-    translation = json_data["genbank"]["translation"]
+    translation = Seq(json_data["sequence"]["optimized_sequence"], IUPAC.unambiguous_dna).translate()[:-1] 
+    #translation = json_data["genbank"]["translation"]
     new_sequence = ff.fix_sequence(table,gene_id,codon.optimize_protein(table, translation) + "TGA")
     if not Seq(json_data["sequence"]["optimized_sequence"], IUPAC.unambiguous_dna).translate() == Seq(new_sequence, IUPAC.unambiguous_dna).translate():
         print("Bad translation, try again")
@@ -229,7 +233,6 @@ def id_reset():
 
 def fragment_to_order():
     print("Recreating database")
-    ff.clear_pairs()
     reset_fragment_stage()
     fragment_genes()
     write_link()

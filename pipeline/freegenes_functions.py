@@ -26,6 +26,7 @@ import codon
 from Bio.Alphabet import IUPAC
 import yaml
 from numpy.random import choice
+import subprocess
 
 
 ## =============
@@ -80,6 +81,11 @@ cut_sites= [
         ("SapI", "GAAGAGC")]
 
 universal_set = pd.read_csv(config["UNIVERSAL_PRIMER"])["Sequence"].tolist()
+
+important_tags = ['locus_tag', 'gene', 'gene_synonyms', 'product', 'note', 'Source', 'GenBank_acc', 'protein_id', 'EC_number', 'translation']
+
+default_table = codon.load_codon_table(taxonomy_id="custom_1", custom=True)
+
 ## ==============
 ## File Functions
 ## ==============
@@ -198,6 +204,41 @@ def strip_df(df):
             new_col.append(str(item).strip())
         df[column] = new_col
     return df
+
+## ===============
+## Digest functions
+## ================
+
+def dictionary_builder(tag_list, string):
+    return {key: value for (key, value) in map(lambda tag: [tag, ''.join(re.findall(r'/{}=\"([A-Za-z0-9:_./-_\s-]+)\"'.format(tag),string))], tag_list)}
+
+def genbank_to_csv(genome):
+    csv_python_command = "python2 " + config["PROJECT_PATH"] + "genome/gb2tab.py -f CDS "
+    csv = subprocess.check_output(csv_python_command + genome, shell=True)
+    df = pd.read_csv(StringIO(str(csv, "utf-8")), sep='\t')
+    df.columns = ['locus_tag', 'sequence', 'exons', 'description']
+    return df
+
+# Functions for the digester
+def dictionary_to_json_genbank(template, dictionary):
+     for key, value in dictionary.items():
+         template["genbank"][key] = data[key]
+     return template
+
+def suffix_genbank(sequence):
+    multiline = "ORIGIN\n"
+    start_site = 1
+    sequence_list = [sequence[i:i+10] for i in range(0, len(sequence), 10)]
+    sequence_split_list = [sequence_list[i:i+6] for i in range(0, len(sequence_list), 6)]
+    for index in sequence_split_list:
+        multiline += str(start_site).rjust(9)
+        for sequence in index:
+            multiline += " " + sequence
+        multiline += "\n"
+        start_site = start_site + 60
+    multiline += '//'
+    return multiline
+
 
 
 ## ==================
@@ -653,27 +694,6 @@ def FG_standard_fragment(seq, part_type, cloning_enzyme, ortho_pair):
     return fragmenter("GGAG" + ortho_pair[0] + part_type_preparer(part_type, seq) + reverse_complement(ortho_pair[1]) + "CGCT", cloning_prefix, cloning_suffix)
 
 
-
-# Functions for the digester
-def dictionary_to_json_genbank(template, dictionary):
-     for key, value in dictionary.items():
-         template["genbank"][key] = data[key]
-     return template
-
-def suffix_genbank(sequence):
-    multiline = "ORIGIN\n"
-    start_site = 1
-    sequence_list = [sequence[i:i+10] for i in range(0, len(sequence), 10)]
-    sequence_split_list = [sequence_list[i:i+6] for i in range(0, len(sequence_list), 6)]
-    for index in sequence_split_list:
-        multiline += str(start_site).rjust(9)
-        for sequence in index:
-            multiline += " " + sequence
-        multiline += "\n"
-        start_site = start_site + 60
-    multiline += '//'
-    return multiline
-
 ## ================================
 ## Twist fix gene by reoptimization
 ## ================================
@@ -708,7 +728,7 @@ def final_fixer(translation):
 ## =======
 class FreeGene:
     """FreeGene class"""
-    def __init__(self, gene_id, collection_id, timestamp, author_name, author_email, author_affiliation, author_orcid, gene_name, description, database_links, part_type, source_organism, target_organism, safety, genbank_file, template_json, optimize, genbank_dictionary={}, tags=[]):
+    def __init__(self, gene_id, collection_id, timestamp, author_name, author_email, author_affiliation, author_orcid, gene_name, description, database_links, part_type, source_organism, target_organism, safety, genbank_file, template_json, optimize, genbank_dictionary={}, tags=[], hashtags=[]):
         self.gene_id = gene_id
         self.collection_id = collection_id
         self.submission_timestamp = timestamp
@@ -725,6 +745,7 @@ class FreeGene:
         self.template_json = template_json
         self.genbank_dictionary = genbank_dictionary
         self.tags = tags
+        self.hashtags = hashtags
         self.original_genbank = genbank_file
         self.original_sequence = str(SeqIO.read(StringIO(genbank_file), "genbank").seq)
         # Sequence modifications
@@ -815,6 +836,7 @@ class FreeGene:
             self.template_json["sequence"]["original_sequence"] = self.original_sequence
             self.template_json["sequence"]["optimized_sequence"] = self.optimized
             self.template_json["tags"] = self.tags
+            self.template_json["hashtags"] = self.hashtags
             if self.genbank_dictionary:
                 self.dictionary_to_json_genbank(self.template_json, self.genbank_dictionary)
             with open("{}/{}.json".format(path,self.gene_id),"w+") as json_file:

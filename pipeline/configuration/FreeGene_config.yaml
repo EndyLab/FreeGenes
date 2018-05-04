@@ -1,11 +1,11 @@
 BULK_SUBMISSION_ID: 1qgNt3h63--o7qlhTdkUqGpLqVOGizUaY5dMG7VdCwHA
-ID_START: 1234
-LAST_COLLECTION: 4
+ID_START: 3117
+LAST_COLLECTION: 7
 PREVIOUS_CSV_BULK: ./configuration/previous_plates/bulk.csv
 PREVIOUS_CSV_SINGLE: ./configuration/previous_plates/single.csv
 PROJECT_PATH: ./../projects/
 SINGLE_SUBMISSION_ID: 1j5Gc7KEfRlPCIaXMGjDhgQDfSOVx7tnbss9AksrHhzk
 STAGE_PATH: ./../stage/
-UNIVERSAL_PRIMER: ./configuration/orthogonal_primers.csv
+UNIVERSAL_PRIMER: ./configuration/primer_sets/orthogonal_primers.csv
 ORTHOGONAL_PRIMER: ./configuration/orthogonal_primers_pairs.csv
 
