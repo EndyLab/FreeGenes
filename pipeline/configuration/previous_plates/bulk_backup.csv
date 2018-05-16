@@ -1,2 +1,5 @@
-Timestamp,CSV file,Genbank files,Name,Email,Affiliation,ORCID
-test,test,test,test,test,test,test
+date,CSV file,Genbank files,Name,Email,Affiliation,ORCID,project_description
+test,test,test,test,test,test,test,
+3-Apr-2018 11:36:00,https://bbfreegenes.wufoo.com/cabinet/cmdqeW55NzE4N2JtOW0=/prNaf3DuIzc%3D/freegenes_kgtest.csv,https://bbfreegenes.wufoo.com/cabinet/cmdqeW55NzE4N2JtOW0=/prNaf3DuIzc%3D/freegenes_bulk.zip,Keoni Gandall,koeng101@gmail.com,BioBricks Foundation,https://orcid.org/0000-0003-3995-6416,
+2-May-2018 13:47:53,https://bbfreegenes.wufoo.com/cabinet/cmdqeW55NzE4N2JtOW0=/EJUUNsF0CeY%3D/freegenes_bulktemplate__sheet111.csv,https://bbfreegenes.wufoo.com/cabinet/cmdqeW55NzE4N2JtOW0=/EJUUNsF0CeY%3D/benbell.zip,Ben Bell,benbell@stanford.edu,Stanford University,,
+

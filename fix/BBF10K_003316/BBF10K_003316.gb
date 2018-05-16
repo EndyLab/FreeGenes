@@ -1,0 +1,170 @@
+LOCUS       Exported                3458 bp ds-DNA     linear   UNA 15-OCT-2015
+DEFINITION  natural linear DNA
+ACCESSION   .
+VERSION     .
+KEYWORDS    antifungal plus SBPase v5.0
+SOURCE      natural DNA sequence
+  ORGANISM  unspecified
+REFERENCE   1  (bases 1 to 3458)
+  AUTHORS   .
+  TITLE     Direct Submission
+  JOURNAL   Exported Thursday, May 10, 2018 from SnapGene Viewer 3.2.1
+            http://www.snapgene.com
+FEATURES             Location/Qualifiers
+     source          1..3458
+                     /organism="unspecified"
+                     /mol_type="genomic DNA"
+     source          397..555
+                     /organism="Drosophila melanogaster"
+                     /chromosome="2R"
+                     /mol_type="mRNA"
+                     /db_xref="taxon:7227"
+     source          692..922
+                     /organism="Galleria mellonella"
+                     /mol_type="mRNA"
+                     /dev_stage="larva"
+                     /cell_type="hemocytes"
+                     /db_xref="taxon:7137"
+     promoter        11..391
+                     /note="MAS promoter"
+                     /note="mannopine synthase promoter (Velten et al., 1984)"
+     misc_feature    277..282
+                     /note="Feature 24"
+     misc_feature    298..305
+                     /note="tastat"
+     misc_feature    331..383
+                     /note="transcript"
+     CDS             397..555
+                     /codon_start=1
+                     /gene="Mtk"
+                     /gene_synonym="BcDNA:RH07954; CG8175; DIM 17; Dmel\CG8175; 
+                     Metc; metch; Metch; METCH; metk; mtk"
+                     /locus_tag="Dmel_CG8175"
+                     /product="metchnikowin"
+                     /note="Mtk"
+                     /note="CG8175 gene product from transcript CG8175-RA; 
+                     CG8175-PA; Mtk-PA; metchnikowin B; drosophila immune 
+                     induced molecule 17; metchikowin; metchinkowin; 
+                     metchnikowin A; metchnikowin-1; metchnikowine; metchnikowin
+                     precursor; metchnikovin; metchnikowin-2"
+                     /db_xref="FLYBASE:FBpp0086518"
+                     /db_xref="GeneID:36708"
+                     /db_xref="FLYBASE:FBgn0014865"
+                     /protein_id="NP_523752.1"
+                     /translation="MQLNLGAIFLALLGVMATATSVLAEPHRHQGPIFDTRPSPFNPNQ
+                     PRPGPIY"
+     gene            397..555
+                     /map="52A1-52A1"
+                     /gene="Mtk"
+                     /gene_synonym="BcDNA:RH07954; CG8175; DIM 17; Dmel\CG8175; 
+                     Metc; metch; Metch; METCH; metk; mtk"
+                     /locus_tag="Dmel_CG8175"
+                     /note="Mtk"
+                     /note="Metchnikowin"
+                     /db_xref="FLYBASE:FBgn0014865"
+                     /db_xref="GeneID:36708"
+     misc_feature    558..663
+                     /note="putative IRES"
+     misc_feature    665..691
+                     /note="IRES module"
+     CDS             692..922
+                     /codon_start=1
+                     /product="antifungal peptide gallerimycin"
+                     /note="antifungal peptide gallerimycin"
+                     /protein_id="AAM46728.1"
+                     /translation="MKIAFIVAISLAFLAVTSCIEFEKSTESHDIQKRGVTITVKPPFP
+                     GCVFYECIANCRSRGYKNGGYCTINGCQCLR"
+     terminator      929..1181
+                     /note="MAS terminator"
+                     /note="mannopine synthase terminator"
+     misc_feature    1181..1183
+                     /note="Add SpeI restriction site inbetween please"
+     misc_feature    1182..1253
+                     /note="5' beta-globin insulator"
+                     /note="insulator upstream of the human beta-globin locus 
+                     (Farrell et al., 2002)"
+     misc_feature    1182..1253
+                     /note="SYNTH1"
+     misc_feature    1254..1836
+                     /note="RTVP promoter"
+     CDS             join(1845..1945,2032..2158,2268..3212)
+                     /codon_start=1
+                     /product="Increased SBPase activity improves photosynthesis
+                     and grain yield in wheat grown in greenhouse conditions"
+                     /note="SBPase (genomic/cDNA hybrid)"
+                     /translation="METVAASGYARGAATRSPACCAAMSFSQSYRPKVRPPTTFYGESV
+                     RANTARTLPGRQSKAASRAALTTRCAIGDSLEEFLTKATPDKNLIRLLICMGEAMRTIA
+                     FKVRTASCGGTACVNSFGDEQLAVDMLADKLLFEALEYSHVCKYACSEEVPELQDMGGP
+                     VDGGFSVAFDPLDGSSIVDTNFTVGTIFGVWPGDKLTGVTGGDQVAAAMGIYGPRTTFV
+                     VALKDCPGTHEFLLLDEGKWQHVKDTTTIGEGKMFSPGNLRATFDNPDYDKLVNYYVKE
+                     KYTLRYTGGMVPDVNQIIVKEKGIFTNVTSPTAKAKLRLLFEVAPLGFLIEKAGGHSSD
+                     GKQSVLDKVITVLDERTQVAYGSKNEIIRFEETLYGSSRLAAGATVGATV"
+     misc_feature    1946..2031
+                     /note="intron"
+     misc_feature    2159..2267
+                     /note="Feature 7"
+     misc_feature    3216..3448
+                     /note="35S terminator"
+     polyA_signal    3262..3438
+                     /note="CaMV poly(A) signal"
+                     /note="cauliflower mosaic virus polyadenylation signal"
+ORIGIN
+        1 GGTACCAGAT TTTTCAAATC AGTGCGCAAG ACGTGACGTA AGTATCCGAG TCAGTTTTTA
+       61 TTTTTCTACT AATTTGGTCG TTTATTTCGG CGTGTAGGAC ATGGCAACCG GGCCTGAATT
+      121 TCGCGGGTAT TCTGTTTCTA TTCCAACTTT TTCTTGATCC GCAGCCATTA ACGACTTTTG
+      181 AATAGATACG CTGACACGCC AAGCCTCGCT AGTCAAAAGT GTACCAAACA ACGCTTTACA
+      241 GCAAGAACGG AATGCGCGTG ACGCTCGCGG TGACGCCATT TCGCCTTTTC AGAAATGGAT
+      301 AAATAGCCTT GCTTCCTATT ATATCTTCCC AAATTACCAA TACATTACAC TAGCATCTGA
+      361 ATTTCATAAC CAATCTCGAT ACACCAAATC GAATCGATGC AACTTAATCT TGGAGCGATT
+      421 TTTCTGGCCC TGCTGGGTGT GATGGCCACG GCTACATCAG TGCTGGCAGA GCCTCATCGT
+      481 CACCAGGGAC CCATTTTCGA TACGAGGCCG TCGCCCTTCA ATCCTAACCA ACCAAGACCG
+      541 GGTCCAATTT ATTAAACTTC TGACATTTCT GACATTTCTG ACATTTCTGA CATTTCTGAC
+      601 ATTTCTGACA TCCGGCGGGT TTCTGACATC CGGCGGGTGA CTCACAACCC CAGAAACAGA
+      661 CATTTAATAT TTATAATTTC TTCTTCCAGA AATGAAGATC GCTTTCATAG TCGCAATATC
+      721 ATTGGCCTTC TTGGCTGTCA CATCATGTAT TGAGTTCGAG AAGTCTACAG AATCACACGA
+      781 CATCCAAAAA AGAGGCGTAA CCATCACCGT CAAGCCACCA TTCCCCGGAT GTGTATTTTA
+      841 CGAGTGCATT GCTAATTGCA GGAGTAGAGG TTACAAAAAT GGTGGATACT GTACCATCAA
+      901 TGGATGTCAA TGTCTTAGAT AGATACATCT TGGACTCCCA TGTTGGCAAA GGCAACCAAA
+      961 CAAACAATGA ATGATCCGCT CCTGCATATG GGGCGGTTTG AGTATTTCAA CTGCCATTTG
+     1021 GGCTGAATTG AAGATATGCT CCTGTCAGAA ATTCCGTGAT CTTACTCAAT ATTCAGTAAT
+     1081 CTCGGCCAAT ATCCTAAATG TGCGTGGCTT TATCTGTCTT TGTATTGTTT CATCAATTCA
+     1141 TGTAACGTTT GCTTTTCTTA TGAATTTTCA AATAAATTAT CCATCTTGGA CCATTAGCTC
+     1201 CACAGGTATC TTCTTCCCTC TAGTGGTCAT AACAGCAGCT TCAGCTACCT CTCGCACCAC
+     1261 ATCAATAGAA GATGAATGGA TCCATCGTAT GGACAATGCT TAAAGAAGCT TTATCAAAAG
+     1321 CAACTTTAAG TACGAATCAA TAAAGAAGGA CCAGAAGATA TAAAGCGGGA ACATCTTCAC
+     1381 ATGCTACCAC ATGGCTAGCA TCTTTACTTT AGCATCTCTA TTATTGTAAG AGTGTGTAAT
+     1441 GACCAGTGTG CCCCTGGACT CCAGTATATA AGGAGCACCA GAGTAGTGTA ATAGATCATC
+     1501 GATCAAGCAA GCGAGAGCTC AAACTTCTAA GAGAGCAAGA GAGGAGCTTA TCCTCTCAAC
+     1561 CCCTCTTCAA GAAGCAAAGG CGATCAATGG CTCAGGTCAG TGAGTAGTCG TCTTTAAGGT
+     1621 TCCTCTAGGA ACCTCTGTGT AATATGTTTG TACTTATGAT TGTATTTCTC AAAACCTATC
+     1681 CGCTGCATGA ATAAAGCTCT TATATTTATC CTACACCCTT GTGATAAAAC ATGAAGTCAT
+     1741 ACTCGTTCTA AGATTAAGTG TTCTAAAAAT ACTTCGAAAG AATCACATTC TATAGAGTCT
+     1801 GATGACTCAA TTCCACTATA CAGGGACAAG CTTCCCGGAC AGCAATGGAA ACCGTCGCGG
+     1861 CGTCGGGATA CGCCCGCGGG GCCGCCACGC GCTCCCCCGC CTGCTGCGCC GCCATGTCCT
+     1921 TCTCGCAGTC CTACAGGCCC AAGGTGTGTG TGAATTTTGC AAATGTAGGC GCGCCAAACT
+     1981 TTATCTTTTT GGTTGATGCC TGACGGGTAA TGTCGGCGCG CTGCAGGCTG CCAGGCCGCC
+     2041 GACCACGTTC TACGGCGAGT CGGTGCGGGC GAACACGGCG AGGACGCTCC CTGGGAGGCA
+     2101 GTCCAAGGCG GCGAGCCGCG CCGCGCTCAC CACACGGTGC GCGATCGGGG ACAGCCTGGT
+     2161 GAGTGTAGTG TAGATAATCA GCCAATCAGC GTGCAGTGCC GAACAAACTG TGCATCGGTG
+     2221 CAGCCGTGAA AGTGCTTACG GTACGCCGTG TTGTGGTGTG GTGCCAGGAG GAGTTCCTGA
+     2281 CCAAGGCGAC GCCGGACAAG AACCTCATCA GGCTGCTGAT CTGCATGGGG GAGGCCATGA
+     2341 GGACGATCGC GTTCAAGGTC AGGACGGCGT CCTGCGGCGG CACGGCCTGC GTCAACTCCT
+     2401 TCGGAGACGA GCAGCTCGCC GTCGACATGC TCGCCGACAA GCTCCTCTTC GAGGCGTTGG
+     2461 AGTACTCCCA TGTCTGCAAG TATGCGTGCT CTGAGGAAGT CCCTGAGCTG CAAGACATGG
+     2521 GTGGCCCAGT CGACGGCGGT TTCAGTGTTG CGTTCGATCC CCTTGACGGT TCCAGCATTG
+     2581 TCGACACAAA CTTCACTGTG GGAACCATCT TTGGTGTTTG GCCCGGTGAC AAGCTGACGG
+     2641 GCGTCACCGG TGGTGACCAG GTTGCTGCTG CTATGGGAAT CTACGGCCCT CGCACCACTT
+     2701 TCGTAGTGGC CCTCAAGGAC TGCCCTGGAA CTCATGAGTT CCTTCTTCTT GACGAAGGTA
+     2761 AATGGCAGCA TGTCAAGGAC ACCACGACCA TCGGAGAAGG GAAGATGTTC TCTCCTGGTA
+     2821 ATCTGAGGGC CACATTTGAC AACCCTGATT ATGACAAGTT GGTCAACTAC TATGTCAAGG
+     2881 AGAAGTACAC ATTGCGCTAT ACCGGAGGAA TGGTCCCTGA TGTCAACCAG ATCATCGTCA
+     2941 AGGAGAAGGG CATCTTCACC AACGTGACGT CTCCCACGGC CAAGGCCAAG CTGCGGCTCC
+     3001 TGTTCGAGGT GGCCCCGCTG GGCTTCTTGA TAGAGAAAGC CGGCGGGCAC AGCAGCGACG
+     3061 GCAAGCAGTC GGTACTGGAC AAGGTGATCA CGGTGCTCGA CGAGCGGACC CAGGTGGCCT
+     3121 ACGGGTCCAA GAACGAGATC ATCCGGTTCG AGGAGACTCT CTACGGCTCG TCGAGGCTCG
+     3181 CGGCTGGCGC CACCGTCGGC GCAACCGTCT AATCGATCGC TGAAATCACC AGTCTCTCTC
+     3241 TACAAATCTA TCTCTCTCTA TTTTCTCCAT AAATAATGTG TGAGTAGTTT CCCGATAAGG
+     3301 GAAATTAGGG TTCTTATAGG GTTTCGCTCA TGTGTTGAGC ATATAAGAAA CCCTTAGTAT
+     3361 GTATTTGTAT TTGTAAAATA CTTCTATCAA TAAAATTTCT AATTCCTAAA ACCAAAATCC
+     3421 AGTACTAAAA TCCAGATCCC ATTGCTGAAA TCTCTAGA
+//

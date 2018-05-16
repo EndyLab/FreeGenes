@@ -1,0 +1,131 @@
+,Author,Email,Gene,Error,Genbank,FG Pass,Twist Pass,Sent note,Order confirmation
+0,Keoni Gandall,koeng101@gmail.com,psdhB5'UTR_gpdIntron6,No records found in handle,,Failed entry.,,,
+1,Keoni Gandall,koeng101@gmail.com,psdhB5'UTR_gpdIntron2,No records found in handle,,Failed entry.,,,
+2,Keoni Gandall,koeng101@gmail.com,psdhB5'UTR_sdhBIntron6,No records found in handle,,Failed entry.,,,
+3,Keoni Gandall,koeng101@gmail.com,psdhB5'UTR_sdhBIntron5,No records found in handle,,Failed entry.,,,
+4,Keoni Gandall,koeng101@gmail.com,psdhB5'UTR_sdhBIntron2,No records found in handle,,Failed entry.,,,
+5,Keoni Gandall,koeng101@gmail.com,psdhB5'UTR_sdhBIntron1,No records found in handle,,Failed entry.,,,
+6,Keoni Gandall,koeng101@gmail.com,psdhB5'UTR_gpdIntron1,No records found in handle,,Failed entry.,,,
+7,Keoni Gandall,koeng101@gmail.com,pgpd_gpdIntron3,No records found in handle,,Failed entry.,,,
+8,Keoni Gandall,koeng101@gmail.com,pgpd_gpdIntron5,No records found in handle,,Failed entry.,,,
+9,Keoni Gandall,koeng101@gmail.com,pgpd_gpdIntron6,No records found in handle,,Failed entry.,,,
+10,Keoni Gandall,koeng101@gmail.com,pgpd_gpdIntron2,No records found in handle,,Failed entry.,,,
+11,Keoni Gandall,koeng101@gmail.com,pgpd_gpdIntron1,No records found in handle,,Failed entry.,,,
+12,Trevor Kalkus,tkalkus@alumni.stanford.edu,Bacteriorhodopsin,Gene has failed on is_triplet,"LOCUS       SYNBRODB                 761 bp    DNA     linear   SYN 27-APR-1993
+DEFINITION  Synthetic Halobacterium halobium bacteriorhodopsin gene, complete
+            cds.
+ACCESSION   J02755 M19098
+VERSION     J02755.1
+KEYWORDS    bacterio-opsin; bacteriorhodopsin.
+SOURCE      synthetic construct
+  ORGANISM  synthetic construct
+            other sequences; artificial sequences.
+REFERENCE   1  (bases 1 to 761)
+  AUTHORS   Nassal,M., Mogi,T., Karnik,S.S. and Khorana,H.G.
+  TITLE     Structure-function studies on bacteriorhodopsin. III. Total
+            synthesis of a gene for bacterio-opsin and its expression in
+            Escherichia coli
+  JOURNAL   J. Biol. Chem. 262 (19), 9264-9270 (1987)
+   PUBMED   3036852
+REFERENCE   2  (bases 522 to 578)
+  AUTHORS   Hackett,N.R., Stern,L.J., Chao,B.H., Kronis,K.A. and Khorana,H.G.
+  TITLE     Structure-function studies on bacteriorhodopsin. V. Effects of
+            amino acid substitutions in the putative helix F
+  JOURNAL   J. Biol. Chem. 262 (19), 9277-9284 (1987)
+   PUBMED   3597412
+COMMENT     Original source text: Synthetic DNA.
+FEATURES             Location/Qualifiers
+     source          1..761
+                     /organism=""synthetic construct""
+                     /mol_type=""genomic DNA""
+                     /db_xref=""taxon:32630""
+     CDS             6..755
+                     /note=""bacteriorhodopsin""
+                     /codon_start=1
+                     /transl_table=11
+                     /protein_id=""AAA72184.1""
+                     /translation=""MQAQITGRPEWIWLALGTALMGLGTLYFLVKGMGVSDPDAKKFY
+                     AITTLVPAIAFTMYLSMLLGYGLTMVPFGGEQNPIYWARYADWLFTTPLLLLDLALLV
+                     DADQGTILALVGADGIMIGTGLVGALTKVYSYRFVWWAISTAAMLYILYVLFFGFTSK
+                     AESMRPEVASTFKVLRNVTVVLWSAYPVVWLIGSEGAGIVPLNIETLLFMVLDVSAKV
+                     GFGLILLRSRAIFGEAEAPEPSAGDGAAATS""
+ORIGIN      HindIII site.
+        1 agcttatgca agctcaaatt actggacgtc cggaatggat ctggctagct ctgggcaccg
+       61 ctctgatggg tctgggcacc ctgtacttcc tggttaaagg tatgggtgtt tcggatccgg
+      121 atgcgaaaaa attctacgct atcaccaccc tggtgccggc tatcgcattc accatgtacc
+      181 tgtctatgct gctgggttac ggtctgacca tggtaccgtt cggtggtgaa cagaacccga
+      241 tctactgggc ccgttacgct gactggctgt tcaccacccc gctgctgctg ctagatctgg
+      301 ctctgctggt tgacgctgat cagggcacca tcctggctct ggttggcgcc gacggtatca
+      361 tgatcggcac cggcctggtt ggcgcgctga ccaaggttta ctcttaccgt ttcgtttggt
+      421 gggctatctc tactgcagct atgctgtaca tcctgtacgt actgttcttc ggtttcacct
+      481 ctaaagctga aagcatgcgt ccggaagttg cgtcgacctt caaagtactg cgtaacgtta
+      541 ccgttgttct gtggtccgct tacccagttg tttggctgat cggttctgaa ggtgccggca
+      601 ttgttccgct gaatattgaa accctgctgt tcatggttct agacgtttct gctaaagttg
+      661 gtttcggtct gatcctgctg cgttctcgag ctatcttcgg tgaagctgaa gctccggaac
+      721 cgtccgcggg tgacggtgcg gccgctacct cttgatgagc t
+//
+
+",Failed entry.,,,
+13,Trevor Kalkus,tkalkus@alumni.stanford.edu,ChR2 Localized + GFP,Gene has failed on MoClo_ends,"LOCUS       ChR2locx4+eGFP          3060 bp    DNA     linear   UNA 11-MAY-2018
+DEFINITION  A new nucleotide sequence entered manually.
+ACCESSION   urn.local...3d-90a7t8w
+VERSION     urn.local...3d-90a7t8w
+KEYWORDS    .
+SOURCE      
+  ORGANISM  
+            .
+FEATURES             Location/Qualifiers
+ORIGIN      
+        1 atggaccacc ctgttgcaag gtcacttatc ggctcttcct acaccaatct gaacaatgga
+       61 agcattgtca taccttccga cgcatgtttt tgcatgaaat ggctaaagtc taagggaagt
+      121 ccggtggcgt taaaaatggc taatgccctt caatgggcag catttgcact gagcgttatc
+      181 atattgattt actacgccta tgccacgtgg aggaccacat gcggttggga agaagtttat
+      241 gtgtgttgcg ttgaactcac gaaagtcgtg atcgaatttt tccacgaatt tgatgagcct
+      301 gggatgttgt atctagccaa cggcaacaga gttttatggc tacgatatgg tgaatggtta
+      361 ctaacctgcc cagttatttt aatacacctg tctaatttaa ctggcctaaa ggatgattat
+      421 aacaaaacgc cgaggccgtc aaatcgtaca atgagactac ttgtgagcga cgtaggaaca
+      481 attgtatggg gcgcgacggc tgcgatgtct actggataca ttaaagtaat attttttttg
+      541 ctgggttgta tgtacggagc aaacacgttc tttcatgctg cgaaggtata cattgagagt
+      601 taccacacag tccctaaagg tctatgtcgt caattagtac gagccatggc gtggctgttc
+      661 ttcgtgtctt ggggaatgtt ccccgtcctg ttcctactcg ggccggaagg ctttggacat
+      721 ctatccgtgt atgggagtac aatcggtcac acgatcattg acctattgag taagaattgt
+      781 tggggtttgt tggggcactt tttgaggctt aaaatccatg agcatatact tctatatggg
+      841 gacatcagga aagtacaaaa aatccgagtg gcgggggaag aactggaagt ggagaccctt
+      901 atgactgaag aagctccgga tacagtaaaa aagtccacgg cgcagtacgc gaatagggaa
+      961 tctttcctca cgatgcgaga taagctgaaa gagaagggat ttgaagtgag ggcaagtctc
+     1021 gataatagtg gcattgatgc ggttatcaat catacgccga gacctagtaa caataacaat
+     1081 tataacaatg ctctcgctaa cgcagcagct gcagtcggca aacctggcat ggagctatct
+     1141 aagttggacc acgtggccgc aaatgcagcg ggcatgggtg gtatcgcaga ccacgtcgct
+     1201 accacctccg gtgcgatatc tcccggcaga gttattttgg cggttcccga tatcagtatg
+     1261 gtcgactact tcagggagca atttgcccag ctgccggttc agtatgaagt ggtccccgcg
+     1321 ttaggggctg ataacgccgt tcaactcgtg gtgcaagctg ccggtcttgg cggatgcgac
+     1381 tttgtcttgc ttcatccgga atttttacgt gataagagtt ccacaagctt accggcgcgt
+     1441 ctgagatcta ttgggcaacg tgtggcagca ttcggatggt ctccggtagg tcccgtaaga
+     1501 gacttaatag agagcgcggg cctcgatggt tggttggaag gtccctcttt tggattaggc
+     1561 atatcccttc caaatttggc gtcacttgtg ctccgtatgc agcatgcaag gaagatggcg
+     1621 gccatgcttg gcgggatggg cggaatgctc ggttcaaatc ttatgacgcc acgtccgtcc
+     1681 aacagtggta gcggaggagt gggcttgatg ggcgcgggct ccccaggggg gggagggggg
+     1741 gcaatgggag tcggcatgac tgggatggga atggtaggca caaacgctat gggacgaggg
+     1801 gcggttggca acagtgtcgc aaacgcgtcc atgggaggcg gcagtgctgg tatgggaatg
+     1861 ggcatgatgg gaatggttgg cgccggggtg ggggggcaac agcagatggg ggccaatggt
+     1921 atggggccca ccagcttcca gcttggcagc aacccactgt acaacactgc cccctccccg
+     1981 ttatccagcc agcctggtgg cgacgcttct gcagccgcag cggctgcagc tgctgctgct
+     2041 gctacgggcg cggcctctaa ctcaatgaac gcgatgcagg ccggcggaag tgtgaggaat
+     2101 agcggcatac tagcaggagg acttggctcc atgatggggc cgccaggggc gcctgcggct
+     2161 ccgacagcgg cagcaaccgc cgcccctact ccgcgaccgt ccaatgctgt aacgatgggg
+     2221 gcgccggggg gtgggggtgc tgcagcttct gaagcagaaa tgctacaaca gttaatggcg
+     2281 gaaatcaatc gactgaagtc cgaactcgga gagggcgaga atttgtactt ccaatccggc
+     2341 ggtatggtgt ctaaaggaga agaactgttc actggtgtgg tccctatcct agtcgagctc
+     2401 gacggagacg ttaatggaca caaattcagc gtgagtggcg agggtgaggg cgatgcgacc
+     2461 tacggtaagc tcactttaaa attcatttgc actactggca agctcccagt gccatggccg
+     2521 acactcgtga ctacactaac ctacggtgtt cagtgcttca gccgttatcc cgaccatatg
+     2581 aaacaacacg atttctttaa aagtgctatg ccggagggat atgtgcaaga gagaacgatt
+     2641 ttcttcaagg atgatggtaa ctacaaaact agggcggaag ttaagtttga gggagatact
+     2701 cttgttaaca ggatcgagtt aaaggggatc gatttcaaag aggacggcaa catacttgga
+     2761 cacaaactgg aatacaacta taactcacat aacgtctaca taatggcgga taaacaaaag
+     2821 aacggaatca aggtcaactt taaaatcaga cataatattg aagacggttc agtccagctg
+     2881 gcggaccatt atcagcagaa tacgccaata ggcgacggtc ccgttttatt gccggataat
+     2941 cattatctct ctacccaaag tgcactttcc aaagacccca atgaaaagcg agaccatatg
+     3001 gtgctcttgg agtttgtcac cgcagctggc attaccttgg gcatggatga actttacaag
+//
+",Failed entry.,,,

@@ -1,0 +1,879 @@
+LOCUS       Exported                5170 bp ds-DNA     circular SYN 04-MAY-2018
+DEFINITION  synthetic circular DNA.
+ACCESSION   .
+VERSION     .
+KEYWORDS    .
+SOURCE      synthetic DNA construct
+  ORGANISM  synthetic DNA construct
+REFERENCE   1  (bases 1 to 5170)
+  AUTHORS   Keoni Gandall
+  TITLE     Direct Submission
+  JOURNAL   Exported May 4, 2018 from SnapGene 4.0.4
+            http://www.snapgene.com
+FEATURES             Location/Qualifiers
+     source          1..5170
+                     /organism="synthetic DNA construct"
+                     /mol_type="other DNA"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          1819..1835
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     source          3517..3599
+                     /organism="Bacillus subtilis"
+                     /plasmid="pBS72"
+                     /strain="72"
+                     /mol_type="genomic DNA"
+                     /country="Belarus"
+                     /isolation_source="flower bed"
+                     /collected_by="M.A.Titok"
+                     /db_xref="taxon:1423"
+     protein_bind    1..4
+                     /label=BsaI
+                     /note="/ApEinfo_fwdcolor=#00FF2C 
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0} 
+                     width 5 offset 0
+                     /ApEinfo_revcolor=#E72E00"
+     misc_feature    5..44
+                     /label=Feature 9
+     CDS             complement(106..915)
+                     /codon_start=1
+                     /gene="aph(3')-Ia"
+                     /product="aminoglycoside phosphotransferase"
+                     /label=KanR
+                     /note="confers resistance to kanamycin"
+                     /translation="MSHIQRETSRPRLNSNMDADLYGYKWARDNVGQSGATIYRLYGKP
+                     DAPELFLKHGKGSVANDVTDEMVRLNWLTEFMPLPTIKHFIRTPDDAWLLTTAIPGKTA
+                     FQVLEEYPDSGENIVDALAVFLRRLHSIPVCNCPFNSDRVFRLAQAQSRMNNGLVDASD
+                     FDDERNGWPVEQVWKEMHKLLPFSPDSVVTHGDFSLDNLIFDEGKLIGCIDVGRVGIAD
+                     RYQDLAILWNCLGEFSPSLQKRLFQKYGIDNPDMNKLQFHLMLDEFF"
+     rep_origin      1131..1719
+                     /label=ori
+                     /note="high-copy-number ColE1/pMB1/pBR322/pUC origin of 
+                     replication"
+     primer_bind     1819..1835
+                     /label=M13 fwd
+                     /note="common sequencing primer, one of multiple similar 
+                     variants"
+     promoter        1920..2361
+                     /gene="S. cerevisiae GAL1"
+                     /label=GAL1 promoter
+                     /note="inducible promoter, regulated by Gal4"
+     protein_bind    1920..2037
+                     /label=UAS
+                     /bound_moiety="Gal4"
+                     /note="upstream activating sequence mediating
+                     Gal4-dependent induction"
+     terminator      2389..2420
+                     /label=tonB terminator
+                     /note="bidirectional E. coli tonB-P14 transcription
+                     terminator"
+     CDS             complement(2421..3098)
+                     /codon_start=1
+                     /product="monomeric derivative of DsRed (Campbell et al.,
+                     2002)"
+                     /label=mRFP1
+                     /translation="MASSEDVIKEFMRFKVRMEGSVNGHEFEIEGEGEGRPYEGTQTAK
+                     LKVTKGGPLPFAWDILSPQFQYGSKAYVKHPADIPDYLKLSFPEGFKWERVMNFEDGGV
+                     VTVTQDSSLQDGEFIYKVKLRGTNFPSDGPVMQKKTMGWEASTERMYPEDGALKGEIKM
+                     RLKLKDGGHYDAEVKTTYMAKKPVQLPGAYKTDIKLDITSHNEDYTIVEQYERAEGRHS
+                     TGA"
+     protein_bind    3134..3150
+                     /label=lac operator
+                     /bound_moiety="lac repressor encoded by lacI"
+                     /note="The lac repressor binds to the lac operator to
+                     inhibit transcription in E. coli. This inhibition can be 
+                     relieved by adding lactose or 
+                     isopropyl-beta-D-thiogalactopyranoside (IPTG)."
+     promoter        complement(3158..3188)
+                     /label=lac promoter
+                     /note="promoter for the E. coli lac operon"
+     protein_bind    3203..3224
+                     /label=CAP binding site
+                     /bound_moiety="E. coli catabolite activator protein"
+                     /note="CAP binding activates transcription in the presence
+                     of cAMP."
+     terminator      3293..3516
+                     /label=ScTDH1 Terminator
+                     /note="/ApEinfo_fwdcolor=#FF8EFF 
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0} 
+                     width 5 offset 0
+                     /ApEinfo_revcolor=#FF8EFF"
+     primer_bind     complement(3517..3535)
+                     /label=T7 Reverse
+                     /note="https://www.elimbio.com/elim's_primer.htm"
+     terminator      3531..3578
+                     /label=T7 terminator
+                     /note="transcription terminator for bacteriophage T7 RNA 
+                     polymerase"
+     primer_bind     complement(3579..3599)
+                     /label=M13 rev
+                     /note="common sequencing primer, one of multiple similar 
+                     variants"
+     primer_bind     complement(3583..3599)
+                     /label=M13 rev
+                     /note="common sequencing primer, one of multiple similar 
+                     variants"
+     promoter        3600..3776
+                     /label=ScURA3 Promoter
+                     /note="/ApEinfo_fwdcolor=#ffb334 
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0} 
+                     width 5 offset 0
+                     /ApEinfo_revcolor=green"
+     CDS             3777..4580
+                     /label=URA3
+                     /note="/ApEinfo_fwdcolor=#ff9127 
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0} 
+                     width 5 offset 0
+                     /ApEinfo_revcolor=green"
+     terminator      4581..4658
+                     /label=ScURA3 Terminator
+                     /note="/ApEinfo_fwdcolor=#ffcb72 
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0} 
+                     width 5 offset 0
+                     /ApEinfo_revcolor=green"
+     protein_bind    4659..4662
+                     /label=BsaI
+                     /note="/ApEinfo_fwdcolor=#00FF2C 
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0} 
+                     width 5 offset 0
+                     /ApEinfo_revcolor=#E72E00"
+     misc_feature    4663..5166
+                     /label=CEN/ARS
+                     /note="S. cerevisiae CEN6 centromere fused to an
+                     autonomously replicating sequence"
+     rep_origin      4663..4779
+                     /label=CEN6
+                     /note="/ApEinfo_fwdcolor=#BDA661 
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0} 
+                     width 5 offset 0
+                     /ApEinfo_revcolor=#BDA661"
+     rep_origin      4780..5170
+                     /label=ARS4
+                     /note="/ApEinfo_fwdcolor=#9A969B 
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0} 
+                     width 5 offset 0
+                     /ApEinfo_revcolor=#9A969B"
+ORIGIN
+        1 CCGAGATTAT CAAAAAGGAT CTTCACCTAG ATCCTTTTAA ATTAAAAATG AAGTTTTAAA
+       61 TCAAGCCCAA TCTGAATAAT GTTACAACCA ATTAACCAAT TCTGATTAGA AAAACTCATC
+      121 GAGCATCAAA TGAAACTGCA ATTTATTCAT ATCAGGATTA TCAATACCAT ATTTTTGAAA
+      181 AAGCCGTTTC TGTAATGAAG GAGAAAACTC ACCGAGGCAG TTCCATAGGA TGGCAAGATC
+      241 CTGGTATCGG TCTGCGATTC CGACTCGTCC AACATCAATA CAACCTATTA ATTTCCCCTC
+      301 GTCAAAAATA AGGTTATCAA GTGAGAAATC ACCATGAGTG ACGACTGAAT CCGGTGAGAA
+      361 TGGCAAAAGT TTATGCATTT CTTTCCAGAC TTGTTCAACA GGCCAGCCAT TACGCTCGTC
+      421 ATCAAAATCA CTCGCATCAA CCAAACCGTT ATTCATTCGT GATTGCGCCT GAGCGAGACG
+      481 AAATACGCGA TCGCTGTTAA AAGGACAATT ACAAACAGGA ATCGAATGCA ACCGGCGCAG
+      541 GAACACTGCC AGCGCATCAA CAATATTTTC ACCTGAATCA GGATATTCTT CTAATACCTG
+      601 GAATGCTGTT TTTCCGGGGA TCGCAGTGGT GAGTAACCAT GCATCATCAG GAGTACGGAT
+      661 AAAATGCTTG ATGGTCGGAA GAGGCATAAA TTCCGTCAGC CAGTTTAGTC TGACCATCTC
+      721 ATCTGTAACA TCATTGGCAA CGCTACCTTT GCCATGTTTC AGAAACAACT CTGGCGCATC
+      781 GGGCTTCCCA TACAAGCGAT AGATTGTCGC ACCTGATTGC CCGACATTAT CGCGAGCCCA
+      841 TTTATACCCA TATAAATCAG CATCCATGTT GGAATTTAAT CGCGGCCTCG ACGTTTCCCG
+      901 TTGAATATGG CTCATAACAC CCCTTGTATT ACTGTTTATG TAAGCAGACA GTTTTATTGT
+      961 TCATGATGAT ATATTTTTAT CTTGTGCAAT GTAACATCAG AGATTTTGAG ACACGGGCCA
+     1021 GAGCTGCACA CATTTCCCCG AAAAGTGCCA CCTGTCATGA CCAAAATCCC TTAACGTGAG
+     1081 TTTTCGTTCC ACTGAGCGTC AGACCCCGTA GAAAAGATCA AAGGATCTTC TTGAGATCCT
+     1141 TTTTTTCTGC GCGTAATCTG CTGCTTGCAA ACAAAAAAAC CACCGCTACC AGCGGTGGTT
+     1201 TGTTTGCCGG ATCAAGAGCT ACCAACTCTT TTTCCGAAGG TAACTGGCTT CAGCAGAGCG
+     1261 CAGATACCAA ATACTGTTCT TCTAGTGTAG CCGTAGTTAG GCCACCACTT CAAGAACTCT
+     1321 GTAGCACCGC CTACATACCT CGCTCTGCTA ATCCTGTTAC CAGTGGCTGC TGCCAGTGGC
+     1381 GATAAGTCGT GTCTTACCGG GTTGGACTCA AGACGATAGT TACCGGATAA GGCGCAGCGG
+     1441 TCGGGCTGAA CGGGGGGTTC GTGCACACAG CCCAGCTTGG AGCGAACGAC CTACACCGAA
+     1501 CTGAGATACC TACAGCGTGA GCTATGAGAA AGCGCCACGC TTCCCGAAGG GAGAAAGGCG
+     1561 GACAGGTATC CGGTAAGCGG CAGGGTCGGA ACAGGAGAGC GCACGAGGGA GCTTCCAGGG
+     1621 GGAAACGCCT GGTATCTTTA TAGTCCTGTC GGGTTTCGCC ACCTCTGACT TGAGCGTCGA
+     1681 TTTTTGTGAT GCTCGTCAGG GGGGCGGAGC CTATGGAAAA ACGCCAGCAA CGCGGCCTTT
+     1741 TTACGGTTCC TGGCCTTTTG CTGGCCTTTT GCTCACATGT TCTTTCCTGC GTTATCCCCT
+     1801 GATTCTGTGG ATAACCGTGT AAAACGACGG CCAGTAACGC CCCATTATCT TAGCCTAAAA
+     1861 AAACCTTCTC TTTGGAACTT TCAGTAATAC GCTTAACTGC TCATTGCTAT ATTGAAGTAC
+     1921 GGATTAGAAG CCGCCGAGCG GGCGACAGCC CTCCGACGGA TGACTCTCCT CCGTGCGTCC
+     1981 TCGTCATCAC CGGTCGCGTT CCTGAAACGC AGATGTGCCT CGCGCCGCAC TGCTCCGAAC
+     2041 AATAAAGATT CTACAATACT AGCTTTTATG GTTATGAAGA GGAAAAATTG GCAGTAACCT
+     2101 GGCCCCACAA ACCTTCAAAT TAACGAATCA AATTAACAAC CATAGGATGA TAATGCGATT
+     2161 AGTTTTTTAG CCTTATTTCT GGGGTAATTA ATCAGCGAAG CGATGATTTT TGATCTATTA
+     2221 ACAGATATAT AAATGGAAAA GCTGCATAAC CACTTTAACT AATACTTTCA ACATTTTCAG
+     2281 TTTGTATTAC TTCTTATTCA AATGTCATAA AAGTATCAAC AAAAAATTGT TAATATACCT
+     2341 CTATACTTTA ACGTCAAGGA GAAAAAACTA TAAGATCAAT GGGAGACCAG TCAAAAGCCT
+     2401 CCGGTCGGAG GCTTTTGACT TTAAGCACCG GTGGAGTGAC GACCTTCAGC ACGTTCGTAC
+     2461 TGTTCAACGA TGGTGTAGTC CTCGTTGTGG GAGGTGATGT CCAGTTTGAT GTCGGTTTTG
+     2521 TAAGCACCCG GTAACTGAAC CGGTTTTTTA GCCATGTAGG TGGTTTTAAC TTCAGCGTCG
+     2581 TAGTGACCAC CGTCTTTCAG TTTCAGACGC ATTTTGATTT CACCTTTCAG AGCACCGTCC
+     2641 TCCGGGTACA TACGTTCGGT GGAAGCTTCC CAACCCATGG TTTTTTTCTG CATAACCGGA
+     2701 CCGTCGGACG GGAAGTTGGT ACCACGCAGT TTAACTTTGT AGATGAACTC ACCGTCTTGC
+     2761 AGGGAGGAGT CCTGGGTAAC GGTAACAACA CCACCGTCCT CGAAGTTCAT AACACGTTCC
+     2821 CATTTGAAAC CTTCCGGGAA GGACAGTTTC AGGTAGTCCG GGATGTCAGC CGGGTGTTTA
+     2881 ACGTAAGCTT TGGAACCGTA CTGGAACTGC GGGGACAGGA TGTCCCAAGC GAACGGCAGC
+     2941 GGACCACCTT TGGTAACTTT CAGTTTAGCG GTCTGGGTAC CTTCGTACGG ACGACCTTCA
+     3001 CCTTCACCTT CGATTTCGAA CTCGTGACCG TTAACGGAAC CTTCCATACG AACTTTGAAA
+     3061 CGCATGAACT CTTTGATAAC ATCTTCGGAG GAAGCCATCT AGTATTTCTC CTCTTTCTCT
+     3121 AGTATGTGTG AAATTGTTAT CCGCTCACAA TTCCACACAA CATACGAGCC GGAAGCATAA
+     3181 AGTGTAAAGC CTGGGGTGCC TAATGAGTGA GCTAACTCAC ATTAATTGCG TTGCGCTCAC
+     3241 TGCCCGCTTT CCAGTCGGGA AACCTGTCGT GCCAGGGTCT CAGCTTCTCG AGATAAAGCA
+     3301 ATCTTGATGA GGATAATGAT TTTTTTTTGA ATATACATAA ATACTACCGT TTTTCTGCTA
+     3361 GATTTTGTGA TGACGTAAAT AAGTACATAT TACTTTTTAA GCCAAGACAA GATTAAGCAT
+     3421 TAACTTTACC CTTTTCTTTC TAAGTTTCAA TATTAGTTAT CACTGTTTAA AAGTTATGGC
+     3481 GAGAACGTCG GCGGTTAAAA TATATTACCC TGAACGCCGC TGAGCAATAA CTAGCATAAC
+     3541 CCCTTGGGGC CTCTAAACGG GTCTTGAGGG GTTTTTTGCA TGGTCATAGC TGTTTCCTGC
+     3601 GGTTTCCTTG AAATTTTTTT GATTCGGTAA TCTCCGAACA GAAGGAAGAA CGAAGGAAGG
+     3661 AGCACAGACT TAGATTGGTA TATATACGCA TATGTAGTGT TGAAGAAACA TGAAATTGCC
+     3721 CAGTATTCTT AACCCAACTG CACAGAACAA AAACGTGCAG GAAACGAAGA TAAATCATGT
+     3781 CGAAAGCTAC ATATAAGGAA CGTGCTGCTA CTCATCCTAG TCCTGTTGCT GCCAAGCTAT
+     3841 TTAATATCAT GCACGAAAAG CAAACAAACT TGTGTGCTTC ATTGGATGTT CGTACCACCA
+     3901 AGGAATTACT GGAGTTAGTT GAAGCATTAG GTCCCAAAAT TTGTTTACTA AAAACACATG
+     3961 TGGATATCTT GACTGATTTT TCCATGGAGG GCACAGTTAA GCCGCTAAAG GCATTATCCG
+     4021 CCAAGTACAA TTTTTTACTC TTCGAGGACA GAAAATTTGC TGACATTGGT AATACAGTCA
+     4081 AATTGCAGTA CTCTGCGGGT GTATACAGAA TAGCAGAATG GGCAGACATT ACGAATGCAC
+     4141 ACGGTGTGGT GGGCCCAGGT ATTGTTAGCG GTTTGAAGCA GGCGGCAGAA GAAGTAACAA
+     4201 AGGAACCTAG AGGCCTTTTG ATGTTAGCAG AATTGTCATG CAAGGGCTCC CTATCTACTG
+     4261 GAGAATATAC TAAGGGTACT GTTGACATTG CGAAGAGCGA CAAAGATTTT GTTATCGGCT
+     4321 TTATTGCTCA AAGAGACATG GGTGGAAGAG ATGAAGGTTA CGATTGGTTG ATTATGACAC
+     4381 CCGGTGTGGG TTTAGATGAC AAGGGAGATG CATTGGGTCA ACAGTATAGA ACCGTGGATG
+     4441 ATGTGGTTTC TACAGGATCT GACATTATTA TTGTTGGAAG AGGACTATTT GCAAAGGGAA
+     4501 GGGATGCTAA GGTAGAGGGT GAACGTTACA GAAAAGCAGG CTGGGAAGCA TATTTGAGAA
+     4561 GATGCGGCCA GCAAAACTAA AAAACTGTAT TATAAGTAAA TGCATGTATA CTAAACTCAC
+     4621 AAATTAGAGC TTCAATTTAA TTATATCAGT TATTACCCGA GTATCACGTG CTATAAAAAT
+     4681 AATTATAATT TAAATTTTTT AATATAAATA TATAAATTAA AAATAGAAAG TAAAAAAAGA
+     4741 AATTAAAGAA AAAATAGTTT TTGTTTTCCG AAGATGTAAA AGACTCTAGG GGGATCGCCA
+     4801 ACAAATACTA CCTTTTATCT TGCTCTTCCT GCTCTCAGGT ATTAATGCCG AATTGTTTCA
+     4861 TCTTGTCTGT GTAGAAAACC ACACACGAAA ATCCTGTGAT TTTACATTTT ACTTATCGTT
+     4921 AATCGAATGT ATATCTATTT AATCTGCTTT TCTTGTCTAA TAAATATATA TGTAAAGTAC
+     4981 GCTTTTTGTT GAAATTTTTT AAACCTTTGT TTATTTTTTT TTCTTCATTC CGTAACTCTT
+     5041 CTACCTTCTT TATTTACTTT CTAAAATCCA AATACAAAAC ATAAAAATAA ATAAACACAG
+     5101 AGTAAATTCC CAAATTATTC CATCATTAAA AGATACGAGG CGCGTGTAAG TTACAGGCAA
+     5161 GCGATCCGTC
+//

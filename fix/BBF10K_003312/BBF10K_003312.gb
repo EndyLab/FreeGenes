@@ -1,0 +1,170 @@
+LOCUS       Exported                1391 bp ds-DNA     linear   SYN 04-MAY-2018
+DEFINITION  synthetic linear DNA
+ACCESSION   .
+VERSION     .
+KEYWORDS    .
+SOURCE      synthetic DNA construct
+  ORGANISM  synthetic DNA construct
+REFERENCE   1  (bases 1 to 1391)
+  AUTHORS   .
+  TITLE     Direct Submission
+  JOURNAL   Exported May 4, 2018 from SnapGene 4.0.4
+            http://www.snapgene.com
+FEATURES             Location/Qualifiers
+     source          1..1391
+                     /organism="synthetic DNA construct"
+                     /mol_type="other DNA"
+     source          1..191
+                     /organism="synthetic DNA construct"
+                     /mol_type="other DNA"
+                     /label=source:synthetic DNA construct
+                     /note="/ApEinfo_fwdcolor=pink
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0
+                     /ApEinfo_label=source:synthetic DNA construct
+                     /ApEinfo_revcolor=pink
+                     /locus_tag=source:synthetic DNA construct"
+     source          192..1364
+                     /organism="synthetic DNA construct"
+                     /mol_type="other DNA"
+                     /label=source:synthetic DNA construct(1)
+                     /note="/ApEinfo_fwdcolor=pink
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0
+                     /ApEinfo_label=source:synthetic DNA construct
+                     /ApEinfo_revcolor=pink
+                     /locus_tag=source:synthetic DNA construct(1)"
+     source          1365..1391
+                     /organism="synthetic DNA construct"
+                     /mol_type="other DNA"
+                     /label=source:synthetic DNA construct(2)
+                     /note="/ApEinfo_fwdcolor=pink
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0
+                     /ApEinfo_label=source:synthetic DNA construct
+                     /ApEinfo_revcolor=pink
+                     /locus_tag=source:synthetic DNA construct(2)"
+     misc_feature    1..27
+                     /locus_tag="mostly unique region II"
+                     /label=mostly unique region II
+                     /note="/ApEinfo_fwdcolor=cyan
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0
+                     /ApEinfo_label=mostly unique region II
+                     /ApEinfo_revcolor=cyan"
+     primer_bind     complement(1..13)
+                     /locus_tag="pBRforEco"
+                     /label=pBRforEco
+                     /note="pBR322 vectors, upsteam of EcoRI site, forward
+                     primer
+                     /ApEinfo_fwdcolor=pink
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0
+                     /ApEinfo_label=pBRforEco
+                     /ApEinfo_revcolor=pink"
+     misc_feature    28..57
+                     /locus_tag="mostly unique region III"
+                     /label=mostly unique region III
+                     /note="/ApEinfo_fwdcolor=#804040
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0
+                     /ApEinfo_label=mostly unique region III
+                     /ApEinfo_revcolor=#804040"
+     promoter        89..162
+                     /locus_tag="PLtetO-1 promoter"
+                     /label=PLtetO-1 promoter
+                     /note="modified phage lambda PL promoter with tet operator
+                     sites (Lutz and Bujard, 1997)
+                     /ApEinfo_fwdcolor=pink
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0
+                     /ApEinfo_label=PLtetO-1 promoter
+                     /ApEinfo_revcolor=pink"
+     protein_bind    89..107
+                     /gene="tetO"
+                     /locus_tag="tet operator"
+                     /label=tet operator
+                     /bound_moiety="tetracycline repressor TetR"
+                     /note="bacterial operator O2 for the tetR and tetA genes
+                     /ApEinfo_fwdcolor=#008080
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0
+                     /ApEinfo_label=tet operator
+                     /ApEinfo_revcolor=#008080"
+     protein_bind    114..132
+                     /gene="tetO"
+                     /locus_tag="tet operator(1)"
+                     /label=tet operator(1)
+                     /bound_moiety="tetracycline repressor TetR"
+                     /note="bacterial operator O2 for the tetR and tetA genes
+                     /ApEinfo_fwdcolor=#008080
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0
+                     /ApEinfo_label=tet operator
+                     /ApEinfo_revcolor=#008080"
+     misc_feature    125..191
+                     /locus_tag="mVenus Up Seq"
+                     /label=mVenus Up Seq
+                     /note="/ApEinfo_fwdcolor=cyan
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0
+                     /ApEinfo_label=mVenus Up Seq
+                     /ApEinfo_revcolor=cyan"
+     RBS             172..183
+                     /locus_tag="strong bacterial ribosome binding site (Elowitz
+                     and Leibler, 2000)"
+                     /label=strong bacterial ribosome binding site (Elowitz
+                     /label=strong bacterial ribosome binding site (Elowitz and 
+                     Leibler, 2000)
+                     /note="strong bacterial ribosome binding site (Elowitz and 
+                     Leibler, 2000)
+                     /ApEinfo_fwdcolor=pink
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0
+                     /ApEinfo_label=strong bacterial ribosome binding site
+                     (Elowitz and  Leibler, 2000)
+                     /ApEinfo_revcolor=pink"
+     CDS             192..1364
+                     /codon_start=1
+                     /label=tetX
+                     /translation="MKKTMRIDTDKQMNLLSDKNVAIIGGGPVGLTMAKLLQQNGIDVS
+                     VYERDNDREARIFGGTLDLHKGSGQEAMKKAGLLQTYYDLALPMGVNIADKKGNILSTK
+                     NVKPENRFDNPEINRNDLRAILLNSLENDTVIWDRKLVMLEPGKKKWTLTFENKPSETA
+                     DLVILANGGMSKVRKFVTDTEVEETGTFNIQADIHQPEINCPGFFQLCNGNRLMASHQG
+                     NLLFANPNNNGALHFGISFKTPDEWKNQTQVDFQNRNSVVDFLLKEFSDWDERYKELIH
+                     TTLSFVGLATRIFPLEKPWKSKRPLPITMIGDAAHLMPPFAGQGVNSGLVDALILSDNL
+                     ADGKFNSIEEAVKNYEQQMFMYGKEAQEESTQNEIEMFKPDFTFQQLLNV"
+     misc_feature    1365..1391
+                     /locus_tag="pLPT Walk up seq fix"
+                     /label=pLPT Walk up seq fix
+                     /note="/ApEinfo_fwdcolor=cyan
+                     /ApEinfo_graphicformat=arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0
+                     /ApEinfo_label=pLPT Walk up seq fix
+                     /ApEinfo_revcolor=cyan"
+ORIGIN
+        1 TGATACGCCT ATTTTTATAG GTTAATGTCA TGATAATAAT GGTTTCTTAG ACGTACTCGA
+       61 GCACGAGGCC CTTTCTCTTC ACCTCGAGTC CCTATCAGTG ATAGAGATTG ACATCCCTAT
+      121 CAGTGATAGA GATACTGAGC ACATCAGCAG GACGCACTGA CCGAATTCAT TAAAGAGGAG
+      181 AAAGGTACCG CATGAAAAAA ACCATGCGTA TCGACACCGA CAAACAGATG AACCTGCTGT
+      241 CTGACAAAAA CGTTGCGATC ATCGGTGGTG GTCCGGTTGG TCTGACCATG GCGAAACTGC
+      301 TTCAGCAGAA CGGTATCGAC GTTTCTGTTT ACGAACGTGA CAACGACCGT GAAGCGCGTA
+      361 TCTTCGGTGG TACCCTGGAC CTGCACAAAG GTTCTGGTCA GGAAGCCATG AAAAAAGCGG
+      421 GTCTGCTTCA GACCTACTAC GACCTGGCGC TGCCGATGGG TGTTAACATT GCGGACAAAA
+      481 AAGGTAACAT CCTGTCTACC AAAAACGTTA AACCGGAAAA CCGTTTCGAC AACCCGGAAA
+      541 TCAACCGTAA CGACCTGCGT GCGATCCTGC TGAACTCTCT GGAAAACGAC ACCGTTATCT
+      601 GGGACCGTAA ACTGGTTATG CTGGAACCGG GTAAAAAAAA ATGGACCCTG ACCTTCGAAA
+      661 ACAAACCGTC TGAAACCGCG GACCTGGTTA TCCTGGCGAA CGGTGGTATG TCTAAAGTTC
+      721 GTAAATTCGT TACCGACACC GAAGTTGAAG AAACCGGTAC CTTCAACATC CAGGCGGACA
+      781 TCCACCAGCC GGAAATCAAC TGCCCGGGTT TCTTCCAGCT GTGCAACGGT AACCGTCTGA
+      841 TGGCGAGCCA CCAGGGTAAC CTGCTGTTCG CGAACCCGAA CAACAACGGT GCGCTGCACT
+      901 TCGGTATCTC TTTCAAAACC CCGGACGAAT GGAAAAACCA GACCCAGGTT GACTTCCAGA
+      961 ACCGTAACTC TGTTGTTGAC TTCCTGCTGA AAGAGTTCTC TGACTGGGAC GAACGTTACA
+     1021 AAGAACTGAT CCACACCACC CTGTCTTTCG TTGGTCTGGC GACCCGTATC TTCCCGCTGG
+     1081 AAAAACCGTG GAAATCTAAA CGTCCGCTGC CGATCACCAT GATCGGTGAC GCGGCGCACC
+     1141 TGATGCCGCC GTTCGCGGGT CAGGGTGTTA ACTCTGGTCT GGTTGACGCG CTGATCCTGT
+     1201 CTGACAACCT GGCGGACGGT AAATTCAACT CTATCGAAGA AGCGGTTAAA AACTACGAAC
+     1261 AGCAGATGTT CATGTACGGT AAAGAAGCGC AGGAAGAATC TACCCAGAAC GAAATCGAAA
+     1321 TGTTCAAACC GGACTTCACC TTCCAGCAGC TGCTGAACGT TTAAGCTTGA TATCGAATTC
+     1381 CTGCAGCCCG G
+//

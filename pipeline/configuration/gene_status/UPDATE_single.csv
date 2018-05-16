@@ -1,0 +1,8 @@
+Timestamp,name,email,affiliation,orcid,gene_name,part_type,source_organism,target_organism,description,links,genbank_file,safety_info,optimize,hashtags,tags,conditionals,project_description
+11-May-2018 16:48:17,Trevor Kalkus,tkalkus@alumni.stanford.edu,Lynn Rothschild,,Bacteriorhodopsin,CDS,Halobacterium halobium,Escherichia coli,Light activated proton pump,"https://www.ncbi.nlm.nih.gov/pubmed/3597412
+https://www.ncbi.nlm.nih.gov/pubmed/3036852",https://bbfreegenes.wufoo.com/cabinet/ejFybmlhanEwYWV5MXBj/wuslashLHM8OdpHxA%3D/sequence13.gb,,Yes,,,,
+11-May-2018 16:58:10,Trevor Kalkus,tkalkus@alumni.stanford.edu,USRA,,ChR2 Localized + GFP,CDS,Chlamydomonas reinhardtii,Arabidopsis thaliana,This is an attempt to localize a channel protein within a plant cell's membrane,"https://www.uniprot.org/uniprot/B4Y105
+http://parts.igem.org/wiki/index.php?title=Part:BBa_K105012
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2879764/
+http://www.plantcell.org/content/plantcell/suppl/2010/04/06/tpc.109.072678.DC1/Offringa_Supp_Data_final.pdf
+https://www.uniprot.org/uniprot/C5MKY7",https://bbfreegenes.wufoo.com/cabinet/ejFybmlhanEwYWV5MXBj/HhcIlUwuslashfrBo%3D/chr2locx4_egfp.gb,,No,,,,

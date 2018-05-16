@@ -1,5 +1,5 @@
 {
-	"version" : "3.0.0",
+	"version" : "3.0.1",
 	"gene_id": "",
 	"author": {
 		"name": "",
@@ -12,6 +12,7 @@
 		"documentation" : {
 			"gene_name": "",
 			"description" : "",
+			"project_description": "",
 			"database_links" : [],
 			"source": ""
 		},
@@ -31,8 +32,9 @@
 					"strain": "",
 					"selection": [""],
 					"media": "",
-					"temperature": "",
-					"mastermix_notes": ""
+				"temperature": "",
+					"mastermix_notes": "",
+					"cut_by": ""
 				}
 			},
 			"collection_id" : "",

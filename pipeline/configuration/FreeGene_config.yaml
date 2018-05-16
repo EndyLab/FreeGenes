@@ -1,5 +1,5 @@
 BULK_SUBMISSION_ID: 1qgNt3h63--o7qlhTdkUqGpLqVOGizUaY5dMG7VdCwHA
-ID_START: 3117
+ID_START: 3235
 LAST_COLLECTION: 7
 PREVIOUS_CSV_BULK: ./configuration/previous_plates/bulk.csv
 PREVIOUS_CSV_SINGLE: ./configuration/previous_plates/single.csv
@@ -8,4 +8,6 @@ SINGLE_SUBMISSION_ID: 1j5Gc7KEfRlPCIaXMGjDhgQDfSOVx7tnbss9AksrHhzk
 STAGE_PATH: ./../stage/
 UNIVERSAL_PRIMER: ./configuration/primer_sets/orthogonal_primers.csv
 ORTHOGONAL_PRIMER: ./configuration/orthogonal_primers_pairs.csv
-
+UPDATE_CSV_BULK: ./configuration/gene_status/UPDATE_bulk.csv
+UPDATE_CSV_SINGLE: ./configuration/gene_status/UPDATE_single.csv
+BIONET_DASHBOARD: ./../../bionet-synthesis/docs/simple_dashboard/index.md
