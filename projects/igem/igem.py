@@ -9,8 +9,25 @@ thing = int(input("range plz: "))
 for uses in range(0,thing):
     df = df[df.TotalReuse != uses]
 
-df["Length"] = df["Info"].apply(lambda x: len(x.replace("('","").replace("'","").split(",")[0]))
-print(df["Length"].sum())
-print(len(df))
+df["Info"] = df["Info"].apply(lambda x: x.replace("('","").replace(")","").replace(" ","").replace("'","").split(","))
+df["Seq"] = df["Info"].apply(lambda x: x[0])
+df["Type"] = df["Info"].apply(lambda x: x[1])
+
+df["Length"] = df["Seq"].apply(lambda x: len(x))
+print("Total bps: {}".format(df["Length"].sum()))
+print("Total genes: {}".format(len(df["Length"])))
+print("Avg gene length: {}".format(df["Length"].sum()/len(df["Length"])))
+
+
+df = df.loc[df["Type"] == 'Coding']
+
+
+df["Length"] = df["Seq"].apply(lambda x: len(x))
+print("Total bps: {}".format(df["Length"].sum()))
+print("Total genes: {}".format(len(df["Length"])))
+print("Avg gene length: {}".format(df["Length"].sum()/len(df["Length"])))
+
+
+
 
 
